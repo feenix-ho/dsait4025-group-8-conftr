@@ -5,6 +5,7 @@ __pycache__/
 
 # CONFORMAL TRAINING CHECKPOINT STUFF
 conformal_training/data/cifar10/
+conformal_training/data/mnist/
 
 
 # C extensions
