@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# CONFORMAL TRAINING CHECKPOINT STUFF
+conformal_training/data/cifar10/
+
+
 # C extensions
 *.so
 
