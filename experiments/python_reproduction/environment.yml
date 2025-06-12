@@ -135,4 +135,5 @@ dependencies:
       - toolz==0.11.2
       - tqdm==4.64.0
       - typeguard==2.13.3
+      - absl-py==2.3.0
 prefix: /home/razo/miniconda3/envs/conformal_training
