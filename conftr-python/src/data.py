@@ -258,13 +258,25 @@ def augment_cutout(
       'label': batch['label']
   }
 
-def create_german_credit_split(
-    train_examples: int, val_examples: int,
-    data_path: str = 'data/german_credit/german_credit.csv',
-) -> Dict[str, Any]:
-    """Load German Credit dataset from CSV and create train/val/test splits.
 
-    Matches 70% / 10% / 20% split used in Appendix F, Table A of the paper.
+def create_tabular_split(
+        train_examples: int,
+        val_examples: int,
+        data_path: str,
+        label_column: str = 'Risk',
+) -> Dict[str, Any]:
+    """Load tabular dataset from CSV and create train/val/test splits.
+
+    Matches 70% / 10% / 20% split as in German Credit setup.
+
+    Args:
+        train_examples: number of training examples
+        val_examples: number of validation examples
+        data_path: path to CSV file
+        label_column: name of the target variable column (default "Risk")
+
+    Returns:
+        data_split dict compatible with main code.
     """
 
     # Load CSV
@@ -272,8 +284,8 @@ def create_german_credit_split(
     df = pd.read_csv(csv_path)
 
     # Prepare X and y
-    X = df.drop(columns=["Risk"]).values.astype(np.float32)
-    y = df["Risk"].values.astype(np.int32)
+    X = df.drop(columns=[label_column]).values.astype(np.float32)
+    y = df[label_column].values.astype(np.int32)
 
     # First split: train vs temp (val + test)
     X_train, X_temp, y_train, y_temp = train_test_split(
@@ -282,7 +294,7 @@ def create_german_credit_split(
 
     # Second split: val (10%) vs test (20%)
     X_val, X_test, y_val, y_test = train_test_split(
-        X_temp, y_temp, test_size=(2/3), random_state=42, stratify=y_temp
+        X_temp, y_temp, test_size=(2 / 3), random_state=42, stratify=y_temp
     )
 
     # Sanity check that requested sizes are compatible

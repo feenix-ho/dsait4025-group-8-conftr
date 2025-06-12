@@ -175,6 +175,19 @@ def get_data_stats(config: collections.ConfigDict) -> Dict[str, Any]:
       # Features are already whitened in preprocessing
       data['means'] = jnp.zeros(config.input_size)
       data['stds'] = jnp.ones(config.input_size)
+  # Add statistics for Diabetes dataset
+  elif config.dataset == 'diabetes':
+      data['classes'] = 3
+      data['sizes'] = {
+          'train': 700,
+          'val': 100,
+          'test': 200,
+      }
+      data['shape'] = (1, 1, config.input_size)
+
+      # Features are already whitened in preprocessing
+      data['means'] = jnp.zeros(config.input_size)
+      data['stds'] = jnp.ones(config.input_size)
 
   else:
     raise ValueError('Invalid dataset.')
@@ -372,11 +385,24 @@ def get_data(config: collections.ConfigDict) -> Dict[str, Any]:
       data['val'] = data['val'].map(map_mnist_cifar)
     data['test'] = data_split['test'].map(map_mnist_cifar)
 
-  # Add if statement for german credit
-  elif config.dataset == 'german_credit':
+  # Add if statement for tabular datasets
+  elif config.dataset in ['german_credit', 'diabetes']:
       train_examples = data['sizes']['train']
       val_examples = data['sizes']['val']
-      data_split = cpdata.create_german_credit_split(train_examples, val_examples)
+
+      if config.dataset == 'german_credit':
+          data_path = 'data/german_credit/german_credit.csv'
+          label_column = 'Risk'
+      else:  # diabetes
+          data_path = 'data/diabetes_prediction/diabetes.csv'
+          label_column = 'CLASS'
+
+      data_split = cpdata.create_tabular_split(
+          train_examples=train_examples,
+          val_examples=val_examples,
+          data_path=data_path,
+          label_column=label_column
+      )
 
       data['train'] = data_split['train']
       data['val'] = data_split['val']

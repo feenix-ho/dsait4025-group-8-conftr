@@ -75,6 +75,10 @@ def main(argv):
   elif FLAGS.experiment_dataset == 'german_credit':
       num_classes = 2
       groups = []
+  # Add for diabetes
+  elif FLAGS.experiment_dataset == 'diabetes':
+      num_classes = 3
+      groups = []
   else:
     raise ValueError('Invalid dataset %s.' % FLAGS.experiment_dataset)
 
