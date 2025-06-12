@@ -34,27 +34,36 @@ load_predictions = cpstaging.load_predictions
 
 
 def get_threshold_fns(
-    alpha: float, jit: bool = True) -> Tuple[_CalibrateFn, _PredictFn]:
+    alpha: float, jit: bool = True, on_logits: bool = False) -> Tuple[_CalibrateFn, _PredictFn]:
   """Prediction and calibration function for threshold conformal prediction.
 
   Args:
     alpha: confidence level
     jit: jit prediction and calibration function
+    on_logits: whether to apply thresholding on logits instead of probabilities (ThrL)
 
   Returns:
     Calibration and prediction functions
   """
   def calibrate_threshold_fn(logits, labels, rng):  # pylint: disable=unused-argument
-    probabilities = jax.nn.softmax(logits, axis=1)
-    return cp.calibrate_threshold(
-        probabilities, labels, alpha=alpha)
+    if on_logits:
+        return cp.calibrate_threshold(logits, labels, alpha=alpha)
+    else:
+        probabilities = jax.nn.softmax(logits, axis=1)
+        return cp.calibrate_threshold(
+            probabilities, labels, alpha=alpha)
   def predict_threshold_fn(logits, tau, rng):  # pylint: disable=unused-argument
-    probabilities = jax.nn.softmax(logits, axis=1)
-    return cp.predict_threshold(
-        probabilities, tau)
+    if on_logits:
+        return cp.predict_threshold(logits, tau)
+    else:
+        probabilities = jax.nn.softmax(logits, axis=1)
+        return cp.predict_threshold(
+            probabilities, tau)
+
   if jit:
     calibrate_threshold_fn = jax.jit(calibrate_threshold_fn)
     predict_threshold_fn = jax.jit(predict_threshold_fn)
+
   return calibrate_threshold_fn, predict_threshold_fn
 
 

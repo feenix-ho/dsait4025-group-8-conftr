@@ -162,6 +162,20 @@ def get_data_stats(config: collections.ConfigDict) -> Dict[str, Any]:
     data['shape'] = (28, 28, 1)
     data['means'] = [0.491399755166, 0.4821585592989, 0.446530913373]
     data['stds'] = [0.2470322514179, 0.2434851647, 0.2615878392604]
+  # Add statistics for German credit dataset
+  elif config.dataset == 'german_credit':
+      data['classes'] = 2
+      data['sizes'] = {
+          'train': 700,
+          'val': 100,
+          'test': 200,
+      }
+      data['shape'] = (1, 1, config.input_size)
+
+      # Features are already whitened in preprocessing
+      data['means'] = jnp.zeros(config.input_size)
+      data['stds'] = jnp.ones(config.input_size)
+
   else:
     raise ValueError('Invalid dataset.')
 
@@ -238,8 +252,8 @@ def _batch_sets(
   data['train'] = data['train'].batch(
       config.batch_size, drop_remainder=drop_remainder)
   if data['val'] is not None:
-    data['val'] = data['val'].batch(
-        config.test_batch_size, drop_remainder=drop_remainder)
+      data['val'] = data['val'].batch(
+          config.test_batch_size, drop_remainder=drop_remainder)
   data['test'] = data['test'].batch(
       config.test_batch_size, drop_remainder=drop_remainder)
 
@@ -357,6 +371,20 @@ def get_data(config: collections.ConfigDict) -> Dict[str, Any]:
     if data['val'] is not None:
       data['val'] = data['val'].map(map_mnist_cifar)
     data['test'] = data_split['test'].map(map_mnist_cifar)
+
+  # Add if statement for german credit
+  elif config.dataset == 'german_credit':
+      train_examples = data['sizes']['train']
+      val_examples = data['sizes']['val']
+      data_split = cpdata.create_german_credit_split(train_examples, val_examples)
+
+      data['train'] = data_split['train']
+      data['val'] = data_split['val']
+      data['test'] = data_split['test']
+      data['train_clean'] = data['train']
+      data['sizes'] = data_split['sizes']
+      data['shape'] = data_split['shape']
+
   else:
     raise ValueError('Invalid dataset.')
 

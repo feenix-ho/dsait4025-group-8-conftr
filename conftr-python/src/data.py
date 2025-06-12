@@ -12,13 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-
 """Datasets and data augmentation."""
+import os
 from typing import Tuple, Dict, Iterator, Any, Optional
 
 import jax.numpy as jnp
 import tensorflow as tf
 import tensorflow_datasets as tfds
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
 
 import auto_augment as augment
 
@@ -254,3 +257,59 @@ def augment_cutout(
       'image': augment.cutout(batch['image'], pad_size=pad, replace=replace),
       'label': batch['label']
   }
+
+def create_german_credit_split(
+    train_examples: int, val_examples: int,
+    data_path: str = 'data/german_credit/german_credit.csv',
+) -> Dict[str, Any]:
+    """Load German Credit dataset from CSV and create train/val/test splits.
+
+    Matches 70% / 10% / 20% split used in Appendix F, Table A of the paper.
+    """
+
+    # Load CSV
+    csv_path = os.path.join(os.path.dirname(__file__), data_path)
+    df = pd.read_csv(csv_path)
+
+    # Prepare X and y
+    X = df.drop(columns=["Risk"]).values.astype(np.float32)
+    y = df["Risk"].values.astype(np.int32)
+
+    # First split: train vs temp (val + test)
+    X_train, X_temp, y_train, y_temp = train_test_split(
+        X, y, test_size=0.3, random_state=42, stratify=y
+    )
+
+    # Second split: val (10%) vs test (20%)
+    X_val, X_test, y_val, y_test = train_test_split(
+        X_temp, y_temp, test_size=(2/3), random_state=42, stratify=y_temp
+    )
+
+    # Sanity check that requested sizes are compatible
+    if train_examples > len(X_train):
+        raise ValueError(f"Requested {train_examples} train examples, but only {len(X_train)} available.")
+    if val_examples > len(X_val):
+        raise ValueError(f"Requested {val_examples} validation examples, but only {len(X_val)} available.")
+
+    # Apply requested sizes
+    X_train, y_train = X_train[:train_examples], y_train[:train_examples]
+    X_val, y_val = X_val[:val_examples], y_val[:val_examples]
+
+    # Helper to create tf.data.Dataset
+    def make_dataset(X_part, y_part):
+        return tf.data.Dataset.from_tensor_slices({'image': X_part[:, None, None, :], 'label': y_part})
+
+    # Build data_split dictionary
+    data_split = {
+        'train': make_dataset(X_train, y_train),
+        'val': make_dataset(X_val, y_val),
+        'test': make_dataset(X_test, y_test),
+        'sizes': {
+            'train': len(X_train),
+            'val': len(X_val),
+            'test': len(X_test),
+        },
+        'shape': (1, 1, X.shape[1]),
+    }
+
+    return data_split
