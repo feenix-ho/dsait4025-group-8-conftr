@@ -7,15 +7,7 @@ First create a cuda environment from the `conformal_training/environment.yaml` f
 ```bash
 conda env create -f conformal_training/environment.yaml
 conda activate conformal_training
-```
-
-The Python packages should be installed automatically.
-
-Run in activated conda environment! Install cuda if not installed: 
-
-```bash
-pip install --upgrade pip
-pip install --upgrade "jax[cuda12]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+conda install "jaxlib=*=*cuda*" jax -c conda-forge```
 ```
 
 ## 4 EXPERIMENTS

@@ -134,6 +134,4 @@ dependencies:
       - tqdm==4.64.0
       - typeguard==2.13.3
       - absl-py==0.15.0
-      - jaxlib==0.3.14+cuda11.cudnn82
-      - jax[cuda]==0.3.14
 prefix: /home/razo/miniconda3/envs/conformal_training
