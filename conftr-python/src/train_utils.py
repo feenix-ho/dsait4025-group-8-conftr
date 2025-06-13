@@ -241,7 +241,7 @@ def compute_weight_decay(params: FlatMapping) -> float:
     Weight decay
   """
   return sum(
-      jnp.sum(jnp.square(param)) for param in jax.tree_leaves(params))
+      jnp.sum(jnp.square(param)) for param in jax.tree.leaves(params))
 
 
 def compute_cross_entropy_loss(

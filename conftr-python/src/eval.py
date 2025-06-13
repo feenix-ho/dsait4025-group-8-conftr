@@ -49,6 +49,8 @@ def main(argv):
   alpha = 0.01
   if FLAGS.experiment_method == 'thr':
     calibrate_fn, predict_fn = cbutils.get_threshold_fns(alpha)
+  elif FLAGS.experiment_method == 'thrl':                                       # Run Thr but apply on logits
+    calibrate_fn, predict_fn = cbutils.get_threshold_fns(alpha, on_logits=True)
   elif FLAGS.experiment_method == 'aps':
     calibrate_fn, predict_fn = cbutils.get_raps_fns(alpha, 0, 0)
   else:
@@ -69,6 +71,14 @@ def main(argv):
   elif FLAGS.experiment_dataset == 'cifar100':
     num_classes = 100
     groups = ['groups', 'hierarchy']
+  # Add for german credit
+  elif FLAGS.experiment_dataset == 'german_credit':
+      num_classes = 2
+      groups = []
+  # Add for diabetes
+  elif FLAGS.experiment_dataset == 'diabetes':
+      num_classes = 3
+      groups = []
   else:
     raise ValueError('Invalid dataset %s.' % FLAGS.experiment_dataset)
 
@@ -106,12 +116,14 @@ def main(argv):
         group, results['mean']['test'][f'{group}_miscoverage_1'])
 
   # Selected coverage confusion combinations:
-  logging.info(
-      'Coverage confusion 4-6: %f',
-      results['mean']['test']['coverage_confusion_4_6'])
-  logging.info(
-      'Coverage confusion 6-4: %f',
-      results['mean']['test']['coverage_confusion_6_4'])
+  if 'coverage_confusion_4_6' in results['mean']['test']:
+      logging.info(
+          'Coverage confusion 4-6: %f',
+          results['mean']['test']['coverage_confusion_4_6'])
+  if 'coverage_confusion_6_4' in results['mean']['test']:
+      logging.info(
+          'Coverage confusion 6-4: %f',
+          results['mean']['test']['coverage_confusion_6_4'])
 
 
 if __name__ == '__main__':
