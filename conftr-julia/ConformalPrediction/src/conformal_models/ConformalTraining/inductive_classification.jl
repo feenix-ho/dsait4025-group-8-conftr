@@ -5,6 +5,15 @@ using MLJFlux: MLJFluxModel, reformat
 using MLUtils
 
 """
+    reformat_mlj_prediction(ŷ)
+
+A helper function that extracts only the output (predicted values) for whatever is returned from `MMI.predict(model, fitresult, Xnew)`. This is currently used to avoid issues when calling `MMI.predict(model, fitresult, Xnew)` in pipelines.
+"""
+function reformat_mlj_prediction(ŷ)
+    return isa(ŷ, Tuple) ? first(ŷ) : ŷ
+end
+
+"""
     ConformalPrediction.score(conf_model::InductiveModel, model::MLJFluxModel, fitresult, X, y::Union{Nothing,AbstractArray}=nothing)
 
 Overloads the `score` function for the `MLJFluxModel` type.
@@ -16,9 +25,14 @@ function ConformalPrediction.score(
     X,
     y::Union{Nothing,AbstractArray}=nothing,
 )
-    X = permutedims(matrix(X))
-    probas = permutedims(fitresult[1](X))
+    # print("DEBUGGING_1")
+    # X = permutedims(matrix(X))
+    # probas = permutedims(fitresult[1](X))
+    p̂ = reformat_mlj_prediction(MMI.predict(atomic, fitresult, MMI.reformat(atomic, X)...))
+    L = p̂.decoder.classes
+    probas = pdf(p̂, L)
     scores = @.(conf_model.heuristic(y, probas))
+    # exit()
     if isnothing(y)
         return scores
     else

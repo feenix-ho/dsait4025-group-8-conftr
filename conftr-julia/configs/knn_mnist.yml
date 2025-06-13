@@ -1,0 +1,8 @@
+model_name: "knn"
+dataset: "MNIST"
+batch_size: 128
+epochs: 50
+save_dir: "checkpoints"
+coverage: 0.99
+kwargs:
+    K: 50

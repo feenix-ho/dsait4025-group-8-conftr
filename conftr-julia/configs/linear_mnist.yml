@@ -1,0 +1,9 @@
+model_name: "mlp"
+dataset: "MNIST"
+input_dim: [28, 28, 1]
+mlp_dims:
+    - 10
+batch_size: 128
+epochs: 50
+save_dir: "checkpoints"
+coverage: 0.99

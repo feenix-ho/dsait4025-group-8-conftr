@@ -1,5 +1,3 @@
-
-
 ![](dev/logo/wide_logo.png)
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliatrustworthyai.github.io/ConformalPrediction.jl/stable/) [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://juliatrustworthyai.github.io/ConformalPrediction.jl/dev/) [![Build Status](https://github.com/juliatrustworthyai/ConformalPrediction.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/juliatrustworthyai/ConformalPrediction.jl/actions/workflows/CI.yml?query=branch%3Amain) [![Coverage](https://codecov.io/gh/juliatrustworthyai/ConformalPrediction.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/juliatrustworthyai/ConformalPrediction.jl) [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle) [![License](https://img.shields.io/github/license/juliatrustworthyai/ConformalPrediction.jl)](LICENSE) [![Package Downloads](https://img.shields.io/badge/dynamic/json?url=http%3A%2F%2Fjuliapkgstats.com%2Fapi%2Fv1%2Fmonthly_downloads%2FConformalPrediction&query=total_requests&suffix=%2Fmonth&label=Downloads)](http://juliapkgstats.com/pkg/ConformalPrediction) [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
@@ -18,7 +16,7 @@ This [`Pluto.jl`](https://github.com/fonsp/Pluto.jl) 🎈 notebook won the 2nd P
 
 To run the tour locally, just clone this repo and start `Pluto.jl` as follows:
 
-``` julia
+```julia
 ] add Pluto
 using Pluto
 Pluto.run()
@@ -46,14 +44,14 @@ The animation above is lifted from a small blog [post](https://www.paltmeyer.com
 
 You can install the latest stable release from the general registry:
 
-``` julia
+```julia
 using Pkg
 Pkg.add("ConformalPrediction")
 ```
 
 The development version can be installed as follows:
 
-``` julia
+```julia
 using Pkg
 Pkg.add(url="https://github.com/juliatrustworthyai/ConformalPrediction.jl")
 ```
@@ -62,7 +60,7 @@ Pkg.add(url="https://github.com/juliatrustworthyai/ConformalPrediction.jl")
 
 To illustrate the intended use of the package, let’s have a quick look at a simple regression problem. We first generate some synthetic data and then determine indices for our training and test data using [MLJ](https://alan-turing-institute.github.io/MLJ.jl/dev/):
 
-``` julia
+```julia
 using MLJ
 
 # Inputs:
@@ -86,7 +84,7 @@ train, test = partition(eachindex(y), 0.4, 0.4, shuffle=true)
 
 We then import Symbolic Regressor ([`SymbolicRegression.jl`](https://github.com/MilesCranmer/SymbolicRegression.jl)) following the standard [MLJ](https://alan-turing-institute.github.io/MLJ.jl/dev/) procedure.
 
-``` julia
+```julia
 regressor = @load SRRegressor pkg=SymbolicRegression
 model = regressor(
     niterations=50,
@@ -95,9 +93,9 @@ model = regressor(
 )
 ```
 
-To turn our conventional model into a conformal model, we just need to declare it as such by using `conformal_model` wrapper function. The generated conformal model instance can wrapped in data to create a *machine*. Finally, we proceed by fitting the machine on training data using the generic `fit!` method:
+To turn our conventional model into a conformal model, we just need to declare it as such by using `conformal_model` wrapper function. The generated conformal model instance can wrapped in data to create a _machine_. Finally, we proceed by fitting the machine on training data using the generic `fit!` method:
 
-``` julia
+```julia
 using ConformalPrediction
 conf_model = conformal_model(model)
 mach = machine(conf_model, X, y)
@@ -106,7 +104,7 @@ fit!(mach, rows=train)
 
 Predictions can then be computed using the generic `predict` method. The code below produces predictions for the first `n` samples. Each tuple contains the lower and upper bound for the prediction interval.
 
-``` julia
+```julia
 show_first = 5
 Xtest = selectrows(X, test)
 ytest = y[test]
@@ -123,7 +121,7 @@ ŷ[1:show_first]
 
 For simple models like this one, we can call a custom `Plots` recipe on our instance, fit result and data to generate the chart below:
 
-``` julia
+```julia
 using Plots
 zoom = 0
 plt = plot(mach.model, mach.fitresult, Xtest, ytest, lw=5, zoom=zoom, observed_lab="Test points")
@@ -135,7 +133,7 @@ plot!(plt, xrange, @.(fun(xrange)), lw=2, ls=:dash, colour=:darkorange, label="G
 
 We can evaluate the conformal model using the standard [MLJ](https://alan-turing-institute.github.io/MLJ.jl/dev/) workflow with a custom performance measure. You can use either `emp_coverage` for the overall empirical coverage (correctness) or `ssc` for the size-stratified coverage rate (adaptiveness).
 
-``` julia
+```julia
 _eval = evaluate!(mach; measure=[emp_coverage, ssc], verbosity=0)
 display(_eval)
 println("Empirical coverage: $(round(_eval.measurement[1], digits=3))")
@@ -168,10 +166,10 @@ If after reading the usage example above you are just left with more questions a
 
 ### External Resources
 
-- *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification* by Angelopoulos and Bates (2022) ([pdf](https://arxiv.org/pdf/2107.07511.pdf)).
-- *Predictive inference with the jackknife+* by Barber et al. (2021) ([pdf](https://projecteuclid.org/journals/annals-of-statistics/volume-49/issue-1/Predictive-inference-with-the-jackknife/10.1214/20-AOS1965.full))
-- *Awesome Conformal Prediction* repository by Valery Manokhin ([repo](https://github.com/valeman/awesome-conformal-prediction)).
-- [Documentation](https://mapie.readthedocs.io/en/latest/index.html) for the Python package MAPIE.
+-   _A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification_ by Angelopoulos and Bates (2022) ([pdf](https://arxiv.org/pdf/2107.07511.pdf)).
+-   _Predictive inference with the jackknife+_ by Barber et al. (2021) ([pdf](https://projecteuclid.org/journals/annals-of-statistics/volume-49/issue-1/Predictive-inference-with-the-jackknife/10.1214/20-AOS1965.full))
+-   _Awesome Conformal Prediction_ repository by Valery Manokhin ([repo](https://github.com/valeman/awesome-conformal-prediction)).
+-   [Documentation](https://mapie.readthedocs.io/en/latest/index.html) for the Python package MAPIE.
 
 ## 🔁 Status
 
@@ -183,25 +181,25 @@ The following CP approaches have been implemented:
 
 **Regression**:
 
-- Inductive
-- Naive Transductive
-- Jackknife
-- Jackknife+
-- Jackknife-minmax
-- CV+
-- CV-minmax
+-   Inductive
+-   Naive Transductive
+-   Jackknife
+-   Jackknife+
+-   Jackknife-minmax
+-   CV+
+-   CV-minmax
 
 **Classification**:
 
-- Inductive
-- Naive Transductive
-- Adaptive Inductive
+-   Inductive
+-   Naive Transductive
+-   Adaptive Inductive
 
 The package has been tested for the following supervised models offered by [MLJ](https://alan-turing-institute.github.io/MLJ.jl/dev/).
 
 **Regression**:
 
-``` julia
+```julia
 keys(tested_atomic_models[:regression])
 ```
 
@@ -217,7 +215,7 @@ keys(tested_atomic_models[:regression])
 
 **Classification**:
 
-``` julia
+```julia
 keys(tested_atomic_models[:classification])
 ```
 
@@ -232,12 +230,12 @@ keys(tested_atomic_models[:classification])
 
 To evaluate conformal predictors we are typically interested in correctness and adaptiveness. The former can be evaluated by looking at the empirical coverage rate, while the latter can be assessed through metrics that address the conditional coverage (Angelopoulos and Bates 2022). To this end, the following metrics have been implemented:
 
-- `emp_coverage` (empirical coverage)
-- `ssc` (size-stratified coverage)
+-   `emp_coverage` (empirical coverage)
+-   `ssc` (size-stratified coverage)
 
 There is also a simple `Plots.jl` recipe that can be used to inspect the set sizes. In the regression case, the interval width is stratified into discrete bins for this purpose:
 
-``` julia
+```julia
 bar(mach.model, mach.fitresult, X)
 ```
 
@@ -255,8 +253,8 @@ To build this package I have read and re-read both Angelopoulos and Bates (2022)
 
 Angelopoulos, Anastasios N., and Stephen Bates. 2022. “A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.” <https://arxiv.org/abs/2107.07511>.
 
-Barber, Rina Foygel, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. 2021. “Predictive Inference with the Jackknife+.” *The Annals of Statistics* 49 (1): 486–507. <https://doi.org/10.1214/20-AOS1965>.
+Barber, Rina Foygel, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. 2021. “Predictive Inference with the Jackknife+.” _The Annals of Statistics_ 49 (1): 486–507. <https://doi.org/10.1214/20-AOS1965>.
 
-Blaom, Anthony D., Franz Kiraly, Thibaut Lienart, Yiannis Simillides, Diego Arenas, and Sebastian J. Vollmer. 2020. “MLJ: A Julia Package for Composable Machine Learning.” *Journal of Open Source Software* 5 (55): 2704. <https://doi.org/10.21105/joss.02704>.
+Blaom, Anthony D., Franz Kiraly, Thibaut Lienart, Yiannis Simillides, Diego Arenas, and Sebastian J. Vollmer. 2020. “MLJ: A Julia Package for Composable Machine Learning.” _Journal of Open Source Software_ 5 (55): 2704. <https://doi.org/10.21105/joss.02704>.
 
 Manokhin, Valery. 2022. “Awesome Conformal Prediction.” https://doi.org/10.5281/zenodo.6467205; Zenodo. <https://doi.org/10.5281/zenodo.6467205>.

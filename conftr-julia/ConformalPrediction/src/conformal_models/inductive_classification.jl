@@ -158,6 +158,9 @@ Score method for the [`AdaptiveInductiveClassifier`](@ref) dispatched for any `<
 function score(
     conf_model::AdaptiveInductiveClassifier, atomic::Supervised, fitresult, X, y=nothing
 )
+    # print("DEBUGGING_2")
+    # print(typeof(fitresult))
+    # exit()
     p̂ = reformat_mlj_prediction(MMI.predict(atomic, fitresult, MMI.reformat(atomic, X)...))
     L = p̂.decoder.classes
     probas = pdf(p̂, L)                                              # compute probabilities for all classes
