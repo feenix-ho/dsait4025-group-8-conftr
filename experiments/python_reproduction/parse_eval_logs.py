@@ -8,13 +8,13 @@ import argparse
 
 def parse_eval_logs(log_file):
     """Parse evaluation logs and extract relevant metrics."""
-    with open(log_file, "r") as f:
+    with open(log_file, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
 
     # Define regex patterns for extracting information
-    dataset_pattern = r"Evaluating ([A-Za-z0-9\-_]+) models for all seeds"
+    dataset_pattern = r"===== ([A-Za-z0-9\-_]+) EVALUATION ====="
     seed_pattern = r"Processing seed (\d+)"
-    experiment_pattern = r"Evaluating ([a-z\.]+) experiment"
+    experiment_pattern = r"Evaluating ([a-z\. ]+) experiment"
     method_pattern = r"Using method: ([a-z]+)"
 
     # Metric patterns
@@ -29,85 +29,130 @@ def parse_eval_logs(log_file):
     # Initialize data list
     data = []
 
-    # Find all evaluation blocks
-    current_dataset = None
-    eval_blocks = re.finditer(
-        r"Evaluating ([a-z\.]+) experiment[\s\S]*?Coverage confusion \d+-\d+: [0-9\.]+",
+    # Find all dataset sections
+    dataset_sections = re.finditer(
+        r"===== ([A-Za-z0-9\-_]+) EVALUATION =====[\s\S]+?(?=\n=====|\Z)",
         content,
     )
 
-    for block in eval_blocks:
-        eval_text = block.group(0)
+    for ds_match in dataset_sections:
+        ds_text = ds_match.group(0)
+        dataset_name = re.search(dataset_pattern, ds_text).group(1)
 
-        # Find current dataset
-        dataset_matches = re.findall(dataset_pattern, content[: block.start()])
-        if dataset_matches:
-            current_dataset = dataset_matches[-1]
+        # Find seed processing blocks
+        seed_blocks = re.finditer(
+            r"Processing seed (\d+)[\s\S]+?(?=Processing seed|\Z)", ds_text
+        )
 
-        # Extract information
-        seed_matches = re.findall(seed_pattern, content[: block.start()])
-        seed = seed_matches[-1] if seed_matches else None
+        for seed_block in seed_blocks:
+            seed_text = seed_block.group(0)
+            seed_value = re.search(r"Processing seed (\d+)", seed_text).group(1)
 
-        experiment_matches = re.search(experiment_pattern, eval_text)
-        experiment = experiment_matches.group(1) if experiment_matches else None
+            # Find experiment blocks
+            experiment_blocks = re.finditer(
+                r"Evaluating ([a-z\. ]+) experiment[\s\S]+?(?=Evaluating|Completed seed|\Z)",
+                seed_text,
+            )
 
-        method_matches = re.search(method_pattern, eval_text)
-        method = method_matches.group(1) if method_matches else None
+            for exp_block in experiment_blocks:
+                exp_text = exp_block.group(0)
+                exp_match = re.search(experiment_pattern, exp_text)
+                experiment_name = exp_match.group(1).strip() if exp_match else None
 
-        accuracy_matches = re.search(accuracy_pattern, eval_text)
-        accuracy = float(accuracy_matches.group(1)) if accuracy_matches else None
+                # Handle experiment name variations
+                if "conformal.training" in exp_text:
+                    experiment_name = "conformal.training"
+                elif "conformal training" in exp_text:
+                    experiment_name = "conformal.training"
+                elif "baseline" in exp_text:
+                    experiment_name = "baseline"
 
-        coverage_matches = re.search(coverage_pattern, eval_text)
-        coverage = float(coverage_matches.group(1)) if coverage_matches else None
+                # Find method blocks
+                method_blocks = re.finditer(
+                    r"Using method: ([a-z]+)[\s\S]+?(?=Using method:|Evaluating|Completed seed|\Z)",
+                    exp_text,
+                )
 
-        size_matches = re.search(size_pattern, eval_text)
-        size = float(size_matches.group(1)) if size_matches else None
+                for method_block in method_blocks:
+                    method_text = method_block.group(0)
+                    method_name = re.search(method_pattern, method_text).group(1)
 
-        # Extract class sizes
-        class_sizes = {}
-        for match in re.finditer(class_size_pattern, eval_text):
-            class_idx = int(match.group(1))
-            class_size = float(match.group(2))
-            class_sizes[class_idx] = class_size
+                    # Extract metrics
+                    accuracy_match = re.search(accuracy_pattern, method_text)
+                    accuracy = (
+                        float(accuracy_match.group(1)) if accuracy_match else None
+                    )
 
-        # Extract group sizes and miscoverage
-        group_metrics = {}
-        for match in re.finditer(group_size_pattern, eval_text):
-            group_name = match.group(1)
-            group_idx = int(match.group(2))
-            group_size = float(match.group(3))
-            group_key = f"{group_name}_size_{group_idx}"
-            group_metrics[group_key] = group_size
+                    coverage_match = re.search(coverage_pattern, method_text)
+                    coverage = (
+                        float(coverage_match.group(1)) if coverage_match else None
+                    )
 
-        for match in re.finditer(group_miscoverage_pattern, eval_text):
-            group_name = match.group(1)
-            group_idx = int(match.group(2))
-            miscoverage = float(match.group(3))
-            group_key = f"{group_name}_miscoverage_{group_idx}"
-            group_metrics[group_key] = miscoverage
+                    size_match = re.search(size_pattern, method_text)
+                    size = float(size_match.group(1)) if size_match else None
 
-        # Extract coverage confusion
-        confusion_metrics = {}
-        for match in re.finditer(coverage_confusion_pattern, eval_text):
-            a, b = int(match.group(1)), int(match.group(2))
-            value = float(match.group(3))
-            confusion_key = f"coverage_confusion_{a}_{b}"
-            confusion_metrics[confusion_key] = value
+                    # Extract class sizes
+                    class_sizes = {}
+                    for match in re.finditer(class_size_pattern, method_text):
+                        class_idx = int(match.group(1))
+                        class_size = float(match.group(2))
+                        class_sizes[class_idx] = class_size
 
-        # Create a data entry
-        entry = {
-            "dataset": current_dataset,
-            "seed": seed,
-            "experiment": experiment,
-            "method": method,
-            "accuracy": accuracy,
-            "coverage": coverage,
-            "size": size,
-            **{f"class_size_{i}": class_sizes.get(i, None) for i in range(10)},
-            **group_metrics,
-            **confusion_metrics,
-        }
-        data.append(entry)
+                    # Extract group metrics
+                    group_metrics = {}
+                    for match in re.finditer(group_size_pattern, method_text):
+                        group_name = match.group(1)
+                        group_idx = int(match.group(2))
+                        group_size = float(match.group(3))
+                        group_key = f"{group_name}_size_{group_idx}"
+                        group_metrics[group_key] = group_size
+
+                    for match in re.finditer(group_miscoverage_pattern, method_text):
+                        group_name = match.group(1)
+                        group_idx = int(match.group(2))
+                        try:
+                            miscoverage = float(match.group(3))
+                        except ValueError:
+                            # Handle potential parsing issues
+                            continue
+                        group_key = f"{group_name}_miscoverage_{group_idx}"
+                        group_metrics[group_key] = miscoverage
+
+                    # Extract confusion metrics
+                    confusion_metrics = {}
+                    for match in re.finditer(coverage_confusion_pattern, method_text):
+                        a, b = int(match.group(1)), int(match.group(2))
+                        try:
+                            value = float(match.group(3))
+                        except ValueError:
+                            continue
+                        confusion_key = f"coverage_confusion_{a}_{b}"
+                        confusion_metrics[confusion_key] = value
+
+                    # Create data entry
+                    entry = {
+                        "dataset": dataset_name,
+                        "seed": seed_value,
+                        "experiment": experiment_name,
+                        "method": method_name,
+                        "accuracy": accuracy,
+                        "coverage": coverage,
+                        "size": size,
+                        **{
+                            f"class_size_{i}": class_sizes.get(i, None)
+                            for i in range(10)
+                        },
+                        **group_metrics,
+                        **confusion_metrics,
+                    }
+
+                    # Add training info based on experiment name
+                    if experiment_name == "conformal.training":
+                        entry["training_epochs"] = 4  # As per your note
+                    else:
+                        entry["training_epochs"] = 10  # Default for models/baseline
+
+                    data.append(entry)
 
     return data
 
@@ -122,47 +167,39 @@ def save_as_csv(data, output_file):
 def display_table(data):
     """Display data as a formatted table."""
     # Create simplified DataFrame for display
-    display_df = pd.DataFrame(data)[
-        ["dataset", "seed", "experiment", "method", "accuracy", "coverage", "size"]
-    ]
-    print(tabulate(display_df, headers="keys", tablefmt="fancy_grid"))
+    df = pd.DataFrame(data)
+    if len(df) == 0:
+        print("No data found in the log file!")
+        return
 
-    # Display additional tables for specific metrics
-    print("\nClass Sizes:")
-    class_size_cols = [
-        col for col in pd.DataFrame(data).columns if col.startswith("class_size_")
+    # Show core metrics table
+    display_cols = [
+        "dataset",
+        "seed",
+        "experiment",
+        "method",
+        "accuracy",
+        "coverage",
+        "size",
+        "training_epochs",
     ]
-    if class_size_cols:
-        class_df = pd.DataFrame(data)[
-            ["dataset", "seed", "experiment", "method"] + class_size_cols
-        ]
-        print(
-            tabulate(class_df, headers="keys", tablefmt="fancy_grid", showindex=False)
-        )
+    display_cols = [col for col in display_cols if col in df.columns]
+    print(tabulate(df[display_cols], headers="keys", tablefmt="fancy_grid"))
 
-    print("\nGroup Metrics:")
-    group_cols = [col for col in pd.DataFrame(data).columns if "group" in col.lower()]
-    if group_cols:
-        group_df = pd.DataFrame(data)[
-            ["dataset", "seed", "experiment", "method"] + group_cols
-        ]
-        print(
-            tabulate(group_df, headers="keys", tablefmt="fancy_grid", showindex=False)
+    # Display summary grouping by experiment type and method
+    print("\nSummary by experiment type and method:")
+    summary = (
+        df.groupby(["dataset", "experiment", "method"])
+        .agg(
+            {
+                "accuracy": ["mean", "std"],
+                "coverage": ["mean", "std"],
+                "size": ["mean", "std"],
+            }
         )
-
-    print("\nCoverage Confusion:")
-    confusion_cols = [
-        col for col in pd.DataFrame(data).columns if "confusion" in col.lower()
-    ]
-    if confusion_cols:
-        confusion_df = pd.DataFrame(data)[
-            ["dataset", "seed", "experiment", "method"] + confusion_cols
-        ]
-        print(
-            tabulate(
-                confusion_df, headers="keys", tablefmt="fancy_grid", showindex=False
-            )
-        )
+        .reset_index()
+    )
+    print(tabulate(summary, headers="keys", tablefmt="fancy_grid"))
 
 
 def main():
@@ -176,25 +213,54 @@ def main():
     parser.add_argument(
         "--summary", action="store_true", help="Show summary statistics"
     )
+    parser.add_argument(
+        "--detailed", action="store_true", help="Show detailed metrics tables"
+    )
     args = parser.parse_args()
 
     data = parse_eval_logs(args.log_file)
+    if not data:
+        print("No data extracted from log file!")
+        return
+
     save_as_csv(data, args.csv)
     display_table(data)
 
-    if args.summary:
-        # Display summary statistics
+    if args.detailed:
         df = pd.DataFrame(data)
-        print("\nSummary Statistics:")
-        print(
-            df.groupby(["dataset", "experiment", "method"]).agg(
-                {
-                    "accuracy": ["mean", "std"],
-                    "coverage": ["mean", "std"],
-                    "size": ["mean", "std"],
-                }
+
+        # Display additional tables for specific metrics
+        print("\nClass Sizes:")
+        class_size_cols = [col for col in df.columns if col.startswith("class_size_")]
+        if class_size_cols:
+            class_df = df[["dataset", "seed", "experiment", "method"] + class_size_cols]
+            print(
+                tabulate(
+                    class_df, headers="keys", tablefmt="fancy_grid", showindex=False
+                )
             )
-        )
+
+        print("\nGroup Metrics:")
+        group_cols = [col for col in df.columns if "group" in col.lower()]
+        if group_cols:
+            group_df = df[["dataset", "seed", "experiment", "method"] + group_cols]
+            print(
+                tabulate(
+                    group_df, headers="keys", tablefmt="fancy_grid", showindex=False
+                )
+            )
+
+        print("\nCoverage Confusion:")
+        confusion_cols = [col for col in df.columns if "confusion" in col.lower()]
+        if confusion_cols:
+            confusion_df = df[
+                ["dataset", "seed", "experiment", "method"] + confusion_cols
+            ]
+            print(
+                tabulate(
+                    confusion_df, headers="keys", tablefmt="fancy_grid", showindex=False
+                )
+            )
 
 
 if __name__ == "__main__":
