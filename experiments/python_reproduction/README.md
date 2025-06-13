@@ -18,7 +18,6 @@ conda install "jaxlib=*=*cuda*" jax -c conda-forge
 
 For tf cuda, leave the environment as is.
 
-
 ## 4 EXPERIMENTS
 
 From the original paper:

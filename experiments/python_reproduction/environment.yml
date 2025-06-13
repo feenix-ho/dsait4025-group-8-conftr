@@ -100,12 +100,15 @@ dependencies:
   # - tensorflow-estimator=2.6.0=py39he80948d_0
 
   # UNCOMMENT THESE FOR JAX CUDA SUPPORT
-  - tensorflow=2.4.1=mkl_py39h4683426_0
-  - tensorflow-base=2.4.1=mkl_py39h43e0292_0
-  - _tflow_select=2.3.0=mkl
+  # - tensorflow=2.4.1=mkl_py39h4683426_0
+  # - tensorflow-base=2.4.1=mkl_py39h43e0292_0
+  # - _tflow_select=2.3.0=mkl
 
   # TENSORFLOW GPU SUPPORT: (COMMENT IF USING JAX CUDA)
-  # - tensorflow-gpu=2.4.1
+  - tensorflow-gpu=2.4.1
+  #  JAX CUDA?
+  # - jax                # the JAX frontend
+  # - jaxlib=0.3.14=cuda112py39h867d1ad_203  # the matching GPU build
   ## END
 
 
