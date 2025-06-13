@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/bash
 
 ## Setup conda
 set -euo pipefail
@@ -66,7 +66,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating models experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/mnist_models_seed${SEED}/ \
       --experiment_dataset=mnist \
       --experiment_method=$METHOD
@@ -76,7 +76,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating conformal training experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/mnist_conformal.training_seed${SEED}/ \
       --experiment_dataset=mnist \
       --experiment_method=$METHOD
@@ -89,6 +89,7 @@ echo "MNIST evaluation completed in $(format_time $MODELS_DURATION)"
 
 echo_section_end "MNIST"
 
+exit 1
 # ----- Fashion‑MNIST -----
 echo_section "Fashion-MNIST"
 
@@ -101,7 +102,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating models experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/fashion_mnist_models_seed${SEED}/ \
       --experiment_dataset=fashion_mnist \
       --experiment_method=$METHOD
@@ -111,7 +112,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating conformal training experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/fashion_mnist_conformal.training_seed${SEED}/ \
       --experiment_dataset=fashion_mnist \
       --experiment_method=$METHOD
@@ -136,7 +137,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating models experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/emnist_byclass_models_seed${SEED}/ \
       --experiment_dataset=emnist_byclass \
       --experiment_method=$METHOD
@@ -146,7 +147,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating conformal experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/emnist_byclass_conformal_seed${SEED}/ \
       --experiment_dataset=emnist_byclass \
       --experiment_method=$METHOD
@@ -171,7 +172,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating models experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar10_models_seed${SEED}/ \
       --experiment_dataset=cifar10 \
       --experiment_method=$METHOD
@@ -181,7 +182,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating baseline experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar10_baseline_seed${SEED}/ \
       --experiment_dataset=cifar10 \
       --experiment_method=$METHOD
@@ -191,7 +192,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating conformal training experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar10_conformal.training_seed${SEED}/ \
       --experiment_dataset=cifar10 \
       --experiment_method=$METHOD
@@ -216,7 +217,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating models experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar100_models_seed${SEED}/ \
       --experiment_dataset=cifar100 \
       --experiment_method=$METHOD
@@ -226,7 +227,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating baseline experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar100_baseline_seed${SEED}/ \
       --experiment_dataset=cifar100 \
       --experiment_method=$METHOD
@@ -236,7 +237,7 @@ for SEED in $SEEDS; do
   echo "    Evaluating conformal training experiment..."
   for METHOD in $METHODS; do
     echo "      Using method: $METHOD"
-    python3 eval.py \
+    python3 ../../conformal_training/eval.py \
       --experiment_path=$EXPERIMENT_DIR/cifar100_conformal.training_seed${SEED}/ \
       --experiment_dataset=cifar100 \
       --experiment_method=$METHOD
