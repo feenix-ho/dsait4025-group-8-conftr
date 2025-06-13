@@ -7,8 +7,17 @@ First create a cuda environment from the `conformal_training/environment.yaml` f
 ```bash
 conda env create -f conformal_training/environment.yaml
 conda activate conformal_training
-conda install "jaxlib=*=*cuda*" jax -c conda-forge```
 ```
+
+note: either works with TF Cuda or with Jax cuda, but not both.
+For Jax Cuda, remove:
+
+```bash
+conda install "jaxlib=*=*cuda*" jax -c conda-forge
+```
+
+For tf cuda, leave the environment as is.
+
 
 ## 4 EXPERIMENTS
 

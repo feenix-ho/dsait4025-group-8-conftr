@@ -5,7 +5,6 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
-  - _tflow_select=2.3.0=mkl
   - abseil-cpp=20211102.0=h27087fc_1
   - absl-py=0.15.0=pyhd3eb1b0_0
   - aiohttp=3.8.1=py39hb9d737c_1
@@ -98,9 +97,18 @@ dependencies:
   - tabulate=0.8.10=pyhd8ed1ab_0
   - tensorboard=2.4.1=pyhd8ed1ab_1
   - tensorboard-plugin-wit=1.8.1=pyhd8ed1ab_0
-  - tensorflow=2.4.1=mkl_py39h4683426_0
-  - tensorflow-base=2.4.1=mkl_py39h43e0292_0
-  - tensorflow-estimator=2.6.0=py39he80948d_0
+  # - tensorflow-estimator=2.6.0=py39he80948d_0
+
+  # UNCOMMENT THESE FOR JAX CUDA SUPPORT
+  # - tensorflow=2.4.1=mkl_py39h4683426_0
+  # - tensorflow-base=2.4.1=mkl_py39h43e0292_0
+  # - _tflow_select=2.3.0=mkl
+
+  # TENSORFLOW GPU SUPPORT: (COMMENT IF USING JAX CUDA)
+  - tensorflow-gpu=2.4.1
+  ## END
+
+
   - termcolor=1.1.0=pyhd8ed1ab_3
   - threadpoolctl=2.2.0=pyh0d69192_0
   - tk=8.6.12=h27826a3_0
@@ -134,4 +142,5 @@ dependencies:
       - tqdm==4.64.0
       - typeguard==2.13.3
       - absl-py==0.15.0
+      - tensorflow-estimator
 prefix: /home/razo/miniconda3/envs/conformal_training
