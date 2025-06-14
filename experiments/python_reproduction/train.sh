@@ -49,6 +49,9 @@ echo "Results will be saved to: $EXPERIMENT_DIR"
 echo ""
 
 # ----- MNIST -----
+# resulting files are dumped in directories (e.g. for seed=3; pwd for this script = experiments\python_reproduction\): 
+# experiments\python_reproduction\results\mnist_conformal.training_seed3
+# experiments\python_reproduction\results\mnist_models_seed3
 echo_section "MNIST"
 
 echo "Training MNIST models..."
