@@ -50,7 +50,7 @@ The German Credit dataset is a binary classification task, where the model predi
 This table shows the reported results from the original paper:
 
 <figure style="text-align: center;">
-  <img src="https://s3.hedgedoc.org/hd1-demo/uploads/e888aa48-fcfc-4bd4-9bc6-6b5f8b2618a6.png" width="450" style="display: inline-block;">
+  <img src="https://s3.hedgedoc.org/hd1-demo/uploads/e888aa48-fcfc-4bd4-9bc6-6b5f8b2618a6.png" width="100" style="display: inline-block;">
   <figcaption><em>Table 1: Experimental results from Stutz et al. (2022) on German Credit dataset.</em></figcaption>
 </figure>
 
