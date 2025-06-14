@@ -60,12 +60,12 @@ intro
 - the codebase uses conda for package management, and the environment is defined in `environment.yml`.
 - environment.yml did not work out of the box, altered slightly to get it to work
 
-installation
+#### installation
 
 - simple, with conda. instructions are provided in a separate `experiments/python_reproduction/README.md` file.
 - could not get GPU support to work, so used CPU only
 
-GPU issues
+##### GPU issues
 
 - repo uses both Jax and TensorFlow, which are both GPU-accelerated libraries. however, could not get GPU support to work on both
 - encountered variety of isuses
@@ -76,7 +76,7 @@ GPU issues
   - either jax or tf could be upgraded to GPU versions, but not both at the same time. here for, there are added test scripts
   - so, we decided to run the experiments on CPU only, which is sufficient for MNIST, but takes a while to run for the multiple seeds
 
-experiment setup
+#### experiment setup
 
 - got the environment to work
 - using windows 11 pro, WSL 2 with ubuntu 24.04 LTS, conda 25.3.1
@@ -102,7 +102,24 @@ experiment setup
 - All variants use an MLP with 0 hidden layers of 32 units, for 50 epochs.
 - "class\_size\_{\*}" denotes any `sub_experiment` matching `class_size_{0–9}` (same hyperparameters for all classes).
 
-Results (incomplete):
+#### Results (incomplete)
+
+Here are the MNIST results (seeds 0–3, α = 0.01) computed from **eval\_results.csv**:
+
+| Method                 | ThR inefficiency (size) |       APS avg. set size |
+| ---------------------- | ----------------------: | ----------------------: |
+| **Baseline** (models)  |            2.23 ± 0.015 |            2.50 ± 0.010 |
+| **Conformal training** |  2.16 ± 0.021  (–3.3 %) | 8.92 ± 0.90  (+257.4 %) |
+
+• Numbers are means ± std over 4 seeds.
+• Parentheses show relative change of ConTr vs. Baseline:
+– ThR inefficiency drops by 3.3 %
+– APS set size increases by 257.4 % (this is inaccurate, because incomplete)
+
+#### notes
+
+- inefficiency and set sizes match paper
+- unfinished: class loss, a rerun to check, fix the APS set size (finish conformal training for all seeds).
 
 ### Julia Implementation [^julia]
 
