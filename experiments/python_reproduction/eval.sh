@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#!/bin/bash
 
 ## Setup conda
 set -euo pipefail
@@ -89,7 +89,10 @@ echo "MNIST evaluation completed in $(format_time $MODELS_DURATION)"
 
 echo_section_end "MNIST"
 
+## ONLY evals MNIST, then exits.
 exit 1
+
+
 # ----- Fashion‑MNIST -----
 echo_section "Fashion-MNIST"
 
