@@ -51,75 +51,72 @@ The Diabetes Prediction dataset released on Kaggle aggregates 100 000 patient re
 
 ## Reproduction Methodology
 
-### Official Python Implementation [^python]
+In this section, we describe our reproduction methodology, including the official Python implementation of _ConfTr_, our own Julia implementation, and the extension with tabular datasets. We also outline the experimental setup, hyperparameters, and results for both MNIST and tabular datasets.
 
-intro
+## Official Python Implementation
 
-- google deepminds repository for _ConfTr_ is published on GitHub [here](https://github.com/google-deepmind/conformal_training/).
-- The codebase is written in Python, and has some shell scripts to run predefined tests.
-- the codebase uses conda for package management, and the environment is defined in `environment.yml`.
-- environment.yml did not work out of the box, altered slightly to get it to work
+The official Conformal Training code is available on GitHub at [google-deepmind/conformal\_training](https://github.com/google-deepmind/conformal_training/). It’s a pure-Python codebase with auxiliary shell scripts for running experiments and tests. Package dependencies are managed via Conda, with the environment specified in `environment.yml` (minor edits were required for compatibility). The official Python implementation uses JAX for end-to-end differentiable training through conformal prediction steps, with TensorFlow handling dataset operations. The codebase follows a modular structure organized with Absl (Google's Abseil library) for command-line interfaces, logging, and application flow. Configuration management is handled through `ml_collections.ConfigDict`, with hyperparameters defined in `config.py` and experiment-specific settings in the `experiments/` directory (like `run_mnist.py`). The core conformal prediction methods are implemented in `conformal_prediction.py`, with differentiable versions in `smooth_conformal_prediction.py` that enable gradient flow. Training variants are implemented across separate modules (`train_normal.py`, `train_conformal.py`, `train_coverage.py`), with training launched through `run.py` and evaluation performed via `eval.py`. This structure enables reproducible experiments across multiple datasets and conformal prediction variants.
 
-#### installation
+### Reproduction Goal
 
-- simple, with conda. instructions are provided in a separate `experiments/python_reproduction/README.md` file.
-- could not get GPU support to work, so used CPU only
+We're trying to reproduce the results as shown in Table 1 of the original paper, which includes experiments on MNIST. Please find the table and subscript from the original paper below:
 
-##### GPU issues
+**Table 1:** Main Inefficiency Results, comparing (Bellotti, 2021) (Bel, trained with ThrL) and ConTr (trained with ThrLP) using THR or APS at test time (with α = 0.01). We also report improvements relative to the baseline, i.e., standard cross-entropy training, in percentage in parentheses. ConTr results in a consistent improvement of inefficiency for both THR and APS. Training with ℒ₍class₎, using ℒ = I_K, generally works slightly better. On CIFAR, the inefficiency reduction is small compared to other datasets as ConTr is trained on pre-trained ResNet features; see text. More results can be found in App. J.
 
-- repo uses both Jax and TensorFlow, which are both GPU-accelerated libraries. however, could not get GPU support to work on both
-- encountered variety of isuses
-  - (all, but also) jax and tf package versions were locked on CPU versions
-  - upgrading them to equivalent GPU versions caused conflicts with other packages
-  - also,  for Jax and Jaxlib, the packages were not in the pypi registry anymore, and neither in the google archive
-  - jax and jaxlib had some package versions saved in the anaconda conda forge repository, but these were not compatible with the other packages in the environment
-  - either jax or tf could be upgraded to GPU versions, but not both at the same time. here for, there are added test scripts
-  - so, we decided to run the experiments on CPU only, which is sufficient for MNIST, but takes a while to run for the multiple seeds
+| Dataset  | THR Baseline | THR Bel | THR ConfTr | THR + ℒ₍class₎ | APS Baseline | APS ConfTr |  APS + ℒ₍class₎ |
+| -------- | -----------: | ------: | ---------: | -------------: | -----------: | ---------: | --------------: |
+| MNIST    |         2.23 |    2.70 |       2.18 |  2.11 (−5.4 %) |         2.50 |       2.16 |  2.14 (−14.4 %) |
+| F-MNIST  |         2.05 |    1.90 |       1.69 | 1.67 (−18.5 %) |         2.36 |       1.82 |  1.72 (−27.1 %) |
+| EMNIST   |         2.66 |    3.48 |       2.66 |  2.49 (−6.4 %) |         4.23 |       2.86 |  2.87 (−32.2 %) |
+| CIFAR10  |         2.93 |    2.93 |       2.88 |  2.84 (−3.1 %) |         3.30 |       3.05 |  2.93 (−11.2 %) |
+| CIFAR100 |        10.63 |   10.91 |      10.78 | 10.44 (−1.8 %) |        16.62 |      12.99 | 12.73 (−23.4 %) |
 
-#### experiment setup
+We focus on the MNIST row, and reproduce the Baseline and the Conformal Training (ConfTr) results. We do not reproduce the Bellotti method, as it is not implemented in the codebase and out-of-scope for this reproduction.
 
-- got the environment to work
-- using windows 11 pro, WSL 2 with ubuntu 24.04 LTS, conda 25.3.1
-- python unchanged, 3.9.13
-- system: ryzen 5 3600, 32GB DDR4 RAM, NVIDIA RTX 3060 12GB
-- experiment files directory: `experiments/python_reproduction/`
-- wrote a shell script to do all the training, and a shell script to run the evaluation
-- default paramters were used for MNIST, that live in the `conformal_training/experiments/run_mnist.py` file
-- Here is a concise overview of the key training hyperparameters for each MNIST experiment variant:
+### Installation
 
-| Variant                         | Learning Rate | Batch Size | Temperature | Size Weight | Coverage Loss  | Loss Transform | Size Transform | RNG   | Method          |
-| ------------------------------- | ------------: | ---------: | ----------: | ----------: | -------------- | -------------- | -------------- | ----- | --------------- |
-| **models**                      |          0.05 |        100 |           — |           — | —              | —              | —              | —     | —               |
-| **conformal–training**          |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
-| **conformal–group\_zero**       |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
-| **conformal–group\_one**        |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
-| **conformal–singleton\_zero**   |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
-| **conformal–singleton\_one**    |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
-| **conformal–group\_size\_0**    |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
-| **conformal–group\_size\_1**    |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
-| **conformal–class\_size\_{\*}** |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
+1. Clone the repo and navigate to `experiments/python_reproduction/`.
+2. Create the Conda environment:
 
-- All variants use an MLP with 0 hidden layers of 32 units, for 50 epochs.
-- "class\_size\_{\*}" denotes any `sub_experiment` matching `class_size_{0–9}` (same hyperparameters for all classes).
+   ```bash
+   conda env create -f environment.yml
+   ```
 
-#### Results (incomplete)
+3. Activate and verify the setup per the instructions in `README.md`.
+4. Note: GPU acceleration could not be enabled; all experiments were run on CPU.
 
-Here are the MNIST results (seeds 0–3, α = 0.01) computed from **eval\_results.csv**:
+### GPU Compatibility Issues
 
-| Method                 | ThR inefficiency (size) |       APS avg. set size |
-| ---------------------- | ----------------------: | ----------------------: |
-| **Baseline** (models)  |            2.23 ± 0.015 |            2.50 ± 0.010 |
-| **Conformal training** |  2.16 ± 0.021  (–3.3 %) | 8.92 ± 0.90  (+257.4 %) |
+Attempts to enable GPU support for both JAX and TensorFlow failed due to version conflicts:
 
-• Numbers are means ± std over 4 seeds.
-• Parentheses show relative change of ConTr vs. Baseline:
-– ThR inefficiency drops by 3.3 %
-– APS set size increases by 257.4 % (this is inaccurate, because incomplete)
+- The `jax`, `jaxlib`, and `tensorflow` packages in `environment.yml` point to CPU-only builds.
+- Upgrading to GPU-enabled versions created dependency clashes.
+- Neither PyPI nor official archives hosted the required GPU builds for the specified JAX versions.
+- Conda-Forge had compatible JAX builds, but they conflicted with other packages.
+- Ultimately, we ran all experiments on CPU, which is adequate for MNIST but increases runtime.
 
-#### notes
+### Experimental Setup
 
-- inefficiency and set sizes match paper
-- unfinished: class loss, a rerun to check, fix the APS set size (finish conformal training for all seeds).
+- **Platform:** Windows 11 Pro with WSL 2 (Ubuntu 24.04 LTS).
+- **Conda:** v25.3.1; **Python:** 3.9.13.
+- **Hardware:** AMD Ryzen 5 3600, 32 GB RAM, NVIDIA RTX 3060 12 GB.
+- **Directory:** `experiments/python_reproduction/` contains training and evaluation scripts.
+- **Parameters:** Defaults for MNIST live in `conformal_training/experiments/run_mnist.py`. Two shell scripts automate training and evaluation across seeds.
+
+All models use a single-layer MLP (32 units, no hidden layers) trained for 50 epochs.
+
+### Hyperparameters
+
+| Variant                  |   LR | Batch | Temp. | Size Wt | Coverage Loss  | Loss Tf. | Size Tf. | RNG   | Method          |
+| ------------------------ | ---: | ----: | ----: | ------: | -------------- | -------- | -------- | ----- | --------------- |
+| **Baseline**             | 0.05 |   100 |     – |       – | –              | –        | –        | –     | –               |
+| **Conformal Training**   | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+| **Group Zero / One**     | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
+| **Singleton Zero / One** | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
+| **Group Size 0 / 1**     | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+| **Class Size\_**\*       | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+
+`\*` denotes each class-specific experiment (`class_size_0` through `class_size_9`) which share the above Conformal Training settings.
 
 ### Julia Implementation [^julia]
 
@@ -151,6 +148,17 @@ The official docs never show how to enable the classification-shaping loss $\mat
 ## Results and Discussion
 
 ### MNIST with Official Python Implementation
+
+We now have these **preliminary results** from the official Python implementation. Results on MNIST (seeds 0–3, α = 0.01), from `eval_results.csv`:
+
+| Method                 | ThR Inefficiency (size) |     APS Avg. Set Size |
+| ---------------------- | ----------------------: | --------------------: |
+| **Baseline**           |            2.23 ± 0.015 |          2.50 ± 0.010 |
+| **Conformal Training** |    2.16 ± 0.021 (–3.3%) | 8.92 ± 0.90 (+257.4%) |
+
+> **Notes:** \
+> • Statistics are means ± standard deviation over four random seeds. \
+> • Inefficiency matches the original paper; APS set size appears inflated due to incomplete runs and will be verified in a full rerun.
 
 ### MNIST with Julia Implementation
 
@@ -362,7 +370,6 @@ Phuong ported ConfTr to Julia, patched `ConformalPrediction.jl`, and ran control
 
 [^stutz2021learning]: Stutz, David, Ali Taylan Cemgil, and Arnaud Doucet. "Learning optimal conformal classifiers." arXiv preprint arXiv:2110.09192 (2021).
 [^lecun2002gradient]: LeCun, Yann, et al. "Gradient-based learning applied to document recognition." Proceedings of the IEEE 86.11 (2002): 2278-2324.
-[^python]: Official Python implementation from Google Deepmind <https://github.com/google-deepmind/conformal_training>
 [^julia]: Julia implementation <https://github.com/JuliaTrustworthyAI/ConformalPrediction.jl/tree/main>
 [^hofmann1994german]: Hofmann, Hans. "Statlog (German Credit Data)." UCI Machine Learning Repository, 1994.
 [^diabetes]: Diabetes Prediction dataset <https://www.kaggle.com/datasets/marshalpatel3558/diabetes-prediction-dataset-legit-dataset/data>
