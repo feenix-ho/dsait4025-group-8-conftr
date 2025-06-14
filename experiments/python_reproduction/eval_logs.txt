@@ -1,0 +1,1816 @@
+Starting evaluation process at: Sat Jun 14 22:48:33 CEST 2025
+Evaluating results from: ./results
+Using seeds: 0 1 2 3 4 5 6 7 8 9
+Using methods: thr aps
+
+==========================================================
+===== MNIST EVALUATION =====
+==========================================================
+Started at: Sat Jun 14 22:48:33 CEST 2025
+Evaluating MNIST models for all seeds...
+  Processing seed 0...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:48:35.037847 140457167284032 open_source_utils.py:39] Read ./results/mnist_models_seed0/eval_test.pkl
+I0614 22:48:35.057628 140457167284032 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:48:35.057794 140457167284032 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:48:35.057885 140457167284032 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:35.057944 140457167284032 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:35.058315 140457167284032 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:48:35.058402 140457167284032 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:48:35.059260 140457167284032 open_source_utils.py:221] loaded ./results/mnist_models_seed0/: 10000 test examples
+I0614 22:48:35.063832 140457167284032 open_source_utils.py:39] Read ./results/mnist_models_seed0/eval_val.pkl
+I0614 22:48:35.063984 140457167284032 open_source_utils.py:228] loaded ./results/mnist_models_seed0/: 5000 val examples
+I0614 22:48:37.622469 140457167284032 colab_utils.py:508] Trial 0: 0.009465
+I0614 22:48:38.552015 140457167284032 colab_utils.py:508] Trial 1: 0.009379
+I0614 22:48:39.488373 140457167284032 colab_utils.py:508] Trial 2: 0.007540
+I0614 22:48:40.153201 140457167284032 colab_utils.py:508] Trial 3: 0.008935
+I0614 22:48:41.004671 140457167284032 colab_utils.py:508] Trial 4: 0.013488
+I0614 22:48:41.790385 140457167284032 colab_utils.py:508] Trial 5: 0.006925
+I0614 22:48:42.434766 140457167284032 colab_utils.py:508] Trial 6: 0.007187
+I0614 22:48:43.156784 140457167284032 colab_utils.py:508] Trial 7: 0.006074
+I0614 22:48:43.851593 140457167284032 colab_utils.py:508] Trial 8: 0.011998
+I0614 22:48:44.490560 140457167284032 colab_utils.py:508] Trial 9: 0.012351
+I0614 22:48:44.494015 140457167284032 eval.py:84] Accuracy: 0.923500
+I0614 22:48:44.494236 140457167284032 eval.py:85] Coverage: 0.991040
+I0614 22:48:44.494282 140457167284032 eval.py:86] Size: 2.248030
+I0614 22:48:44.494326 140457167284032 eval.py:89] Class size 0: 1.575184
+I0614 22:48:44.494365 140457167284032 eval.py:89] Class size 1: 1.923484
+I0614 22:48:44.494395 140457167284032 eval.py:89] Class size 2: 2.076770
+I0614 22:48:44.494423 140457167284032 eval.py:89] Class size 3: 2.319696
+I0614 22:48:44.494458 140457167284032 eval.py:89] Class size 4: 2.217956
+I0614 22:48:44.494499 140457167284032 eval.py:89] Class size 5: 2.713781
+I0614 22:48:44.494542 140457167284032 eval.py:89] Class size 6: 1.849204
+I0614 22:48:44.494584 140457167284032 eval.py:89] Class size 7: 1.986430
+I0614 22:48:44.494623 140457167284032 eval.py:89] Class size 8: 2.868247
+I0614 22:48:44.494660 140457167284032 eval.py:89] Class size 9: 3.023817
+I0614 22:48:44.494692 140457167284032 eval.py:96] Group singleton size 0: 2.267553
+I0614 22:48:44.494723 140457167284032 eval.py:96] Group singleton size 1: 2.076770
+I0614 22:48:44.494753 140457167284032 eval.py:101] Group singleton miscoverage 0: 0.163082
+I0614 22:48:44.494781 140457167284032 eval.py:104] Group singleton miscoverage 1: 0.514128
+I0614 22:48:44.494811 140457167284032 eval.py:96] Group groups size 0: 2.118715
+I0614 22:48:44.494843 140457167284032 eval.py:96] Group groups size 1: 2.372943
+I0614 22:48:44.494878 140457167284032 eval.py:101] Group groups miscoverage 0: 0.426457
+I0614 22:48:44.494913 140457167284032 eval.py:104] Group groups miscoverage 1: 0.483088
+I0614 22:48:44.494942 140457167284032 eval.py:109] Coverage confusion 4-6: 0.012520
+I0614 22:48:44.494972 140457167284032 eval.py:112] Coverage confusion 6-4: 0.011750
+      Using method: aps
+I0614 22:48:45.584825 139692109526848 open_source_utils.py:39] Read ./results/mnist_models_seed0/eval_test.pkl
+I0614 22:48:45.593188 139692109526848 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:48:45.593342 139692109526848 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:48:45.593415 139692109526848 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:45.593453 139692109526848 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:45.593814 139692109526848 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:48:45.594118 139692109526848 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:48:45.594646 139692109526848 open_source_utils.py:221] loaded ./results/mnist_models_seed0/: 10000 test examples
+I0614 22:48:45.598535 139692109526848 open_source_utils.py:39] Read ./results/mnist_models_seed0/eval_val.pkl
+I0614 22:48:45.598653 139692109526848 open_source_utils.py:228] loaded ./results/mnist_models_seed0/: 5000 val examples
+I0614 22:48:49.622901 139692109526848 colab_utils.py:508] Trial 0: 0.992854
+I0614 22:48:50.659046 139692109526848 colab_utils.py:508] Trial 1: 0.992905
+I0614 22:48:51.746485 139692109526848 colab_utils.py:508] Trial 2: 0.994426
+I0614 22:48:52.562715 139692109526848 colab_utils.py:508] Trial 3: 0.994551
+I0614 22:48:53.503464 139692109526848 colab_utils.py:508] Trial 4: 0.992362
+I0614 22:48:54.296769 139692109526848 colab_utils.py:508] Trial 5: 0.994812
+I0614 22:48:54.912870 139692109526848 colab_utils.py:508] Trial 6: 0.994364
+I0614 22:48:55.644785 139692109526848 colab_utils.py:508] Trial 7: 0.995332
+I0614 22:48:56.441426 139692109526848 colab_utils.py:508] Trial 8: 0.992645
+I0614 22:48:57.053044 139692109526848 colab_utils.py:508] Trial 9: 0.991308
+I0614 22:48:57.054720 139692109526848 eval.py:84] Accuracy: 0.923500
+I0614 22:48:57.054882 139692109526848 eval.py:85] Coverage: 0.990670
+I0614 22:48:57.054953 139692109526848 eval.py:86] Size: 2.506210
+I0614 22:48:57.055037 139692109526848 eval.py:89] Class size 0: 1.673613
+I0614 22:48:57.055086 139692109526848 eval.py:89] Class size 1: 2.520625
+I0614 22:48:57.055193 139692109526848 eval.py:89] Class size 2: 2.201251
+I0614 22:48:57.055250 139692109526848 eval.py:89] Class size 3: 2.497531
+I0614 22:48:57.055304 139692109526848 eval.py:89] Class size 4: 2.515916
+I0614 22:48:57.055371 139692109526848 eval.py:89] Class size 5: 3.014508
+I0614 22:48:57.055407 139692109526848 eval.py:89] Class size 6: 2.025883
+I0614 22:48:57.055446 139692109526848 eval.py:89] Class size 7: 2.059427
+I0614 22:48:57.055531 139692109526848 eval.py:89] Class size 8: 3.212047
+I0614 22:48:57.055575 139692109526848 eval.py:89] Class size 9: 3.380804
+I0614 22:48:57.055609 139692109526848 eval.py:96] Group singleton size 0: 2.540958
+I0614 22:48:57.055683 139692109526848 eval.py:96] Group singleton size 1: 2.201251
+I0614 22:48:57.055734 139692109526848 eval.py:101] Group singleton miscoverage 0: 0.209584
+I0614 22:48:57.055873 139692109526848 eval.py:104] Group singleton miscoverage 1: 0.531608
+I0614 22:48:57.055912 139692109526848 eval.py:96] Group groups size 0: 2.326645
+I0614 22:48:57.055943 139692109526848 eval.py:96] Group groups size 1: 2.679574
+I0614 22:48:57.055974 139692109526848 eval.py:101] Group groups miscoverage 0: 0.461451
+I0614 22:48:57.056048 139692109526848 eval.py:104] Group groups miscoverage 1: 0.561966
+I0614 22:48:57.056090 139692109526848 eval.py:109] Coverage confusion 4-6: 0.016270
+I0614 22:48:57.056122 139692109526848 eval.py:112] Coverage confusion 6-4: 0.013950
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:48:58.160768 139737307457344 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed0/eval_test.pkl
+I0614 22:48:58.170562 139737307457344 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:48:58.170744 139737307457344 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:48:58.170845 139737307457344 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:58.170903 139737307457344 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:48:58.171522 139737307457344 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:48:58.171753 139737307457344 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:48:58.172348 139737307457344 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed0/: 10000 test examples
+I0614 22:48:58.177217 139737307457344 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed0/eval_val.pkl
+I0614 22:48:58.177344 139737307457344 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed0/: 5000 val examples
+I0614 22:49:00.754482 139737307457344 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:49:01.768240 139737307457344 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:49:02.729281 139737307457344 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:49:03.436920 139737307457344 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:49:04.328262 139737307457344 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:49:05.123156 139737307457344 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:49:05.704361 139737307457344 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:49:06.400373 139737307457344 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:49:07.108037 139737307457344 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:49:07.737257 139737307457344 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:49:07.738914 139737307457344 eval.py:84] Accuracy: 0.901030
+I0614 22:49:07.739067 139737307457344 eval.py:85] Coverage: 0.990180
+I0614 22:49:07.739115 139737307457344 eval.py:86] Size: 2.141000
+I0614 22:49:07.739152 139737307457344 eval.py:89] Class size 0: 1.565144
+I0614 22:49:07.739183 139737307457344 eval.py:89] Class size 1: 1.597367
+I0614 22:49:07.739222 139737307457344 eval.py:89] Class size 2: 2.069908
+I0614 22:49:07.739281 139737307457344 eval.py:89] Class size 3: 2.232169
+I0614 22:49:07.739349 139737307457344 eval.py:89] Class size 4: 2.168060
+I0614 22:49:07.739413 139737307457344 eval.py:89] Class size 5: 2.689309
+I0614 22:49:07.739465 139737307457344 eval.py:89] Class size 6: 1.862796
+I0614 22:49:07.739500 139737307457344 eval.py:89] Class size 7: 2.025458
+I0614 22:49:07.739531 139737307457344 eval.py:89] Class size 8: 2.749222
+I0614 22:49:07.739577 139737307457344 eval.py:89] Class size 9: 2.562907
+I0614 22:49:07.739662 139737307457344 eval.py:96] Group singleton size 0: 2.149100
+I0614 22:49:07.739705 139737307457344 eval.py:96] Group singleton size 1: 2.069908
+I0614 22:49:07.739739 139737307457344 eval.py:101] Group singleton miscoverage 0: 0.151615
+I0614 22:49:07.739773 139737307457344 eval.py:104] Group singleton miscoverage 1: 0.493236
+I0614 22:49:07.739815 139737307457344 eval.py:96] Group groups size 0: 2.084330
+I0614 22:49:07.739863 139737307457344 eval.py:96] Group groups size 1: 2.195735
+I0614 22:49:07.739917 139737307457344 eval.py:101] Group groups miscoverage 0: 0.403691
+I0614 22:49:07.739951 139737307457344 eval.py:104] Group groups miscoverage 1: 0.388171
+I0614 22:49:07.739980 139737307457344 eval.py:109] Coverage confusion 4-6: 0.010430
+I0614 22:49:07.740011 139737307457344 eval.py:112] Coverage confusion 6-4: 0.013650
+      Using method: aps
+I0614 22:49:08.866797 140420606637888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed0/eval_test.pkl
+I0614 22:49:08.874978 140420606637888 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:49:08.875137 140420606637888 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:49:08.875215 140420606637888 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:08.875275 140420606637888 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:08.875736 140420606637888 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:49:08.875916 140420606637888 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:49:08.876426 140420606637888 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed0/: 10000 test examples
+I0614 22:49:08.880451 140420606637888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed0/eval_val.pkl
+I0614 22:49:08.880533 140420606637888 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed0/: 5000 val examples
+I0614 22:49:11.721338 140420606637888 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:49:12.700719 140420606637888 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:49:13.687594 140420606637888 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:49:14.402281 140420606637888 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:49:15.321027 140420606637888 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:49:16.108940 140420606637888 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:49:16.754285 140420606637888 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:49:17.515203 140420606637888 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:49:18.275948 140420606637888 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:49:18.904050 140420606637888 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:49:18.905643 140420606637888 eval.py:84] Accuracy: 0.901030
+I0614 22:49:18.905774 140420606637888 eval.py:85] Coverage: 0.996300
+I0614 22:49:18.905863 140420606637888 eval.py:86] Size: 7.675170
+I0614 22:49:18.905913 140420606637888 eval.py:89] Class size 0: 7.518634
+I0614 22:49:18.905947 140420606637888 eval.py:89] Class size 1: 7.459217
+I0614 22:49:18.905977 140420606637888 eval.py:89] Class size 2: 7.665641
+I0614 22:49:18.906059 140420606637888 eval.py:89] Class size 3: 7.700977
+I0614 22:49:18.906100 140420606637888 eval.py:89] Class size 4: 7.712027
+I0614 22:49:18.906134 140420606637888 eval.py:89] Class size 5: 7.816348
+I0614 22:49:18.906173 140420606637888 eval.py:89] Class size 6: 7.556076
+I0614 22:49:18.906237 140420606637888 eval.py:89] Class size 7: 7.674888
+I0614 22:49:18.906302 140420606637888 eval.py:89] Class size 8: 7.810662
+I0614 22:49:18.906334 140420606637888 eval.py:89] Class size 9: 7.866979
+I0614 22:49:18.906368 140420606637888 eval.py:96] Group singleton size 0: 7.676258
+I0614 22:49:18.906472 140420606637888 eval.py:96] Group singleton size 1: 7.665641
+I0614 22:49:18.906508 140420606637888 eval.py:101] Group singleton miscoverage 0: 0.746736
+I0614 22:49:18.906558 140420606637888 eval.py:104] Group singleton miscoverage 1: 0.829534
+I0614 22:49:18.906626 140420606637888 eval.py:96] Group groups size 0: 7.654243
+I0614 22:49:18.906663 140420606637888 eval.py:96] Group groups size 1: 7.695200
+I0614 22:49:18.906693 140420606637888 eval.py:101] Group groups miscoverage 0: 0.804070
+I0614 22:49:18.906723 140420606637888 eval.py:104] Group groups miscoverage 1: 0.798809
+I0614 22:49:18.906812 140420606637888 eval.py:109] Coverage confusion 4-6: 0.072490
+I0614 22:49:18.906857 140420606637888 eval.py:112] Coverage confusion 6-4: 0.070630
+  Completed seed 0
+  Processing seed 1...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:49:20.072872 140682178254656 open_source_utils.py:39] Read ./results/mnist_models_seed1/eval_test.pkl
+I0614 22:49:20.080888 140682178254656 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:49:20.081135 140682178254656 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:49:20.081248 140682178254656 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:20.081305 140682178254656 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:20.081723 140682178254656 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:49:20.081848 140682178254656 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:49:20.082351 140682178254656 open_source_utils.py:221] loaded ./results/mnist_models_seed1/: 10000 test examples
+I0614 22:49:20.086487 140682178254656 open_source_utils.py:39] Read ./results/mnist_models_seed1/eval_val.pkl
+I0614 22:49:20.086621 140682178254656 open_source_utils.py:228] loaded ./results/mnist_models_seed1/: 5000 val examples
+I0614 22:49:23.805856 140682178254656 colab_utils.py:508] Trial 0: 0.009157
+I0614 22:49:24.766839 140682178254656 colab_utils.py:508] Trial 1: 0.010113
+I0614 22:49:25.750910 140682178254656 colab_utils.py:508] Trial 2: 0.008990
+I0614 22:49:26.452567 140682178254656 colab_utils.py:508] Trial 3: 0.009157
+I0614 22:49:27.287430 140682178254656 colab_utils.py:508] Trial 4: 0.013752
+I0614 22:49:28.095259 140682178254656 colab_utils.py:508] Trial 5: 0.006454
+I0614 22:49:28.683821 140682178254656 colab_utils.py:508] Trial 6: 0.006187
+I0614 22:49:29.395516 140682178254656 colab_utils.py:508] Trial 7: 0.007012
+I0614 22:49:30.128809 140682178254656 colab_utils.py:508] Trial 8: 0.011831
+I0614 22:49:30.744349 140682178254656 colab_utils.py:508] Trial 9: 0.013321
+I0614 22:49:30.745839 140682178254656 eval.py:84] Accuracy: 0.924640
+I0614 22:49:30.745974 140682178254656 eval.py:85] Coverage: 0.990850
+I0614 22:49:30.746018 140682178254656 eval.py:86] Size: 2.225310
+I0614 22:49:30.746052 140682178254656 eval.py:89] Class size 0: 1.534080
+I0614 22:49:30.746082 140682178254656 eval.py:89] Class size 1: 1.871701
+I0614 22:49:30.746110 140682178254656 eval.py:89] Class size 2: 2.053303
+I0614 22:49:30.746139 140682178254656 eval.py:89] Class size 3: 2.279034
+I0614 22:49:30.746167 140682178254656 eval.py:89] Class size 4: 2.169483
+I0614 22:49:30.746195 140682178254656 eval.py:89] Class size 5: 2.708687
+I0614 22:49:30.746222 140682178254656 eval.py:89] Class size 6: 1.869427
+I0614 22:49:30.746249 140682178254656 eval.py:89] Class size 7: 1.978758
+I0614 22:49:30.746277 140682178254656 eval.py:89] Class size 8: 2.911131
+I0614 22:49:30.746304 140682178254656 eval.py:89] Class size 9: 2.959071
+I0614 22:49:30.746336 140682178254656 eval.py:96] Group singleton size 0: 2.244912
+I0614 22:49:30.746368 140682178254656 eval.py:96] Group singleton size 1: 2.053303
+I0614 22:49:30.746399 140682178254656 eval.py:101] Group singleton miscoverage 0: 0.164237
+I0614 22:49:30.746427 140682178254656 eval.py:104] Group singleton miscoverage 1: 0.507113
+I0614 22:49:30.746456 140682178254656 eval.py:96] Group groups size 0: 2.108540
+I0614 22:49:30.746485 140682178254656 eval.py:96] Group groups size 1: 2.338080
+I0614 22:49:30.746515 140682178254656 eval.py:101] Group groups miscoverage 0: 0.420120
+I0614 22:49:30.746543 140682178254656 eval.py:104] Group groups miscoverage 1: 0.466161
+I0614 22:49:30.746572 140682178254656 eval.py:109] Coverage confusion 4-6: 0.011560
+I0614 22:49:30.746601 140682178254656 eval.py:112] Coverage confusion 6-4: 0.012420
+      Using method: aps
+I0614 22:49:31.878214 140634732873536 open_source_utils.py:39] Read ./results/mnist_models_seed1/eval_test.pkl
+I0614 22:49:31.887008 140634732873536 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:49:31.887154 140634732873536 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:49:31.887217 140634732873536 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:31.887253 140634732873536 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:31.887618 140634732873536 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:49:31.887805 140634732873536 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:49:31.888240 140634732873536 open_source_utils.py:221] loaded ./results/mnist_models_seed1/: 10000 test examples
+I0614 22:49:31.892190 140634732873536 open_source_utils.py:39] Read ./results/mnist_models_seed1/eval_val.pkl
+I0614 22:49:31.892317 140634732873536 open_source_utils.py:228] loaded ./results/mnist_models_seed1/: 5000 val examples
+I0614 22:49:34.777154 140634732873536 colab_utils.py:508] Trial 0: 0.993462
+I0614 22:49:35.853971 140634732873536 colab_utils.py:508] Trial 1: 0.993510
+I0614 22:49:36.835513 140634732873536 colab_utils.py:508] Trial 2: 0.994362
+I0614 22:49:37.607304 140634732873536 colab_utils.py:508] Trial 3: 0.994776
+I0614 22:49:38.505938 140634732873536 colab_utils.py:508] Trial 4: 0.992379
+I0614 22:49:39.289103 140634732873536 colab_utils.py:508] Trial 5: 0.994698
+I0614 22:49:39.896564 140634732873536 colab_utils.py:508] Trial 6: 0.994442
+I0614 22:49:40.785718 140634732873536 colab_utils.py:508] Trial 7: 0.994718
+I0614 22:49:41.571759 140634732873536 colab_utils.py:508] Trial 8: 0.992756
+I0614 22:49:42.191766 140634732873536 colab_utils.py:508] Trial 9: 0.991214
+I0614 22:49:42.193285 140634732873536 eval.py:84] Accuracy: 0.924640
+I0614 22:49:42.193422 140634732873536 eval.py:85] Coverage: 0.990710
+I0614 22:49:42.193465 140634732873536 eval.py:86] Size: 2.502570
+I0614 22:49:42.193498 140634732873536 eval.py:89] Class size 0: 1.648087
+I0614 22:49:42.193527 140634732873536 eval.py:89] Class size 1: 2.468083
+I0614 22:49:42.193555 140634732873536 eval.py:89] Class size 2: 2.188329
+I0614 22:49:42.193582 140634732873536 eval.py:89] Class size 3: 2.473129
+I0614 22:49:42.193609 140634732873536 eval.py:89] Class size 4: 2.480149
+I0614 22:49:42.193636 140634732873536 eval.py:89] Class size 5: 3.054482
+I0614 22:49:42.193663 140634732873536 eval.py:89] Class size 6: 2.072869
+I0614 22:49:42.193690 140634732873536 eval.py:89] Class size 7: 2.061380
+I0614 22:49:42.193717 140634732873536 eval.py:89] Class size 8: 3.286771
+I0614 22:49:42.193744 140634732873536 eval.py:89] Class size 9: 3.345516
+I0614 22:49:42.193774 140634732873536 eval.py:96] Group singleton size 0: 2.538375
+I0614 22:49:42.193804 140634732873536 eval.py:96] Group singleton size 1: 2.188329
+I0614 22:49:42.193834 140634732873536 eval.py:101] Group singleton miscoverage 0: 0.213249
+I0614 22:49:42.193862 140634732873536 eval.py:104] Group singleton miscoverage 1: 0.527766
+I0614 22:49:42.193891 140634732873536 eval.py:96] Group groups size 0: 2.335847
+I0614 22:49:42.193919 140634732873536 eval.py:96] Group groups size 1: 2.663527
+I0614 22:49:42.193948 140634732873536 eval.py:101] Group groups miscoverage 0: 0.458672
+I0614 22:49:42.193976 140634732873536 eval.py:104] Group groups miscoverage 1: 0.551898
+I0614 22:49:42.194004 140634732873536 eval.py:109] Coverage confusion 4-6: 0.015690
+I0614 22:49:42.194032 140634732873536 eval.py:112] Coverage confusion 6-4: 0.014880
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:49:43.257580 139674076845888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed1/eval_test.pkl
+I0614 22:49:43.266491 139674076845888 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:49:43.266662 139674076845888 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:49:43.266731 139674076845888 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:43.266768 139674076845888 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:43.267084 139674076845888 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:49:43.267189 139674076845888 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:49:43.267973 139674076845888 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed1/: 10000 test examples
+I0614 22:49:43.271734 139674076845888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed1/eval_val.pkl
+I0614 22:49:43.271840 139674076845888 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed1/: 5000 val examples
+I0614 22:49:45.678047 139674076845888 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:49:46.672600 139674076845888 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:49:47.752959 139674076845888 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:49:48.488365 139674076845888 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:49:49.374450 139674076845888 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:49:50.203746 139674076845888 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:49:50.833898 139674076845888 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:49:51.586167 139674076845888 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:49:52.314289 139674076845888 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:49:52.926156 139674076845888 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:49:52.927531 139674076845888 eval.py:84] Accuracy: 0.902680
+I0614 22:49:52.927663 139674076845888 eval.py:85] Coverage: 0.990130
+I0614 22:49:52.927707 139674076845888 eval.py:86] Size: 2.189950
+I0614 22:49:52.927741 139674076845888 eval.py:89] Class size 0: 1.610380
+I0614 22:49:52.927770 139674076845888 eval.py:89] Class size 1: 1.617830
+I0614 22:49:52.927799 139674076845888 eval.py:89] Class size 2: 2.153408
+I0614 22:49:52.927827 139674076845888 eval.py:89] Class size 3: 2.284012
+I0614 22:49:52.927854 139674076845888 eval.py:89] Class size 4: 2.290891
+I0614 22:49:52.927881 139674076845888 eval.py:89] Class size 5: 2.788287
+I0614 22:49:52.927908 139674076845888 eval.py:89] Class size 6: 1.876956
+I0614 22:49:52.927941 139674076845888 eval.py:89] Class size 7: 2.012734
+I0614 22:49:52.927969 139674076845888 eval.py:89] Class size 8: 2.719954
+I0614 22:49:52.927996 139674076845888 eval.py:89] Class size 9: 2.665166
+I0614 22:49:52.928026 139674076845888 eval.py:96] Group singleton size 0: 2.194116
+I0614 22:49:52.928056 139674076845888 eval.py:96] Group singleton size 1: 2.153408
+I0614 22:49:52.928086 139674076845888 eval.py:101] Group singleton miscoverage 0: 0.150668
+I0614 22:49:52.928128 139674076845888 eval.py:104] Group singleton miscoverage 1: 0.513499
+I0614 22:49:52.928201 139674076845888 eval.py:96] Group groups size 0: 2.132124
+I0614 22:49:52.928242 139674076845888 eval.py:96] Group groups size 1: 2.245803
+I0614 22:49:52.928288 139674076845888 eval.py:101] Group groups miscoverage 0: 0.418910
+I0614 22:49:52.928318 139674076845888 eval.py:104] Group groups miscoverage 1: 0.405313
+I0614 22:49:52.928362 139674076845888 eval.py:109] Coverage confusion 4-6: 0.012550
+I0614 22:49:52.928394 139674076845888 eval.py:112] Coverage confusion 6-4: 0.016360
+      Using method: aps
+I0614 22:49:54.077097 140527826933568 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed1/eval_test.pkl
+I0614 22:49:54.087692 140527826933568 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:49:54.087856 140527826933568 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:49:54.087940 140527826933568 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:54.087991 140527826933568 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:49:54.088381 140527826933568 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:49:54.088673 140527826933568 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:49:54.089240 140527826933568 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed1/: 10000 test examples
+I0614 22:49:54.093267 140527826933568 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed1/eval_val.pkl
+I0614 22:49:54.093399 140527826933568 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed1/: 5000 val examples
+I0614 22:49:58.173849 140527826933568 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:49:59.358428 140527826933568 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:50:00.355255 140527826933568 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:50:01.042588 140527826933568 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:50:01.909035 140527826933568 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:50:02.680116 140527826933568 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:50:03.279908 140527826933568 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:50:03.979308 140527826933568 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:50:04.675955 140527826933568 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:50:05.307316 140527826933568 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:50:05.308928 140527826933568 eval.py:84] Accuracy: 0.902680
+I0614 22:50:05.309074 140527826933568 eval.py:85] Coverage: 0.997830
+I0614 22:50:05.309119 140527826933568 eval.py:86] Size: 9.100760
+I0614 22:50:05.309155 140527826933568 eval.py:89] Class size 0: 9.101158
+I0614 22:50:05.309186 140527826933568 eval.py:89] Class size 1: 9.126056
+I0614 22:50:05.309216 140527826933568 eval.py:89] Class size 2: 9.098932
+I0614 22:50:05.309244 140527826933568 eval.py:89] Class size 3: 9.119317
+I0614 22:50:05.309273 140527826933568 eval.py:89] Class size 4: 9.124238
+I0614 22:50:05.309301 140527826933568 eval.py:89] Class size 5: 9.007053
+I0614 22:50:05.309329 140527826933568 eval.py:89] Class size 6: 9.051634
+I0614 22:50:05.309357 140527826933568 eval.py:89] Class size 7: 9.103465
+I0614 22:50:05.309384 140527826933568 eval.py:89] Class size 8: 9.130445
+I0614 22:50:05.309412 140527826933568 eval.py:89] Class size 9: 9.131912
+I0614 22:50:05.309444 140527826933568 eval.py:96] Group singleton size 0: 9.100959
+I0614 22:50:05.309475 140527826933568 eval.py:96] Group singleton size 1: 9.098932
+I0614 22:50:05.309506 140527826933568 eval.py:101] Group singleton miscoverage 0: 0.902221
+I0614 22:50:05.309535 140527826933568 eval.py:104] Group singleton miscoverage 1: 0.943645
+I0614 22:50:05.309564 140527826933568 eval.py:96] Group groups size 0: 9.101276
+I0614 22:50:05.309595 140527826933568 eval.py:96] Group groups size 1: 9.100199
+I0614 22:50:05.309625 140527826933568 eval.py:101] Group groups miscoverage 0: 0.931750
+I0614 22:50:05.309653 140527826933568 eval.py:104] Group groups miscoverage 1: 0.927134
+I0614 22:50:05.309681 140527826933568 eval.py:109] Coverage confusion 4-6: 0.088410
+I0614 22:50:05.309710 140527826933568 eval.py:112] Coverage confusion 6-4: 0.086370
+  Completed seed 1
+  Processing seed 2...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:50:06.447072 140581792905024 open_source_utils.py:39] Read ./results/mnist_models_seed2/eval_test.pkl
+I0614 22:50:06.456151 140581792905024 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:50:06.456352 140581792905024 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:50:06.456442 140581792905024 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:06.456512 140581792905024 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:06.456998 140581792905024 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:50:06.457271 140581792905024 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:50:06.457789 140581792905024 open_source_utils.py:221] loaded ./results/mnist_models_seed2/: 10000 test examples
+I0614 22:50:06.462090 140581792905024 open_source_utils.py:39] Read ./results/mnist_models_seed2/eval_val.pkl
+I0614 22:50:06.462181 140581792905024 open_source_utils.py:228] loaded ./results/mnist_models_seed2/: 5000 val examples
+I0614 22:50:08.890016 140581792905024 colab_utils.py:508] Trial 0: 0.008515
+I0614 22:50:09.881013 140581792905024 colab_utils.py:508] Trial 1: 0.008789
+I0614 22:50:10.880474 140581792905024 colab_utils.py:508] Trial 2: 0.008452
+I0614 22:50:11.610497 140581792905024 colab_utils.py:508] Trial 3: 0.008754
+I0614 22:50:12.601749 140581792905024 colab_utils.py:508] Trial 4: 0.013099
+I0614 22:50:13.471247 140581792905024 colab_utils.py:508] Trial 5: 0.007155
+I0614 22:50:14.162059 140581792905024 colab_utils.py:508] Trial 6: 0.007349
+I0614 22:50:14.925809 140581792905024 colab_utils.py:508] Trial 7: 0.007382
+I0614 22:50:15.703576 140581792905024 colab_utils.py:508] Trial 8: 0.012205
+I0614 22:50:16.398687 140581792905024 colab_utils.py:508] Trial 9: 0.011244
+I0614 22:50:16.400465 140581792905024 eval.py:84] Accuracy: 0.923870
+I0614 22:50:16.400633 140581792905024 eval.py:85] Coverage: 0.990970
+I0614 22:50:16.400678 140581792905024 eval.py:86] Size: 2.242530
+I0614 22:50:16.400727 140581792905024 eval.py:89] Class size 0: 1.535263
+I0614 22:50:16.400781 140581792905024 eval.py:89] Class size 1: 1.900221
+I0614 22:50:16.400825 140581792905024 eval.py:89] Class size 2: 2.066710
+I0614 22:50:16.400870 140581792905024 eval.py:89] Class size 3: 2.301447
+I0614 22:50:16.400913 140581792905024 eval.py:89] Class size 4: 2.198403
+I0614 22:50:16.400957 140581792905024 eval.py:89] Class size 5: 2.750219
+I0614 22:50:16.400995 140581792905024 eval.py:89] Class size 6: 1.874281
+I0614 22:50:16.401033 140581792905024 eval.py:89] Class size 7: 2.011323
+I0614 22:50:16.401073 140581792905024 eval.py:89] Class size 8: 2.875224
+I0614 22:50:16.401118 140581792905024 eval.py:89] Class size 9: 2.992047
+I0614 22:50:16.401224 140581792905024 eval.py:96] Group singleton size 0: 2.262561
+I0614 22:50:16.401302 140581792905024 eval.py:96] Group singleton size 1: 2.066710
+I0614 22:50:16.401355 140581792905024 eval.py:101] Group singleton miscoverage 0: 0.169572
+I0614 22:50:16.401415 140581792905024 eval.py:104] Group singleton miscoverage 1: 0.510541
+I0614 22:50:16.401468 140581792905024 eval.py:96] Group groups size 0: 2.111126
+I0614 22:50:16.401517 140581792905024 eval.py:96] Group groups size 1: 2.369401
+I0614 22:50:16.401565 140581792905024 eval.py:101] Group groups miscoverage 0: 0.419342
+I0614 22:50:16.401611 140581792905024 eval.py:104] Group groups miscoverage 1: 0.481292
+I0614 22:50:16.401648 140581792905024 eval.py:109] Coverage confusion 4-6: 0.011820
+I0614 22:50:16.401704 140581792905024 eval.py:112] Coverage confusion 6-4: 0.011740
+      Using method: aps
+I0614 22:50:17.518678 140669696177984 open_source_utils.py:39] Read ./results/mnist_models_seed2/eval_test.pkl
+I0614 22:50:17.527261 140669696177984 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:50:17.527428 140669696177984 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:50:17.527497 140669696177984 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:17.527535 140669696177984 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:17.527903 140669696177984 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:50:17.528071 140669696177984 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:50:17.528793 140669696177984 open_source_utils.py:221] loaded ./results/mnist_models_seed2/: 10000 test examples
+I0614 22:50:17.532674 140669696177984 open_source_utils.py:39] Read ./results/mnist_models_seed2/eval_val.pkl
+I0614 22:50:17.532767 140669696177984 open_source_utils.py:228] loaded ./results/mnist_models_seed2/: 5000 val examples
+I0614 22:50:20.246532 140669696177984 colab_utils.py:508] Trial 0: 0.993285
+I0614 22:50:21.250413 140669696177984 colab_utils.py:508] Trial 1: 0.993641
+I0614 22:50:22.285229 140669696177984 colab_utils.py:508] Trial 2: 0.994255
+I0614 22:50:23.088127 140669696177984 colab_utils.py:508] Trial 3: 0.994297
+I0614 22:50:24.009363 140669696177984 colab_utils.py:508] Trial 4: 0.991830
+I0614 22:50:24.807725 140669696177984 colab_utils.py:508] Trial 5: 0.994581
+I0614 22:50:25.450850 140669696177984 colab_utils.py:508] Trial 6: 0.993358
+I0614 22:50:26.183948 140669696177984 colab_utils.py:508] Trial 7: 0.994939
+I0614 22:50:26.947297 140669696177984 colab_utils.py:508] Trial 8: 0.992533
+I0614 22:50:27.591005 140669696177984 colab_utils.py:508] Trial 9: 0.991650
+I0614 22:50:27.592771 140669696177984 eval.py:84] Accuracy: 0.923870
+I0614 22:50:27.592931 140669696177984 eval.py:85] Coverage: 0.990510
+I0614 22:50:27.592976 140669696177984 eval.py:86] Size: 2.489370
+I0614 22:50:27.593010 140669696177984 eval.py:89] Class size 0: 1.630666
+I0614 22:50:27.593040 140669696177984 eval.py:89] Class size 1: 2.470343
+I0614 22:50:27.593110 140669696177984 eval.py:89] Class size 2: 2.172868
+I0614 22:50:27.593174 140669696177984 eval.py:89] Class size 3: 2.468415
+I0614 22:50:27.593265 140669696177984 eval.py:89] Class size 4: 2.486260
+I0614 22:50:27.593328 140669696177984 eval.py:89] Class size 5: 3.047033
+I0614 22:50:27.593416 140669696177984 eval.py:89] Class size 6: 2.049635
+I0614 22:50:27.593465 140669696177984 eval.py:89] Class size 7: 2.074928
+I0614 22:50:27.593505 140669696177984 eval.py:89] Class size 8: 3.208938
+I0614 22:50:27.593622 140669696177984 eval.py:89] Class size 9: 3.333755
+I0614 22:50:27.593667 140669696177984 eval.py:96] Group singleton size 0: 2.525434
+I0614 22:50:27.593739 140669696177984 eval.py:96] Group singleton size 1: 2.172868
+I0614 22:50:27.593810 140669696177984 eval.py:101] Group singleton miscoverage 0: 0.214731
+I0614 22:50:27.593901 140669696177984 eval.py:104] Group singleton miscoverage 1: 0.526501
+I0614 22:50:27.593969 140669696177984 eval.py:96] Group groups size 0: 2.310313
+I0614 22:50:27.594012 140669696177984 eval.py:96] Group groups size 1: 2.662223
+I0614 22:50:27.594092 140669696177984 eval.py:101] Group groups miscoverage 0: 0.451037
+I0614 22:50:27.594132 140669696177984 eval.py:104] Group groups miscoverage 1: 0.556840
+I0614 22:50:27.594184 140669696177984 eval.py:109] Coverage confusion 4-6: 0.015880
+I0614 22:50:27.594304 140669696177984 eval.py:112] Coverage confusion 6-4: 0.013950
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:50:30.020234 139982082856768 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed2/eval_test.pkl
+I0614 22:50:30.035740 139982082856768 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:50:30.036051 139982082856768 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:50:30.036152 139982082856768 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:30.036214 139982082856768 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:30.036998 139982082856768 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:50:30.037149 139982082856768 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:50:30.037629 139982082856768 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed2/: 10000 test examples
+I0614 22:50:30.041985 139982082856768 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed2/eval_val.pkl
+I0614 22:50:30.042120 139982082856768 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed2/: 5000 val examples
+I0614 22:50:32.576178 139982082856768 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:50:33.517608 139982082856768 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:50:34.506191 139982082856768 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:50:35.200913 139982082856768 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:50:36.065290 139982082856768 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:50:36.807011 139982082856768 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:50:37.382175 139982082856768 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:50:38.156821 139982082856768 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:50:38.905903 139982082856768 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:50:39.543045 139982082856768 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:50:39.544767 139982082856768 eval.py:84] Accuracy: 0.901840
+I0614 22:50:39.544935 139982082856768 eval.py:85] Coverage: 0.990000
+I0614 22:50:39.544981 139982082856768 eval.py:86] Size: 2.155280
+I0614 22:50:39.545017 139982082856768 eval.py:89] Class size 0: 1.563231
+I0614 22:50:39.545047 139982082856768 eval.py:89] Class size 1: 1.578781
+I0614 22:50:39.545077 139982082856768 eval.py:89] Class size 2: 2.115485
+I0614 22:50:39.545105 139982082856768 eval.py:89] Class size 3: 2.221686
+I0614 22:50:39.545132 139982082856768 eval.py:89] Class size 4: 2.258456
+I0614 22:50:39.545160 139982082856768 eval.py:89] Class size 5: 2.731076
+I0614 22:50:39.545188 139982082856768 eval.py:89] Class size 6: 1.827433
+I0614 22:50:39.545216 139982082856768 eval.py:89] Class size 7: 2.033868
+I0614 22:50:39.545244 139982082856768 eval.py:89] Class size 8: 2.741591
+I0614 22:50:39.545271 139982082856768 eval.py:89] Class size 9: 2.598808
+I0614 22:50:39.545303 139982082856768 eval.py:96] Group singleton size 0: 2.159814
+I0614 22:50:39.545335 139982082856768 eval.py:96] Group singleton size 1: 2.115485
+I0614 22:50:39.545367 139982082856768 eval.py:101] Group singleton miscoverage 0: 0.148974
+I0614 22:50:39.545395 139982082856768 eval.py:104] Group singleton miscoverage 1: 0.504573
+I0614 22:50:39.545425 139982082856768 eval.py:96] Group groups size 0: 2.103079
+I0614 22:50:39.545455 139982082856768 eval.py:96] Group groups size 1: 2.205709
+I0614 22:50:39.545485 139982082856768 eval.py:101] Group groups miscoverage 0: 0.410864
+I0614 22:50:39.545514 139982082856768 eval.py:104] Group groups miscoverage 1: 0.399843
+I0614 22:50:39.545542 139982082856768 eval.py:109] Coverage confusion 4-6: 0.012300
+I0614 22:50:39.545572 139982082856768 eval.py:112] Coverage confusion 6-4: 0.012260
+      Using method: aps
+I0614 22:50:40.649418 140281917781824 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed2/eval_test.pkl
+I0614 22:50:40.665137 140281917781824 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:50:40.665291 140281917781824 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:50:40.665359 140281917781824 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:40.665397 140281917781824 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:40.665838 140281917781824 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:50:40.666054 140281917781824 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:50:40.666583 140281917781824 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed2/: 10000 test examples
+I0614 22:50:40.670227 140281917781824 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed2/eval_val.pkl
+I0614 22:50:40.670305 140281917781824 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed2/: 5000 val examples
+I0614 22:50:43.358913 140281917781824 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:50:44.323188 140281917781824 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:50:45.294019 140281917781824 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:50:46.044280 140281917781824 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:50:46.969807 140281917781824 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:50:47.800421 140281917781824 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:50:48.435783 140281917781824 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:50:49.174530 140281917781824 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:50:49.925840 140281917781824 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:50:50.566982 140281917781824 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:50:50.569041 140281917781824 eval.py:84] Accuracy: 0.901840
+I0614 22:50:50.569348 140281917781824 eval.py:85] Coverage: 0.998210
+I0614 22:50:50.569418 140281917781824 eval.py:86] Size: 9.089240
+I0614 22:50:50.569479 140281917781824 eval.py:89] Class size 0: 9.099821
+I0614 22:50:50.569533 140281917781824 eval.py:89] Class size 1: 9.069190
+I0614 22:50:50.569589 140281917781824 eval.py:89] Class size 2: 9.140147
+I0614 22:50:50.569646 140281917781824 eval.py:89] Class size 3: 9.090296
+I0614 22:50:50.569701 140281917781824 eval.py:89] Class size 4: 9.139363
+I0614 22:50:50.569757 140281917781824 eval.py:89] Class size 5: 8.944344
+I0614 22:50:50.569812 140281917781824 eval.py:89] Class size 6: 9.059209
+I0614 22:50:50.569869 140281917781824 eval.py:89] Class size 7: 9.134597
+I0614 22:50:50.569929 140281917781824 eval.py:89] Class size 8: 9.071327
+I0614 22:50:50.569983 140281917781824 eval.py:89] Class size 9: 9.129741
+I0614 22:50:50.570045 140281917781824 eval.py:96] Group singleton size 0: 9.083445
+I0614 22:50:50.570105 140281917781824 eval.py:96] Group singleton size 1: 9.140147
+I0614 22:50:50.570160 140281917781824 eval.py:101] Group singleton miscoverage 0: 0.900093
+I0614 22:50:50.570212 140281917781824 eval.py:104] Group singleton miscoverage 1: 0.943448
+I0614 22:50:50.570266 140281917781824 eval.py:96] Group groups size 0: 9.102304
+I0614 22:50:50.570322 140281917781824 eval.py:96] Group groups size 1: 9.076568
+I0614 22:50:50.570378 140281917781824 eval.py:101] Group groups miscoverage 0: 0.932935
+I0614 22:50:50.570431 140281917781824 eval.py:104] Group groups miscoverage 1: 0.930550
+I0614 22:50:50.570483 140281917781824 eval.py:109] Coverage confusion 4-6: 0.088510
+I0614 22:50:50.570542 140281917781824 eval.py:112] Coverage confusion 6-4: 0.086340
+  Completed seed 2
+  Processing seed 3...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:50:51.708335 140361656969024 open_source_utils.py:39] Read ./results/mnist_models_seed3/eval_test.pkl
+I0614 22:50:51.716006 140361656969024 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:50:51.716155 140361656969024 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:50:51.716229 140361656969024 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:51.716269 140361656969024 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:50:51.716651 140361656969024 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:50:51.717021 140361656969024 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:50:51.717471 140361656969024 open_source_utils.py:221] loaded ./results/mnist_models_seed3/: 10000 test examples
+I0614 22:50:51.721580 140361656969024 open_source_utils.py:39] Read ./results/mnist_models_seed3/eval_val.pkl
+I0614 22:50:51.721732 140361656969024 open_source_utils.py:228] loaded ./results/mnist_models_seed3/: 5000 val examples
+I0614 22:50:54.149340 140361656969024 colab_utils.py:508] Trial 0: 0.008479
+I0614 22:50:55.143330 140361656969024 colab_utils.py:508] Trial 1: 0.010283
+I0614 22:50:56.145595 140361656969024 colab_utils.py:508] Trial 2: 0.008971
+I0614 22:50:56.833183 140361656969024 colab_utils.py:508] Trial 3: 0.009666
+I0614 22:50:57.737870 140361656969024 colab_utils.py:508] Trial 4: 0.013038
+I0614 22:50:58.526359 140361656969024 colab_utils.py:508] Trial 5: 0.008225
+I0614 22:50:59.118449 140361656969024 colab_utils.py:508] Trial 6: 0.007894
+I0614 22:50:59.842141 140361656969024 colab_utils.py:508] Trial 7: 0.006819
+I0614 22:51:00.554578 140361656969024 colab_utils.py:508] Trial 8: 0.011623
+I0614 22:51:01.165024 140361656969024 colab_utils.py:508] Trial 9: 0.010923
+I0614 22:51:01.166867 140361656969024 eval.py:84] Accuracy: 0.923820
+I0614 22:51:01.167089 140361656969024 eval.py:85] Coverage: 0.990810
+I0614 22:51:01.167147 140361656969024 eval.py:86] Size: 2.216180
+I0614 22:51:01.167196 140361656969024 eval.py:89] Class size 0: 1.535943
+I0614 22:51:01.167237 140361656969024 eval.py:89] Class size 1: 1.835790
+I0614 22:51:01.167313 140361656969024 eval.py:89] Class size 2: 2.062080
+I0614 22:51:01.167370 140361656969024 eval.py:89] Class size 3: 2.284154
+I0614 22:51:01.167684 140361656969024 eval.py:89] Class size 4: 2.178789
+I0614 22:51:01.167778 140361656969024 eval.py:89] Class size 5: 2.726315
+I0614 22:51:01.167884 140361656969024 eval.py:89] Class size 6: 1.859339
+I0614 22:51:01.167958 140361656969024 eval.py:89] Class size 7: 1.971279
+I0614 22:51:01.168023 140361656969024 eval.py:89] Class size 8: 2.855993
+I0614 22:51:01.168082 140361656969024 eval.py:89] Class size 9: 2.938624
+I0614 22:51:01.168138 140361656969024 eval.py:96] Group singleton size 0: 2.233737
+I0614 22:51:01.168187 140361656969024 eval.py:96] Group singleton size 1: 2.062080
+I0614 22:51:01.168421 140361656969024 eval.py:101] Group singleton miscoverage 0: 0.161417
+I0614 22:51:01.168561 140361656969024 eval.py:104] Group singleton miscoverage 1: 0.510647
+I0614 22:51:01.168636 140361656969024 eval.py:96] Group groups size 0: 2.099679
+I0614 22:51:01.168683 140361656969024 eval.py:96] Group groups size 1: 2.328671
+I0614 22:51:01.168725 140361656969024 eval.py:101] Group groups miscoverage 0: 0.418571
+I0614 22:51:01.168767 140361656969024 eval.py:104] Group groups miscoverage 1: 0.465866
+I0614 22:51:01.168797 140361656969024 eval.py:109] Coverage confusion 4-6: 0.011490
+I0614 22:51:01.168832 140361656969024 eval.py:112] Coverage confusion 6-4: 0.012190
+      Using method: aps
+I0614 22:51:03.649684 140593538025280 open_source_utils.py:39] Read ./results/mnist_models_seed3/eval_test.pkl
+I0614 22:51:03.657573 140593538025280 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:03.657726 140593538025280 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:03.657795 140593538025280 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:03.657855 140593538025280 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:03.658283 140593538025280 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:03.658547 140593538025280 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:03.659029 140593538025280 open_source_utils.py:221] loaded ./results/mnist_models_seed3/: 10000 test examples
+I0614 22:51:03.662996 140593538025280 open_source_utils.py:39] Read ./results/mnist_models_seed3/eval_val.pkl
+I0614 22:51:03.663080 140593538025280 open_source_utils.py:228] loaded ./results/mnist_models_seed3/: 5000 val examples
+I0614 22:51:06.532199 140593538025280 colab_utils.py:508] Trial 0: 0.993334
+I0614 22:51:07.484811 140593538025280 colab_utils.py:508] Trial 1: 0.992329
+I0614 22:51:08.437680 140593538025280 colab_utils.py:508] Trial 2: 0.994586
+I0614 22:51:09.118861 140593538025280 colab_utils.py:508] Trial 3: 0.994280
+I0614 22:51:09.983088 140593538025280 colab_utils.py:508] Trial 4: 0.992833
+I0614 22:51:10.824146 140593538025280 colab_utils.py:508] Trial 5: 0.994219
+I0614 22:51:11.481717 140593538025280 colab_utils.py:508] Trial 6: 0.993950
+I0614 22:51:12.231908 140593538025280 colab_utils.py:508] Trial 7: 0.994616
+I0614 22:51:13.008000 140593538025280 colab_utils.py:508] Trial 8: 0.992966
+I0614 22:51:13.662505 140593538025280 colab_utils.py:508] Trial 9: 0.991045
+I0614 22:51:13.664145 140593538025280 eval.py:84] Accuracy: 0.923820
+I0614 22:51:13.664306 140593538025280 eval.py:85] Coverage: 0.990590
+I0614 22:51:13.664348 140593538025280 eval.py:86] Size: 2.485400
+I0614 22:51:13.664381 140593538025280 eval.py:89] Class size 0: 1.643939
+I0614 22:51:13.664409 140593538025280 eval.py:89] Class size 1: 2.437684
+I0614 22:51:13.664435 140593538025280 eval.py:89] Class size 2: 2.189969
+I0614 22:51:13.664461 140593538025280 eval.py:89] Class size 3: 2.473487
+I0614 22:51:13.664486 140593538025280 eval.py:89] Class size 4: 2.482260
+I0614 22:51:13.664512 140593538025280 eval.py:89] Class size 5: 3.046240
+I0614 22:51:13.664537 140593538025280 eval.py:89] Class size 6: 2.062785
+I0614 22:51:13.664573 140593538025280 eval.py:89] Class size 7: 2.046021
+I0614 22:51:13.664613 140593538025280 eval.py:89] Class size 8: 3.217653
+I0614 22:51:13.664662 140593538025280 eval.py:89] Class size 9: 3.308844
+I0614 22:51:13.664695 140593538025280 eval.py:96] Group singleton size 0: 2.519059
+I0614 22:51:13.664725 140593538025280 eval.py:96] Group singleton size 1: 2.189969
+I0614 22:51:13.664754 140593538025280 eval.py:101] Group singleton miscoverage 0: 0.210184
+I0614 22:51:13.664781 140593538025280 eval.py:104] Group singleton miscoverage 1: 0.530328
+I0614 22:51:13.664831 140593538025280 eval.py:96] Group groups size 0: 2.320079
+I0614 22:51:13.664870 140593538025280 eval.py:96] Group groups size 1: 2.644990
+I0614 22:51:13.664900 140593538025280 eval.py:101] Group groups miscoverage 0: 0.455943
+I0614 22:51:13.664927 140593538025280 eval.py:104] Group groups miscoverage 1: 0.551612
+I0614 22:51:13.664954 140593538025280 eval.py:109] Coverage confusion 4-6: 0.015540
+I0614 22:51:13.664987 140593538025280 eval.py:112] Coverage confusion 6-4: 0.014620
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:51:14.715584 139958447953728 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed3/eval_test.pkl
+I0614 22:51:14.723872 139958447953728 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:14.724014 139958447953728 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:14.724076 139958447953728 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:14.724112 139958447953728 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:14.724377 139958447953728 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:14.724454 139958447953728 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:14.725001 139958447953728 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed3/: 10000 test examples
+I0614 22:51:14.728634 139958447953728 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed3/eval_val.pkl
+I0614 22:51:14.728707 139958447953728 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed3/: 5000 val examples
+I0614 22:51:17.070626 139958447953728 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:51:18.053724 139958447953728 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:51:19.166256 139958447953728 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:51:19.897929 139958447953728 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:51:20.812945 139958447953728 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:51:21.619838 139958447953728 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:51:22.194754 139958447953728 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:51:22.879801 139958447953728 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:51:23.573406 139958447953728 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:51:24.217808 139958447953728 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:51:24.219209 139958447953728 eval.py:84] Accuracy: 0.900500
+I0614 22:51:24.219341 139958447953728 eval.py:85] Coverage: 0.990090
+I0614 22:51:24.219382 139958447953728 eval.py:86] Size: 2.151510
+I0614 22:51:24.219414 139958447953728 eval.py:89] Class size 0: 1.536416
+I0614 22:51:24.219442 139958447953728 eval.py:89] Class size 1: 1.563715
+I0614 22:51:24.219468 139958447953728 eval.py:89] Class size 2: 2.127326
+I0614 22:51:24.219494 139958447953728 eval.py:89] Class size 3: 2.270055
+I0614 22:51:24.219519 139958447953728 eval.py:89] Class size 4: 2.274540
+I0614 22:51:24.219544 139958447953728 eval.py:89] Class size 5: 2.716392
+I0614 22:51:24.219569 139958447953728 eval.py:89] Class size 6: 1.844235
+I0614 22:51:24.219595 139958447953728 eval.py:89] Class size 7: 2.044250
+I0614 22:51:24.219620 139958447953728 eval.py:89] Class size 8: 2.709493
+I0614 22:51:24.219650 139958447953728 eval.py:89] Class size 9: 2.545324
+I0614 22:51:24.219696 139958447953728 eval.py:96] Group singleton size 0: 2.154268
+I0614 22:51:24.219734 139958447953728 eval.py:96] Group singleton size 1: 2.127326
+I0614 22:51:24.219763 139958447953728 eval.py:101] Group singleton miscoverage 0: 0.147984
+I0614 22:51:24.219791 139958447953728 eval.py:104] Group singleton miscoverage 1: 0.503287
+I0614 22:51:24.219830 139958447953728 eval.py:96] Group groups size 0: 2.100290
+I0614 22:51:24.219860 139958447953728 eval.py:96] Group groups size 1: 2.200953
+I0614 22:51:24.219887 139958447953728 eval.py:101] Group groups miscoverage 0: 0.407311
+I0614 22:51:24.219913 139958447953728 eval.py:104] Group groups miscoverage 1: 0.393821
+I0614 22:51:24.219939 139958447953728 eval.py:109] Coverage confusion 4-6: 0.010880
+I0614 22:51:24.219967 139958447953728 eval.py:112] Coverage confusion 6-4: 0.013700
+      Using method: aps
+I0614 22:51:25.343100 140310860597056 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed3/eval_test.pkl
+I0614 22:51:25.350881 140310860597056 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:25.351029 140310860597056 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:25.351096 140310860597056 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:25.351132 140310860597056 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:25.351555 140310860597056 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:25.351724 140310860597056 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:25.352180 140310860597056 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed3/: 10000 test examples
+I0614 22:51:25.355819 140310860597056 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed3/eval_val.pkl
+I0614 22:51:25.355899 140310860597056 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed3/: 5000 val examples
+I0614 22:51:28.315648 140310860597056 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:51:29.356342 140310860597056 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:51:30.339300 140310860597056 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:51:31.045367 140310860597056 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:51:31.984226 140310860597056 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:51:32.773002 140310860597056 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:51:33.384840 140310860597056 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:51:34.106553 140310860597056 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:51:34.824025 140310860597056 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:51:36.891389 140310860597056 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:51:36.892991 140310860597056 eval.py:84] Accuracy: 0.900500
+I0614 22:51:36.893180 140310860597056 eval.py:85] Coverage: 0.999220
+I0614 22:51:36.893226 140310860597056 eval.py:86] Size: 9.813110
+I0614 22:51:36.893275 140310860597056 eval.py:89] Class size 0: 9.877908
+I0614 22:51:36.893336 140310860597056 eval.py:89] Class size 1: 9.901079
+I0614 22:51:36.893391 140310860597056 eval.py:89] Class size 2: 9.810912
+I0614 22:51:36.893446 140310860597056 eval.py:89] Class size 3: 9.829033
+I0614 22:51:36.893480 140310860597056 eval.py:89] Class size 4: 9.802644
+I0614 22:51:36.893510 140310860597056 eval.py:89] Class size 5: 9.721822
+I0614 22:51:36.893538 140310860597056 eval.py:89] Class size 6: 9.855705
+I0614 22:51:36.893582 140310860597056 eval.py:89] Class size 7: 9.873958
+I0614 22:51:36.893644 140310860597056 eval.py:89] Class size 8: 9.724299
+I0614 22:51:36.893692 140310860597056 eval.py:89] Class size 9: 9.712201
+I0614 22:51:36.893734 140310860597056 eval.py:96] Group singleton size 0: 9.813358
+I0614 22:51:36.893768 140310860597056 eval.py:96] Group singleton size 1: 9.810912
+I0614 22:51:36.893809 140310860597056 eval.py:101] Group singleton miscoverage 0: 0.980529
+I0614 22:51:36.893841 140310860597056 eval.py:104] Group singleton miscoverage 1: 1.000000
+I0614 22:51:36.893871 140310860597056 eval.py:96] Group groups size 0: 9.814110
+I0614 22:51:36.893902 140310860597056 eval.py:96] Group groups size 1: 9.812151
+I0614 22:51:36.893932 140310860597056 eval.py:101] Group groups miscoverage 0: 0.996968
+I0614 22:51:36.893961 140310860597056 eval.py:104] Group groups miscoverage 1: 0.995305
+I0614 22:51:36.893990 140310860597056 eval.py:109] Coverage confusion 4-6: 0.095500
+I0614 22:51:36.894056 140310860597056 eval.py:112] Coverage confusion 6-4: 0.094660
+  Completed seed 3
+  Processing seed 4...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:51:38.025102 139716256974656 open_source_utils.py:39] Read ./results/mnist_models_seed4/eval_test.pkl
+I0614 22:51:38.034140 139716256974656 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:38.034299 139716256974656 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:38.034366 139716256974656 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:38.034404 139716256974656 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:38.034819 139716256974656 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:38.035006 139716256974656 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:38.035746 139716256974656 open_source_utils.py:221] loaded ./results/mnist_models_seed4/: 10000 test examples
+I0614 22:51:38.039565 139716256974656 open_source_utils.py:39] Read ./results/mnist_models_seed4/eval_val.pkl
+I0614 22:51:38.039652 139716256974656 open_source_utils.py:228] loaded ./results/mnist_models_seed4/: 5000 val examples
+I0614 22:51:40.477774 139716256974656 colab_utils.py:508] Trial 0: 0.009876
+I0614 22:51:41.403665 139716256974656 colab_utils.py:508] Trial 1: 0.010424
+I0614 22:51:42.332228 139716256974656 colab_utils.py:508] Trial 2: 0.009550
+I0614 22:51:43.005790 139716256974656 colab_utils.py:508] Trial 3: 0.008922
+I0614 22:51:43.847918 139716256974656 colab_utils.py:508] Trial 4: 0.013615
+I0614 22:51:44.620978 139716256974656 colab_utils.py:508] Trial 5: 0.007002
+I0614 22:51:45.283633 139716256974656 colab_utils.py:508] Trial 6: 0.006393
+I0614 22:51:46.031695 139716256974656 colab_utils.py:508] Trial 7: 0.006146
+I0614 22:51:46.748760 139716256974656 colab_utils.py:508] Trial 8: 0.011662
+I0614 22:51:47.348038 139716256974656 colab_utils.py:508] Trial 9: 0.011897
+I0614 22:51:47.349497 139716256974656 eval.py:84] Accuracy: 0.924060
+I0614 22:51:47.349622 139716256974656 eval.py:85] Coverage: 0.991040
+I0614 22:51:47.349708 139716256974656 eval.py:86] Size: 2.229400
+I0614 22:51:47.349749 139716256974656 eval.py:89] Class size 0: 1.543232
+I0614 22:51:47.349780 139716256974656 eval.py:89] Class size 1: 1.868427
+I0614 22:51:47.349808 139716256974656 eval.py:89] Class size 2: 2.071088
+I0614 22:51:47.349884 139716256974656 eval.py:89] Class size 3: 2.331992
+I0614 22:51:47.349918 139716256974656 eval.py:89] Class size 4: 2.209347
+I0614 22:51:47.349946 139716256974656 eval.py:89] Class size 5: 2.700346
+I0614 22:51:47.349972 139716256974656 eval.py:89] Class size 6: 1.850775
+I0614 22:51:47.350045 139716256974656 eval.py:89] Class size 7: 1.970572
+I0614 22:51:47.350083 139716256974656 eval.py:89] Class size 8: 2.885998
+I0614 22:51:47.350111 139716256974656 eval.py:89] Class size 9: 2.941987
+I0614 22:51:47.350141 139716256974656 eval.py:96] Group singleton size 0: 2.247439
+I0614 22:51:47.350170 139716256974656 eval.py:96] Group singleton size 1: 2.071088
+I0614 22:51:47.350198 139716256974656 eval.py:101] Group singleton miscoverage 0: 0.162656
+I0614 22:51:47.350249 139716256974656 eval.py:104] Group singleton miscoverage 1: 0.510524
+I0614 22:51:47.350310 139716256974656 eval.py:96] Group groups size 0: 2.113385
+I0614 22:51:47.350345 139716256974656 eval.py:96] Group groups size 1: 2.341456
+I0614 22:51:47.350375 139716256974656 eval.py:101] Group groups miscoverage 0: 0.421642
+I0614 22:51:47.350451 139716256974656 eval.py:104] Group groups miscoverage 1: 0.471870
+I0614 22:51:47.350489 139716256974656 eval.py:109] Coverage confusion 4-6: 0.011570
+I0614 22:51:47.350517 139716256974656 eval.py:112] Coverage confusion 6-4: 0.012100
+      Using method: aps
+I0614 22:51:48.387479 140588646278976 open_source_utils.py:39] Read ./results/mnist_models_seed4/eval_test.pkl
+I0614 22:51:48.394792 140588646278976 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:48.394964 140588646278976 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:48.395041 140588646278976 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:48.395085 140588646278976 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:48.395532 140588646278976 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:48.395755 140588646278976 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:48.396185 140588646278976 open_source_utils.py:221] loaded ./results/mnist_models_seed4/: 10000 test examples
+I0614 22:51:48.399731 140588646278976 open_source_utils.py:39] Read ./results/mnist_models_seed4/eval_val.pkl
+I0614 22:51:48.399804 140588646278976 open_source_utils.py:228] loaded ./results/mnist_models_seed4/: 5000 val examples
+I0614 22:51:51.043475 140588646278976 colab_utils.py:508] Trial 0: 0.993015
+I0614 22:51:52.061013 140588646278976 colab_utils.py:508] Trial 1: 0.993270
+I0614 22:51:53.100465 140588646278976 colab_utils.py:508] Trial 2: 0.994562
+I0614 22:51:53.892652 140588646278976 colab_utils.py:508] Trial 3: 0.994304
+I0614 22:51:54.895755 140588646278976 colab_utils.py:508] Trial 4: 0.992961
+I0614 22:51:55.690165 140588646278976 colab_utils.py:508] Trial 5: 0.994805
+I0614 22:51:56.292090 140588646278976 colab_utils.py:508] Trial 6: 0.993638
+I0614 22:51:57.046394 140588646278976 colab_utils.py:508] Trial 7: 0.994565
+I0614 22:51:57.764559 140588646278976 colab_utils.py:508] Trial 8: 0.992783
+I0614 22:51:58.390880 140588646278976 colab_utils.py:508] Trial 9: 0.991016
+I0614 22:51:58.392342 140588646278976 eval.py:84] Accuracy: 0.924060
+I0614 22:51:58.392474 140588646278976 eval.py:85] Coverage: 0.990550
+I0614 22:51:58.392578 140588646278976 eval.py:86] Size: 2.492310
+I0614 22:51:58.392636 140588646278976 eval.py:89] Class size 0: 1.641496
+I0614 22:51:58.392681 140588646278976 eval.py:89] Class size 1: 2.447277
+I0614 22:51:58.392748 140588646278976 eval.py:89] Class size 2: 2.200134
+I0614 22:51:58.392849 140588646278976 eval.py:89] Class size 3: 2.517490
+I0614 22:51:58.392901 140588646278976 eval.py:89] Class size 4: 2.505875
+I0614 22:51:58.392943 140588646278976 eval.py:89] Class size 5: 3.018586
+I0614 22:51:58.393084 140588646278976 eval.py:89] Class size 6: 2.044664
+I0614 22:51:58.393144 140588646278976 eval.py:89] Class size 7: 2.044155
+I0614 22:51:58.393343 140588646278976 eval.py:89] Class size 8: 3.236705
+I0614 22:51:58.393415 140588646278976 eval.py:89] Class size 9: 3.316739
+I0614 22:51:58.393605 140588646278976 eval.py:96] Group singleton size 0: 2.525599
+I0614 22:51:58.393661 140588646278976 eval.py:96] Group singleton size 1: 2.200134
+I0614 22:51:58.393720 140588646278976 eval.py:101] Group singleton miscoverage 0: 0.211721
+I0614 22:51:58.393813 140588646278976 eval.py:104] Group singleton miscoverage 1: 0.534153
+I0614 22:51:58.394055 140588646278976 eval.py:96] Group groups size 0: 2.326623
+I0614 22:51:58.394145 140588646278976 eval.py:96] Group groups size 1: 2.652245
+I0614 22:51:58.394245 140588646278976 eval.py:101] Group groups miscoverage 0: 0.456195
+I0614 22:51:58.394300 140588646278976 eval.py:104] Group groups miscoverage 1: 0.555337
+I0614 22:51:58.394346 140588646278976 eval.py:109] Coverage confusion 4-6: 0.015240
+I0614 22:51:58.394399 140588646278976 eval.py:112] Coverage confusion 6-4: 0.014750
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:51:59.618688 140320752568128 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed4/eval_test.pkl
+I0614 22:51:59.627586 140320752568128 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:51:59.627761 140320752568128 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:51:59.627840 140320752568128 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:59.627897 140320752568128 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:51:59.628276 140320752568128 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:51:59.628396 140320752568128 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:51:59.628968 140320752568128 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed4/: 10000 test examples
+I0614 22:51:59.634437 140320752568128 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed4/eval_val.pkl
+I0614 22:51:59.634630 140320752568128 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed4/: 5000 val examples
+I0614 22:52:02.204290 140320752568128 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:52:03.250733 140320752568128 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:52:04.245188 140320752568128 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:52:04.932075 140320752568128 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:52:05.799988 140320752568128 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:52:06.603373 140320752568128 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:52:07.190315 140320752568128 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:52:07.911087 140320752568128 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:52:08.654327 140320752568128 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:52:10.717769 140320752568128 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:52:10.719287 140320752568128 eval.py:84] Accuracy: 0.904700
+I0614 22:52:10.719476 140320752568128 eval.py:85] Coverage: 0.990190
+I0614 22:52:10.719529 140320752568128 eval.py:86] Size: 2.177380
+I0614 22:52:10.719589 140320752568128 eval.py:89] Class size 0: 1.559636
+I0614 22:52:10.719642 140320752568128 eval.py:89] Class size 1: 1.584122
+I0614 22:52:10.719702 140320752568128 eval.py:89] Class size 2: 2.157121
+I0614 22:52:10.719749 140320752568128 eval.py:89] Class size 3: 2.313997
+I0614 22:52:10.719782 140320752568128 eval.py:89] Class size 4: 2.263815
+I0614 22:52:10.719811 140320752568128 eval.py:89] Class size 5: 2.720776
+I0614 22:52:10.719840 140320752568128 eval.py:89] Class size 6: 1.872687
+I0614 22:52:10.719868 140320752568128 eval.py:89] Class size 7: 2.048403
+I0614 22:52:10.719896 140320752568128 eval.py:89] Class size 8: 2.770950
+I0614 22:52:10.719924 140320752568128 eval.py:89] Class size 9: 2.597597
+I0614 22:52:10.719956 140320752568128 eval.py:96] Group singleton size 0: 2.179686
+I0614 22:52:10.719988 140320752568128 eval.py:96] Group singleton size 1: 2.157121
+I0614 22:52:10.720019 140320752568128 eval.py:101] Group singleton miscoverage 0: 0.151427
+I0614 22:52:10.720048 140320752568128 eval.py:104] Group singleton miscoverage 1: 0.512840
+I0614 22:52:10.720077 140320752568128 eval.py:96] Group groups size 0: 2.126771
+I0614 22:52:10.720108 140320752568128 eval.py:96] Group groups size 1: 2.226262
+I0614 22:52:10.720139 140320752568128 eval.py:101] Group groups miscoverage 0: 0.407701
+I0614 22:52:10.720167 140320752568128 eval.py:104] Group groups miscoverage 1: 0.402172
+I0614 22:52:10.720195 140320752568128 eval.py:109] Coverage confusion 4-6: 0.012210
+I0614 22:52:10.720225 140320752568128 eval.py:112] Coverage confusion 6-4: 0.014950
+      Using method: aps
+I0614 22:52:12.017223 139872492152640 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed4/eval_test.pkl
+I0614 22:52:12.025582 139872492152640 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:52:12.025752 139872492152640 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:52:12.025824 139872492152640 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:12.025864 139872492152640 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:12.026456 139872492152640 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:52:12.026634 139872492152640 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:52:12.027110 139872492152640 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed4/: 10000 test examples
+I0614 22:52:12.032119 139872492152640 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed4/eval_val.pkl
+I0614 22:52:12.032276 139872492152640 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed4/: 5000 val examples
+I0614 22:52:14.731569 139872492152640 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:52:15.653427 139872492152640 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:52:16.631950 139872492152640 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:52:17.391086 139872492152640 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:52:18.349509 139872492152640 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:52:19.203290 139872492152640 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:52:20.021215 139872492152640 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:52:20.763727 139872492152640 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:52:21.456494 139872492152640 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:52:22.047199 139872492152640 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:52:22.048924 139872492152640 eval.py:84] Accuracy: 0.904700
+I0614 22:52:22.049125 139872492152640 eval.py:85] Coverage: 0.999290
+I0614 22:52:22.049168 139872492152640 eval.py:86] Size: 9.817170
+I0614 22:52:22.049202 139872492152640 eval.py:89] Class size 0: 9.938691
+I0614 22:52:22.049235 139872492152640 eval.py:89] Class size 1: 9.936716
+I0614 22:52:22.049273 139872492152640 eval.py:89] Class size 2: 9.778685
+I0614 22:52:22.049314 139872492152640 eval.py:89] Class size 3: 9.774085
+I0614 22:52:22.049356 139872492152640 eval.py:89] Class size 4: 9.838677
+I0614 22:52:22.049397 139872492152640 eval.py:89] Class size 5: 9.733926
+I0614 22:52:22.049451 139872492152640 eval.py:89] Class size 6: 9.849416
+I0614 22:52:22.049527 139872492152640 eval.py:89] Class size 7: 9.867319
+I0614 22:52:22.049605 139872492152640 eval.py:89] Class size 8: 9.710681
+I0614 22:52:22.049641 139872492152640 eval.py:89] Class size 9: 9.723112
+I0614 22:52:22.049672 139872492152640 eval.py:96] Group singleton size 0: 9.821565
+I0614 22:52:22.049706 139872492152640 eval.py:96] Group singleton size 1: 9.778685
+I0614 22:52:22.049771 139872492152640 eval.py:101] Group singleton miscoverage 0: 0.981944
+I0614 22:52:22.049811 139872492152640 eval.py:104] Group singleton miscoverage 1: 1.000000
+I0614 22:52:22.049842 139872492152640 eval.py:96] Group groups size 0: 9.822560
+I0614 22:52:22.049876 139872492152640 eval.py:96] Group groups size 1: 9.811952
+I0614 22:52:22.049909 139872492152640 eval.py:101] Group groups miscoverage 0: 0.996660
+I0614 22:52:22.049937 139872492152640 eval.py:104] Group groups miscoverage 1: 0.993340
+I0614 22:52:22.049963 139872492152640 eval.py:109] Coverage confusion 4-6: 0.096380
+I0614 22:52:22.049993 139872492152640 eval.py:112] Coverage confusion 6-4: 0.094730
+  Completed seed 4
+  Processing seed 5...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:52:23.213558 140649808144192 open_source_utils.py:39] Read ./results/mnist_models_seed5/eval_test.pkl
+I0614 22:52:23.228935 140649808144192 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:52:23.229084 140649808144192 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:52:23.229149 140649808144192 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:23.229185 140649808144192 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:23.229454 140649808144192 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:52:23.229536 140649808144192 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:52:23.230120 140649808144192 open_source_utils.py:221] loaded ./results/mnist_models_seed5/: 10000 test examples
+I0614 22:52:23.234030 140649808144192 open_source_utils.py:39] Read ./results/mnist_models_seed5/eval_val.pkl
+I0614 22:52:23.234121 140649808144192 open_source_utils.py:228] loaded ./results/mnist_models_seed5/: 5000 val examples
+I0614 22:52:25.864657 140649808144192 colab_utils.py:508] Trial 0: 0.009322
+I0614 22:52:26.907707 140649808144192 colab_utils.py:508] Trial 1: 0.009741
+I0614 22:52:28.006320 140649808144192 colab_utils.py:508] Trial 2: 0.009037
+I0614 22:52:28.722760 140649808144192 colab_utils.py:508] Trial 3: 0.008386
+I0614 22:52:29.570762 140649808144192 colab_utils.py:508] Trial 4: 0.015384
+I0614 22:52:30.310735 140649808144192 colab_utils.py:508] Trial 5: 0.006968
+I0614 22:52:30.876583 140649808144192 colab_utils.py:508] Trial 6: 0.006051
+I0614 22:52:31.562920 140649808144192 colab_utils.py:508] Trial 7: 0.006547
+I0614 22:52:32.301620 140649808144192 colab_utils.py:508] Trial 8: 0.012024
+I0614 22:52:32.996670 140649808144192 colab_utils.py:508] Trial 9: 0.012174
+I0614 22:52:32.998242 140649808144192 eval.py:84] Accuracy: 0.923740
+I0614 22:52:32.998387 140649808144192 eval.py:85] Coverage: 0.990940
+I0614 22:52:32.998434 140649808144192 eval.py:86] Size: 2.235120
+I0614 22:52:32.998501 140649808144192 eval.py:89] Class size 0: 1.542559
+I0614 22:52:32.998554 140649808144192 eval.py:89] Class size 1: 1.866285
+I0614 22:52:32.998589 140649808144192 eval.py:89] Class size 2: 2.089937
+I0614 22:52:32.998618 140649808144192 eval.py:89] Class size 3: 2.287030
+I0614 22:52:32.998647 140649808144192 eval.py:89] Class size 4: 2.202850
+I0614 22:52:32.998676 140649808144192 eval.py:89] Class size 5: 2.719434
+I0614 22:52:32.998704 140649808144192 eval.py:89] Class size 6: 1.837320
+I0614 22:52:32.998732 140649808144192 eval.py:89] Class size 7: 1.995911
+I0614 22:52:32.998760 140649808144192 eval.py:89] Class size 8: 2.896552
+I0614 22:52:32.998788 140649808144192 eval.py:89] Class size 9: 2.994258
+I0614 22:52:32.998821 140649808144192 eval.py:96] Group singleton size 0: 2.251670
+I0614 22:52:32.998853 140649808144192 eval.py:96] Group singleton size 1: 2.089937
+I0614 22:52:32.998884 140649808144192 eval.py:101] Group singleton miscoverage 0: 0.161567
+I0614 22:52:32.998914 140649808144192 eval.py:104] Group singleton miscoverage 1: 0.517444
+I0614 22:52:32.998944 140649808144192 eval.py:96] Group groups size 0: 2.115319
+I0614 22:52:32.998975 140649808144192 eval.py:96] Group groups size 1: 2.350830
+I0614 22:52:32.999006 140649808144192 eval.py:101] Group groups miscoverage 0: 0.422915
+I0614 22:52:32.999035 140649808144192 eval.py:104] Group groups miscoverage 1: 0.470702
+I0614 22:52:32.999065 140649808144192 eval.py:109] Coverage confusion 4-6: 0.012120
+I0614 22:52:32.999132 140649808144192 eval.py:112] Coverage confusion 6-4: 0.012270
+      Using method: aps
+I0614 22:52:34.306296 140560937277248 open_source_utils.py:39] Read ./results/mnist_models_seed5/eval_test.pkl
+I0614 22:52:34.322683 140560937277248 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:52:34.322838 140560937277248 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:52:34.322908 140560937277248 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:34.322949 140560937277248 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:34.323343 140560937277248 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:52:34.323525 140560937277248 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:52:34.324026 140560937277248 open_source_utils.py:221] loaded ./results/mnist_models_seed5/: 10000 test examples
+I0614 22:52:34.328638 140560937277248 open_source_utils.py:39] Read ./results/mnist_models_seed5/eval_val.pkl
+I0614 22:52:34.328774 140560937277248 open_source_utils.py:228] loaded ./results/mnist_models_seed5/: 5000 val examples
+I0614 22:52:37.233023 140560937277248 colab_utils.py:508] Trial 0: 0.992940
+I0614 22:52:38.219069 140560937277248 colab_utils.py:508] Trial 1: 0.993204
+I0614 22:52:39.231104 140560937277248 colab_utils.py:508] Trial 2: 0.994450
+I0614 22:52:39.922687 140560937277248 colab_utils.py:508] Trial 3: 0.994136
+I0614 22:52:40.960108 140560937277248 colab_utils.py:508] Trial 4: 0.992699
+I0614 22:52:41.880833 140560937277248 colab_utils.py:508] Trial 5: 0.994703
+I0614 22:52:43.890349 140560937277248 colab_utils.py:508] Trial 6: 0.993785
+I0614 22:52:44.659919 140560937277248 colab_utils.py:508] Trial 7: 0.994899
+I0614 22:52:45.428015 140560937277248 colab_utils.py:508] Trial 8: 0.992749
+I0614 22:52:46.062939 140560937277248 colab_utils.py:508] Trial 9: 0.991071
+I0614 22:52:46.064435 140560937277248 eval.py:84] Accuracy: 0.923740
+I0614 22:52:46.064602 140560937277248 eval.py:85] Coverage: 0.990650
+I0614 22:52:46.064645 140560937277248 eval.py:86] Size: 2.490190
+I0614 22:52:46.064679 140560937277248 eval.py:89] Class size 0: 1.644049
+I0614 22:52:46.064710 140560937277248 eval.py:89] Class size 1: 2.430264
+I0614 22:52:46.064749 140560937277248 eval.py:89] Class size 2: 2.211434
+I0614 22:52:46.064779 140560937277248 eval.py:89] Class size 3: 2.462989
+I0614 22:52:46.064806 140560937277248 eval.py:89] Class size 4: 2.500538
+I0614 22:52:46.064832 140560937277248 eval.py:89] Class size 5: 3.032801
+I0614 22:52:46.064859 140560937277248 eval.py:89] Class size 6: 2.014545
+I0614 22:52:46.064886 140560937277248 eval.py:89] Class size 7: 2.068768
+I0614 22:52:46.064912 140560937277248 eval.py:89] Class size 8: 3.236288
+I0614 22:52:46.064943 140560937277248 eval.py:89] Class size 9: 3.352298
+I0614 22:52:46.064981 140560937277248 eval.py:96] Group singleton size 0: 2.521948
+I0614 22:52:46.065012 140560937277248 eval.py:96] Group singleton size 1: 2.211434
+I0614 22:52:46.065041 140560937277248 eval.py:101] Group singleton miscoverage 0: 0.207155
+I0614 22:52:46.065068 140560937277248 eval.py:104] Group singleton miscoverage 1: 0.537372
+I0614 22:52:46.065096 140560937277248 eval.py:96] Group groups size 0: 2.322442
+I0614 22:52:46.065131 140560937277248 eval.py:96] Group groups size 1: 2.652128
+I0614 22:52:46.065194 140560937277248 eval.py:101] Group groups miscoverage 0: 0.456563
+I0614 22:52:46.065243 140560937277248 eval.py:104] Group groups miscoverage 1: 0.551376
+I0614 22:52:46.065283 140560937277248 eval.py:109] Coverage confusion 4-6: 0.016050
+I0614 22:52:46.065322 140560937277248 eval.py:112] Coverage confusion 6-4: 0.014630
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:52:47.111353 139847265679168 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed5/eval_test.pkl
+I0614 22:52:47.118679 139847265679168 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:52:47.118836 139847265679168 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:52:47.118904 139847265679168 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:47.118941 139847265679168 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:47.119269 139847265679168 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:52:47.119366 139847265679168 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:52:47.120178 139847265679168 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed5/: 10000 test examples
+I0614 22:52:47.123890 139847265679168 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed5/eval_val.pkl
+I0614 22:52:47.123989 139847265679168 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed5/: 5000 val examples
+I0614 22:52:49.407308 139847265679168 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:52:50.428868 139847265679168 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:52:51.483476 139847265679168 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:52:52.204468 139847265679168 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:52:53.125261 139847265679168 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:52:53.961023 139847265679168 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:52:54.566633 139847265679168 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:52:55.310795 139847265679168 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:52:56.001978 139847265679168 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:52:56.602192 139847265679168 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:52:56.603541 139847265679168 eval.py:84] Accuracy: 0.901460
+I0614 22:52:56.603666 139847265679168 eval.py:85] Coverage: 0.990390
+I0614 22:52:56.603708 139847265679168 eval.py:86] Size: 2.184390
+I0614 22:52:56.603740 139847265679168 eval.py:89] Class size 0: 1.572154
+I0614 22:52:56.603769 139847265679168 eval.py:89] Class size 1: 1.572979
+I0614 22:52:56.603796 139847265679168 eval.py:89] Class size 2: 2.146477
+I0614 22:52:56.603822 139847265679168 eval.py:89] Class size 3: 2.338607
+I0614 22:52:56.603848 139847265679168 eval.py:89] Class size 4: 2.315933
+I0614 22:52:56.603874 139847265679168 eval.py:89] Class size 5: 2.776564
+I0614 22:52:56.603904 139847265679168 eval.py:89] Class size 6: 1.874434
+I0614 22:52:56.603930 139847265679168 eval.py:89] Class size 7: 2.071549
+I0614 22:52:56.603956 139847265679168 eval.py:89] Class size 8: 2.726700
+I0614 22:52:56.603982 139847265679168 eval.py:89] Class size 9: 2.570134
+I0614 22:52:56.604012 139847265679168 eval.py:96] Group singleton size 0: 2.188709
+I0614 22:52:56.604042 139847265679168 eval.py:96] Group singleton size 1: 2.146477
+I0614 22:52:56.604070 139847265679168 eval.py:101] Group singleton miscoverage 0: 0.157861
+I0614 22:52:56.604098 139847265679168 eval.py:104] Group singleton miscoverage 1: 0.524175
+I0614 22:52:56.604125 139847265679168 eval.py:96] Group groups size 0: 2.128939
+I0614 22:52:56.604153 139847265679168 eval.py:96] Group groups size 1: 2.237914
+I0614 22:52:56.604182 139847265679168 eval.py:101] Group groups miscoverage 0: 0.418851
+I0614 22:52:56.604208 139847265679168 eval.py:104] Group groups miscoverage 1: 0.396020
+I0614 22:52:56.604234 139847265679168 eval.py:109] Coverage confusion 4-6: 0.011580
+I0614 22:52:56.604262 139847265679168 eval.py:112] Coverage confusion 6-4: 0.012910
+      Using method: aps
+I0614 22:52:57.694773 140003014883136 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed5/eval_test.pkl
+I0614 22:52:57.703451 140003014883136 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:52:57.703610 140003014883136 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:52:57.703685 140003014883136 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:57.703725 140003014883136 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:52:57.704118 140003014883136 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:52:57.704402 140003014883136 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:52:57.704889 140003014883136 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed5/: 10000 test examples
+I0614 22:52:57.708824 140003014883136 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed5/eval_val.pkl
+I0614 22:52:57.708939 140003014883136 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed5/: 5000 val examples
+I0614 22:53:00.568350 140003014883136 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:53:01.605950 140003014883136 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:53:02.585874 140003014883136 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:53:03.311541 140003014883136 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:53:04.177672 140003014883136 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:53:04.942631 140003014883136 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:53:05.565496 140003014883136 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:53:06.361320 140003014883136 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:53:07.136153 140003014883136 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:53:07.817964 140003014883136 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:53:07.819455 140003014883136 eval.py:84] Accuracy: 0.901460
+I0614 22:53:07.819605 140003014883136 eval.py:85] Coverage: 0.999060
+I0614 22:53:07.819652 140003014883136 eval.py:86] Size: 9.797250
+I0614 22:53:07.819688 140003014883136 eval.py:89] Class size 0: 9.901034
+I0614 22:53:07.819720 140003014883136 eval.py:89] Class size 1: 9.955670
+I0614 22:53:07.819751 140003014883136 eval.py:89] Class size 2: 9.825057
+I0614 22:53:07.819780 140003014883136 eval.py:89] Class size 3: 9.719033
+I0614 22:53:07.819810 140003014883136 eval.py:89] Class size 4: 9.817595
+I0614 22:53:07.819839 140003014883136 eval.py:89] Class size 5: 9.657551
+I0614 22:53:07.819869 140003014883136 eval.py:89] Class size 6: 9.845241
+I0614 22:53:07.819898 140003014883136 eval.py:89] Class size 7: 9.785175
+I0614 22:53:07.819927 140003014883136 eval.py:89] Class size 8: 9.685700
+I0614 22:53:07.819956 140003014883136 eval.py:89] Class size 9: 9.751195
+I0614 22:53:07.819989 140003014883136 eval.py:96] Group singleton size 0: 9.794092
+I0614 22:53:07.820023 140003014883136 eval.py:96] Group singleton size 1: 9.825057
+I0614 22:53:07.820067 140003014883136 eval.py:101] Group singleton miscoverage 0: 0.979405
+I0614 22:53:07.820102 140003014883136 eval.py:104] Group singleton miscoverage 1: 1.000000
+I0614 22:53:07.820136 140003014883136 eval.py:96] Group groups size 0: 9.814732
+I0614 22:53:07.820167 140003014883136 eval.py:96] Group groups size 1: 9.780389
+I0614 22:53:07.820198 140003014883136 eval.py:101] Group groups miscoverage 0: 0.996232
+I0614 22:53:07.820227 140003014883136 eval.py:104] Group groups miscoverage 1: 0.990903
+I0614 22:53:07.820257 140003014883136 eval.py:109] Coverage confusion 4-6: 0.095950
+I0614 22:53:07.820287 140003014883136 eval.py:112] Coverage confusion 6-4: 0.094720
+  Completed seed 5
+  Processing seed 6...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:53:09.042618 140506781439808 open_source_utils.py:39] Read ./results/mnist_models_seed6/eval_test.pkl
+I0614 22:53:09.051568 140506781439808 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:53:09.051738 140506781439808 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:53:09.051808 140506781439808 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:09.051847 140506781439808 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:09.052184 140506781439808 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:53:09.052273 140506781439808 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:53:09.052867 140506781439808 open_source_utils.py:221] loaded ./results/mnist_models_seed6/: 10000 test examples
+I0614 22:53:09.057601 140506781439808 open_source_utils.py:39] Read ./results/mnist_models_seed6/eval_val.pkl
+I0614 22:53:09.057760 140506781439808 open_source_utils.py:228] loaded ./results/mnist_models_seed6/: 5000 val examples
+I0614 22:53:11.469252 140506781439808 colab_utils.py:508] Trial 0: 0.009154
+I0614 22:53:12.417231 140506781439808 colab_utils.py:508] Trial 1: 0.008568
+I0614 22:53:13.363746 140506781439808 colab_utils.py:508] Trial 2: 0.007876
+I0614 22:53:14.072893 140506781439808 colab_utils.py:508] Trial 3: 0.008450
+I0614 22:53:14.972780 140506781439808 colab_utils.py:508] Trial 4: 0.013845
+I0614 22:53:15.785325 140506781439808 colab_utils.py:508] Trial 5: 0.006862
+I0614 22:53:17.749219 140506781439808 colab_utils.py:508] Trial 6: 0.006862
+I0614 22:53:18.483671 140506781439808 colab_utils.py:508] Trial 7: 0.006729
+I0614 22:53:19.206689 140506781439808 colab_utils.py:508] Trial 8: 0.012642
+I0614 22:53:19.775326 140506781439808 colab_utils.py:508] Trial 9: 0.012861
+I0614 22:53:19.776671 140506781439808 eval.py:84] Accuracy: 0.923420
+I0614 22:53:19.776805 140506781439808 eval.py:85] Coverage: 0.991020
+I0614 22:53:19.776889 140506781439808 eval.py:86] Size: 2.238930
+I0614 22:53:19.776926 140506781439808 eval.py:89] Class size 0: 1.550027
+I0614 22:53:19.776955 140506781439808 eval.py:89] Class size 1: 1.907833
+I0614 22:53:19.777034 140506781439808 eval.py:89] Class size 2: 2.072129
+I0614 22:53:19.777067 140506781439808 eval.py:89] Class size 3: 2.292282
+I0614 22:53:19.777094 140506781439808 eval.py:89] Class size 4: 2.218656
+I0614 22:53:19.777149 140506781439808 eval.py:89] Class size 5: 2.720241
+I0614 22:53:19.777209 140506781439808 eval.py:89] Class size 6: 1.859978
+I0614 22:53:19.777238 140506781439808 eval.py:89] Class size 7: 1.996712
+I0614 22:53:19.777264 140506781439808 eval.py:89] Class size 8: 2.923099
+I0614 22:53:19.777289 140506781439808 eval.py:89] Class size 9: 2.926881
+I0614 22:53:19.777319 140506781439808 eval.py:96] Group singleton size 0: 2.257941
+I0614 22:53:19.777395 140506781439808 eval.py:96] Group singleton size 1: 2.072129
+I0614 22:53:19.777439 140506781439808 eval.py:101] Group singleton miscoverage 0: 0.169365
+I0614 22:53:19.777467 140506781439808 eval.py:104] Group singleton miscoverage 1: 0.511960
+I0614 22:53:19.777518 140506781439808 eval.py:96] Group groups size 0: 2.125931
+I0614 22:53:19.777577 140506781439808 eval.py:96] Group groups size 1: 2.348091
+I0614 22:53:19.777608 140506781439808 eval.py:101] Group groups miscoverage 0: 0.426761
+I0614 22:53:19.777674 140506781439808 eval.py:104] Group groups miscoverage 1: 0.472500
+I0614 22:53:19.777716 140506781439808 eval.py:109] Coverage confusion 4-6: 0.011900
+I0614 22:53:19.777746 140506781439808 eval.py:112] Coverage confusion 6-4: 0.012020
+      Using method: aps
+I0614 22:53:20.838995 140086267471680 open_source_utils.py:39] Read ./results/mnist_models_seed6/eval_test.pkl
+I0614 22:53:20.846977 140086267471680 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:53:20.847122 140086267471680 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:53:20.847187 140086267471680 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:20.847228 140086267471680 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:20.847563 140086267471680 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:53:20.847724 140086267471680 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:53:20.848219 140086267471680 open_source_utils.py:221] loaded ./results/mnist_models_seed6/: 10000 test examples
+I0614 22:53:20.852391 140086267471680 open_source_utils.py:39] Read ./results/mnist_models_seed6/eval_val.pkl
+I0614 22:53:20.852546 140086267471680 open_source_utils.py:228] loaded ./results/mnist_models_seed6/: 5000 val examples
+I0614 22:53:23.497234 140086267471680 colab_utils.py:508] Trial 0: 0.993274
+I0614 22:53:24.487272 140086267471680 colab_utils.py:508] Trial 1: 0.993262
+I0614 22:53:25.509844 140086267471680 colab_utils.py:508] Trial 2: 0.994061
+I0614 22:53:26.376865 140086267471680 colab_utils.py:508] Trial 3: 0.994842
+I0614 22:53:27.293221 140086267471680 colab_utils.py:508] Trial 4: 0.992860
+I0614 22:53:28.134416 140086267471680 colab_utils.py:508] Trial 5: 0.995148
+I0614 22:53:28.788772 140086267471680 colab_utils.py:508] Trial 6: 0.993622
+I0614 22:53:29.537263 140086267471680 colab_utils.py:508] Trial 7: 0.994691
+I0614 22:53:30.309294 140086267471680 colab_utils.py:508] Trial 8: 0.992801
+I0614 22:53:30.967409 140086267471680 colab_utils.py:508] Trial 9: 0.991875
+I0614 22:53:30.969189 140086267471680 eval.py:84] Accuracy: 0.923420
+I0614 22:53:30.969373 140086267471680 eval.py:85] Coverage: 0.990470
+I0614 22:53:30.969419 140086267471680 eval.py:86] Size: 2.499630
+I0614 22:53:30.969457 140086267471680 eval.py:89] Class size 0: 1.644423
+I0614 22:53:30.969495 140086267471680 eval.py:89] Class size 1: 2.513189
+I0614 22:53:30.969535 140086267471680 eval.py:89] Class size 2: 2.192371
+I0614 22:53:30.969579 140086267471680 eval.py:89] Class size 3: 2.475592
+I0614 22:53:30.969653 140086267471680 eval.py:89] Class size 4: 2.506433
+I0614 22:53:30.969702 140086267471680 eval.py:89] Class size 5: 3.035850
+I0614 22:53:30.969748 140086267471680 eval.py:89] Class size 6: 2.041867
+I0614 22:53:30.969786 140086267471680 eval.py:89] Class size 7: 2.067344
+I0614 22:53:30.969821 140086267471680 eval.py:89] Class size 8: 3.277109
+I0614 22:53:30.969850 140086267471680 eval.py:89] Class size 9: 3.286327
+I0614 22:53:30.969901 140086267471680 eval.py:96] Group singleton size 0: 2.534631
+I0614 22:53:30.969948 140086267471680 eval.py:96] Group singleton size 1: 2.192371
+I0614 22:53:30.969987 140086267471680 eval.py:101] Group singleton miscoverage 0: 0.216899
+I0614 22:53:30.970074 140086267471680 eval.py:104] Group singleton miscoverage 1: 0.531822
+I0614 22:53:30.970127 140086267471680 eval.py:96] Group groups size 0: 2.333186
+I0614 22:53:30.970161 140086267471680 eval.py:96] Group groups size 1: 2.660293
+I0614 22:53:30.970221 140086267471680 eval.py:101] Group groups miscoverage 0: 0.460238
+I0614 22:53:30.970267 140086267471680 eval.py:104] Group groups miscoverage 1: 0.554951
+I0614 22:53:30.970302 140086267471680 eval.py:109] Coverage confusion 4-6: 0.015770
+I0614 22:53:30.970337 140086267471680 eval.py:112] Coverage confusion 6-4: 0.014360
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:53:32.219797 139770879588160 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed6/eval_test.pkl
+I0614 22:53:32.227362 139770879588160 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:53:32.227516 139770879588160 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:53:32.227581 139770879588160 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:32.227619 139770879588160 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:32.227981 139770879588160 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:53:32.228064 139770879588160 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:53:32.228770 139770879588160 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed6/: 10000 test examples
+I0614 22:53:32.232700 139770879588160 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed6/eval_val.pkl
+I0614 22:53:32.232799 139770879588160 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed6/: 5000 val examples
+I0614 22:53:34.808186 139770879588160 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:53:35.806052 139770879588160 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:53:36.804928 139770879588160 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:53:37.501082 139770879588160 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:53:38.381263 139770879588160 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:53:39.211020 139770879588160 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:53:39.822967 139770879588160 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:53:40.554234 139770879588160 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:53:41.281048 139770879588160 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:53:41.889016 139770879588160 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:53:41.890474 139770879588160 eval.py:84] Accuracy: 0.903130
+I0614 22:53:41.890603 139770879588160 eval.py:85] Coverage: 0.989760
+I0614 22:53:41.890653 139770879588160 eval.py:86] Size: 2.158160
+I0614 22:53:41.890694 139770879588160 eval.py:89] Class size 0: 1.494163
+I0614 22:53:41.890724 139770879588160 eval.py:89] Class size 1: 1.570933
+I0614 22:53:41.890752 139770879588160 eval.py:89] Class size 2: 2.143515
+I0614 22:53:41.890779 139770879588160 eval.py:89] Class size 3: 2.290658
+I0614 22:53:41.890811 139770879588160 eval.py:89] Class size 4: 2.203771
+I0614 22:53:41.890846 139770879588160 eval.py:89] Class size 5: 2.740846
+I0614 22:53:41.890875 139770879588160 eval.py:89] Class size 6: 1.832422
+I0614 22:53:41.890902 139770879588160 eval.py:89] Class size 7: 2.061572
+I0614 22:53:41.890928 139770879588160 eval.py:89] Class size 8: 2.702681
+I0614 22:53:41.890955 139770879588160 eval.py:89] Class size 9: 2.653746
+I0614 22:53:41.890996 139770879588160 eval.py:96] Group singleton size 0: 2.159837
+I0614 22:53:41.891029 139770879588160 eval.py:96] Group singleton size 1: 2.143515
+I0614 22:53:41.891058 139770879588160 eval.py:101] Group singleton miscoverage 0: 0.154682
+I0614 22:53:41.891086 139770879588160 eval.py:104] Group singleton miscoverage 1: 0.518992
+I0614 22:53:41.891114 139770879588160 eval.py:96] Group groups size 0: 2.077545
+I0614 22:53:41.891141 139770879588160 eval.py:96] Group groups size 1: 2.235986
+I0614 22:53:41.891170 139770879588160 eval.py:101] Group groups miscoverage 0: 0.395606
+I0614 22:53:41.891200 139770879588160 eval.py:104] Group groups miscoverage 1: 0.405481
+I0614 22:53:41.891246 139770879588160 eval.py:109] Coverage confusion 4-6: 0.011070
+I0614 22:53:41.891297 139770879588160 eval.py:112] Coverage confusion 6-4: 0.012780
+      Using method: aps
+I0614 22:53:42.969304 140193770157888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed6/eval_test.pkl
+I0614 22:53:42.977253 140193770157888 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:53:42.977421 140193770157888 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:53:42.977490 140193770157888 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:42.977527 140193770157888 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:42.977778 140193770157888 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:53:42.977867 140193770157888 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:53:42.978444 140193770157888 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed6/: 10000 test examples
+I0614 22:53:42.982366 140193770157888 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed6/eval_val.pkl
+I0614 22:53:42.982446 140193770157888 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed6/: 5000 val examples
+I0614 22:53:45.771413 140193770157888 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:53:46.735130 140193770157888 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:53:47.716579 140193770157888 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:53:48.410730 140193770157888 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:53:49.293143 140193770157888 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:53:51.681308 140193770157888 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:53:52.286947 140193770157888 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:53:53.005704 140193770157888 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:53:53.726336 140193770157888 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:53:54.348531 140193770157888 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:53:54.350014 140193770157888 eval.py:84] Accuracy: 0.903130
+I0614 22:53:54.350140 140193770157888 eval.py:85] Coverage: 0.997950
+I0614 22:53:54.350184 140193770157888 eval.py:86] Size: 9.093490
+I0614 22:53:54.350219 140193770157888 eval.py:89] Class size 0: 9.104193
+I0614 22:53:54.350249 140193770157888 eval.py:89] Class size 1: 9.087188
+I0614 22:53:54.350278 140193770157888 eval.py:89] Class size 2: 9.107789
+I0614 22:53:54.350306 140193770157888 eval.py:89] Class size 3: 9.106503
+I0614 22:53:54.350334 140193770157888 eval.py:89] Class size 4: 9.135460
+I0614 22:53:54.350362 140193770157888 eval.py:89] Class size 5: 9.026833
+I0614 22:53:54.350390 140193770157888 eval.py:89] Class size 6: 9.095070
+I0614 22:53:54.350418 140193770157888 eval.py:89] Class size 7: 9.064585
+I0614 22:53:54.350445 140193770157888 eval.py:89] Class size 8: 9.085379
+I0614 22:53:54.350474 140193770157888 eval.py:89] Class size 9: 9.117726
+I0614 22:53:54.350505 140193770157888 eval.py:96] Group singleton size 0: 9.091871
+I0614 22:53:54.350535 140193770157888 eval.py:96] Group singleton size 1: 9.107789
+I0614 22:53:54.350566 140193770157888 eval.py:101] Group singleton miscoverage 0: 0.902054
+I0614 22:53:54.350594 140193770157888 eval.py:104] Group singleton miscoverage 1: 0.945123
+I0614 22:53:54.350623 140193770157888 eval.py:96] Group groups size 0: 9.105495
+I0614 22:53:54.350652 140193770157888 eval.py:96] Group groups size 1: 9.081807
+I0614 22:53:54.350682 140193770157888 eval.py:101] Group groups miscoverage 0: 0.930707
+I0614 22:53:54.350709 140193770157888 eval.py:104] Group groups miscoverage 1: 0.928681
+I0614 22:53:54.350737 140193770157888 eval.py:109] Coverage confusion 4-6: 0.088490
+I0614 22:53:54.350766 140193770157888 eval.py:112] Coverage confusion 6-4: 0.086380
+  Completed seed 6
+  Processing seed 7...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:53:55.435334 139671129397056 open_source_utils.py:39] Read ./results/mnist_models_seed7/eval_test.pkl
+I0614 22:53:55.442924 139671129397056 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:53:55.443100 139671129397056 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:53:55.443183 139671129397056 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:55.443251 139671129397056 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:53:55.443538 139671129397056 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:53:55.443667 139671129397056 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:53:55.444211 139671129397056 open_source_utils.py:221] loaded ./results/mnist_models_seed7/: 10000 test examples
+I0614 22:53:55.448182 139671129397056 open_source_utils.py:39] Read ./results/mnist_models_seed7/eval_val.pkl
+I0614 22:53:55.448281 139671129397056 open_source_utils.py:228] loaded ./results/mnist_models_seed7/: 5000 val examples
+I0614 22:53:57.874485 139671129397056 colab_utils.py:508] Trial 0: 0.008737
+I0614 22:53:58.818501 139671129397056 colab_utils.py:508] Trial 1: 0.010217
+I0614 22:53:59.893868 139671129397056 colab_utils.py:508] Trial 2: 0.008471
+I0614 22:54:00.582415 139671129397056 colab_utils.py:508] Trial 3: 0.008952
+I0614 22:54:01.457237 139671129397056 colab_utils.py:508] Trial 4: 0.014499
+I0614 22:54:02.227773 139671129397056 colab_utils.py:508] Trial 5: 0.006630
+I0614 22:54:02.816233 139671129397056 colab_utils.py:508] Trial 6: 0.006427
+I0614 22:54:03.514985 139671129397056 colab_utils.py:508] Trial 7: 0.007205
+I0614 22:54:04.220887 139671129397056 colab_utils.py:508] Trial 8: 0.012593
+I0614 22:54:04.822153 139671129397056 colab_utils.py:508] Trial 9: 0.012023
+I0614 22:54:04.823612 139671129397056 eval.py:84] Accuracy: 0.924850
+I0614 22:54:04.823742 139671129397056 eval.py:85] Coverage: 0.991000
+I0614 22:54:04.823807 139671129397056 eval.py:86] Size: 2.238460
+I0614 22:54:04.823849 139671129397056 eval.py:89] Class size 0: 1.551388
+I0614 22:54:04.823881 139671129397056 eval.py:89] Class size 1: 1.880036
+I0614 22:54:04.823910 139671129397056 eval.py:89] Class size 2: 2.046432
+I0614 22:54:04.823939 139671129397056 eval.py:89] Class size 3: 2.311640
+I0614 22:54:04.823966 139671129397056 eval.py:89] Class size 4: 2.225340
+I0614 22:54:04.823994 139671129397056 eval.py:89] Class size 5: 2.738665
+I0614 22:54:04.824021 139671129397056 eval.py:89] Class size 6: 1.863440
+I0614 22:54:04.824051 139671129397056 eval.py:89] Class size 7: 2.005531
+I0614 22:54:04.824079 139671129397056 eval.py:89] Class size 8: 2.892340
+I0614 22:54:04.824106 139671129397056 eval.py:89] Class size 9: 2.952843
+I0614 22:54:04.824137 139671129397056 eval.py:96] Group singleton size 0: 2.260339
+I0614 22:54:04.824167 139671129397056 eval.py:96] Group singleton size 1: 2.046432
+I0614 22:54:04.824198 139671129397056 eval.py:101] Group singleton miscoverage 0: 0.171567
+I0614 22:54:04.824226 139671129397056 eval.py:104] Group singleton miscoverage 1: 0.503466
+I0614 22:54:04.824255 139671129397056 eval.py:96] Group groups size 0: 2.116741
+I0614 22:54:04.824284 139671129397056 eval.py:96] Group groups size 1: 2.356011
+I0614 22:54:04.824313 139671129397056 eval.py:101] Group groups miscoverage 0: 0.419804
+I0614 22:54:04.824344 139671129397056 eval.py:104] Group groups miscoverage 1: 0.475900
+I0614 22:54:04.824375 139671129397056 eval.py:109] Coverage confusion 4-6: 0.012210
+I0614 22:54:04.824405 139671129397056 eval.py:112] Coverage confusion 6-4: 0.012090
+      Using method: aps
+I0614 22:54:05.892687 139800501954368 open_source_utils.py:39] Read ./results/mnist_models_seed7/eval_test.pkl
+I0614 22:54:05.900317 139800501954368 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:54:05.900474 139800501954368 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:54:05.900546 139800501954368 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:05.900585 139800501954368 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:05.900931 139800501954368 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:54:05.901017 139800501954368 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:54:05.901491 139800501954368 open_source_utils.py:221] loaded ./results/mnist_models_seed7/: 10000 test examples
+I0614 22:54:05.905757 139800501954368 open_source_utils.py:39] Read ./results/mnist_models_seed7/eval_val.pkl
+I0614 22:54:05.905945 139800501954368 open_source_utils.py:228] loaded ./results/mnist_models_seed7/: 5000 val examples
+I0614 22:54:08.597371 139800501954368 colab_utils.py:508] Trial 0: 0.993335
+I0614 22:54:09.557495 139800501954368 colab_utils.py:508] Trial 1: 0.992897
+I0614 22:54:10.532028 139800501954368 colab_utils.py:508] Trial 2: 0.994264
+I0614 22:54:11.232211 139800501954368 colab_utils.py:508] Trial 3: 0.994655
+I0614 22:54:12.113769 139800501954368 colab_utils.py:508] Trial 4: 0.992482
+I0614 22:54:12.897402 139800501954368 colab_utils.py:508] Trial 5: 0.994483
+I0614 22:54:13.511178 139800501954368 colab_utils.py:508] Trial 6: 0.994478
+I0614 22:54:14.227644 139800501954368 colab_utils.py:508] Trial 7: 0.994982
+I0614 22:54:14.943252 139800501954368 colab_utils.py:508] Trial 8: 0.992613
+I0614 22:54:15.556905 139800501954368 colab_utils.py:508] Trial 9: 0.990896
+I0614 22:54:15.558284 139800501954368 eval.py:84] Accuracy: 0.924850
+I0614 22:54:15.558415 139800501954368 eval.py:85] Coverage: 0.990650
+I0614 22:54:15.558460 139800501954368 eval.py:86] Size: 2.506840
+I0614 22:54:15.558495 139800501954368 eval.py:89] Class size 0: 1.660480
+I0614 22:54:15.558526 139800501954368 eval.py:89] Class size 1: 2.456043
+I0614 22:54:15.558556 139800501954368 eval.py:89] Class size 2: 2.185204
+I0614 22:54:15.558584 139800501954368 eval.py:89] Class size 3: 2.498117
+I0614 22:54:15.558613 139800501954368 eval.py:89] Class size 4: 2.537906
+I0614 22:54:15.558640 139800501954368 eval.py:89] Class size 5: 3.063900
+I0614 22:54:15.558668 139800501954368 eval.py:89] Class size 6: 2.051289
+I0614 22:54:15.558696 139800501954368 eval.py:89] Class size 7: 2.080402
+I0614 22:54:15.558723 139800501954368 eval.py:89] Class size 8: 3.251492
+I0614 22:54:15.558751 139800501954368 eval.py:89] Class size 9: 3.338184
+I0614 22:54:15.558783 139800501954368 eval.py:96] Group singleton size 0: 2.543482
+I0614 22:54:15.558815 139800501954368 eval.py:96] Group singleton size 1: 2.185204
+I0614 22:54:15.558849 139800501954368 eval.py:101] Group singleton miscoverage 0: 0.219374
+I0614 22:54:15.558877 139800501954368 eval.py:104] Group singleton miscoverage 1: 0.527492
+I0614 22:54:15.558907 139800501954368 eval.py:96] Group groups size 0: 2.337906
+I0614 22:54:15.558937 139800501954368 eval.py:96] Group groups size 1: 2.669927
+I0614 22:54:15.558967 139800501954368 eval.py:101] Group groups miscoverage 0: 0.457526
+I0614 22:54:15.558996 139800501954368 eval.py:104] Group groups miscoverage 1: 0.559442
+I0614 22:54:15.559024 139800501954368 eval.py:109] Coverage confusion 4-6: 0.016520
+I0614 22:54:15.559054 139800501954368 eval.py:112] Coverage confusion 6-4: 0.014340
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:54:16.654238 139947712010048 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed7/eval_test.pkl
+I0614 22:54:16.661900 139947712010048 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:54:16.662052 139947712010048 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:54:16.662119 139947712010048 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:16.662156 139947712010048 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:16.662521 139947712010048 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:54:16.662613 139947712010048 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:54:16.663376 139947712010048 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed7/: 10000 test examples
+I0614 22:54:16.667140 139947712010048 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed7/eval_val.pkl
+I0614 22:54:16.667239 139947712010048 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed7/: 5000 val examples
+I0614 22:54:19.039811 139947712010048 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:54:19.978414 139947712010048 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:54:20.942347 139947712010048 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:54:21.624682 139947712010048 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:54:22.484492 139947712010048 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:54:23.261576 139947712010048 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:54:25.200212 139947712010048 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:54:25.900329 139947712010048 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:54:26.593844 139947712010048 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:54:27.192959 139947712010048 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:54:27.194548 139947712010048 eval.py:84] Accuracy: 0.900320
+I0614 22:54:27.194702 139947712010048 eval.py:85] Coverage: 0.990320
+I0614 22:54:27.194752 139947712010048 eval.py:86] Size: 2.178510
+I0614 22:54:27.194793 139947712010048 eval.py:89] Class size 0: 1.554701
+I0614 22:54:27.194824 139947712010048 eval.py:89] Class size 1: 1.633504
+I0614 22:54:27.194852 139947712010048 eval.py:89] Class size 2: 2.154785
+I0614 22:54:27.194879 139947712010048 eval.py:89] Class size 3: 2.204801
+I0614 22:54:27.194905 139947712010048 eval.py:89] Class size 4: 2.260013
+I0614 22:54:27.194939 139947712010048 eval.py:89] Class size 5: 2.735293
+I0614 22:54:27.194974 139947712010048 eval.py:89] Class size 6: 1.910575
+I0614 22:54:27.195001 139947712010048 eval.py:89] Class size 7: 1.985376
+I0614 22:54:27.195028 139947712010048 eval.py:89] Class size 8: 2.846841
+I0614 22:54:27.195065 139947712010048 eval.py:89] Class size 9: 2.616602
+I0614 22:54:27.195111 139947712010048 eval.py:96] Group singleton size 0: 2.181212
+I0614 22:54:27.195174 139947712010048 eval.py:96] Group singleton size 1: 2.154785
+I0614 22:54:27.195230 139947712010048 eval.py:101] Group singleton miscoverage 0: 0.156425
+I0614 22:54:27.195262 139947712010048 eval.py:104] Group singleton miscoverage 1: 0.526117
+I0614 22:54:27.195292 139947712010048 eval.py:96] Group groups size 0: 2.147072
+I0614 22:54:27.195321 139947712010048 eval.py:96] Group groups size 1: 2.208888
+I0614 22:54:27.195349 139947712010048 eval.py:101] Group groups miscoverage 0: 0.428356
+I0614 22:54:27.195376 139947712010048 eval.py:104] Group groups miscoverage 1: 0.394693
+I0614 22:54:27.195404 139947712010048 eval.py:109] Coverage confusion 4-6: 0.010330
+I0614 22:54:27.195444 139947712010048 eval.py:112] Coverage confusion 6-4: 0.014580
+      Using method: aps
+I0614 22:54:28.285419 140227173357376 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed7/eval_test.pkl
+I0614 22:54:28.292668 140227173357376 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:54:28.292814 140227173357376 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:54:28.292879 140227173357376 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:28.292916 140227173357376 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:28.293267 140227173357376 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:54:28.293494 140227173357376 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:54:28.294046 140227173357376 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed7/: 10000 test examples
+I0614 22:54:28.298063 140227173357376 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed7/eval_val.pkl
+I0614 22:54:28.298223 140227173357376 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed7/: 5000 val examples
+I0614 22:54:31.325467 140227173357376 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:54:32.326947 140227173357376 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:54:33.313660 140227173357376 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:54:34.118453 140227173357376 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:54:35.094910 140227173357376 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:54:35.873433 140227173357376 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:54:36.480708 140227173357376 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:54:37.190891 140227173357376 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:54:37.887453 140227173357376 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:54:38.495961 140227173357376 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:54:38.497462 140227173357376 eval.py:84] Accuracy: 0.900320
+I0614 22:54:38.497601 140227173357376 eval.py:85] Coverage: 0.999070
+I0614 22:54:38.497695 140227173357376 eval.py:86] Size: 9.806700
+I0614 22:54:38.497742 140227173357376 eval.py:89] Class size 0: 9.948467
+I0614 22:54:38.497775 140227173357376 eval.py:89] Class size 1: 9.916536
+I0614 22:54:38.497803 140227173357376 eval.py:89] Class size 2: 9.826221
+I0614 22:54:38.497830 140227173357376 eval.py:89] Class size 3: 9.781790
+I0614 22:54:38.497856 140227173357376 eval.py:89] Class size 4: 9.831169
+I0614 22:54:38.497935 140227173357376 eval.py:89] Class size 5: 9.642307
+I0614 22:54:38.497976 140227173357376 eval.py:89] Class size 6: 9.826146
+I0614 22:54:38.498006 140227173357376 eval.py:89] Class size 7: 9.817318
+I0614 22:54:38.498032 140227173357376 eval.py:89] Class size 8: 9.737484
+I0614 22:54:38.498058 140227173357376 eval.py:89] Class size 9: 9.713789
+I0614 22:54:38.498088 140227173357376 eval.py:96] Group singleton size 0: 9.804474
+I0614 22:54:38.498167 140227173357376 eval.py:96] Group singleton size 1: 9.826221
+I0614 22:54:38.498211 140227173357376 eval.py:101] Group singleton miscoverage 0: 0.981666
+I0614 22:54:38.498240 140227173357376 eval.py:104] Group singleton miscoverage 1: 1.000000
+I0614 22:54:38.498269 140227173357376 eval.py:96] Group groups size 0: 9.833695
+I0614 22:54:38.498462 140227173357376 eval.py:96] Group groups size 1: 9.780668
+I0614 22:54:38.498501 140227173357376 eval.py:101] Group groups miscoverage 0: 0.996457
+I0614 22:54:38.498529 140227173357376 eval.py:104] Group groups miscoverage 1: 0.992652
+I0614 22:54:38.498557 140227173357376 eval.py:109] Coverage confusion 4-6: 0.096110
+I0614 22:54:38.498638 140227173357376 eval.py:112] Coverage confusion 6-4: 0.094450
+  Completed seed 7
+  Processing seed 8...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:54:39.561183 140320453228352 open_source_utils.py:39] Read ./results/mnist_models_seed8/eval_test.pkl
+I0614 22:54:39.568563 140320453228352 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:54:39.568729 140320453228352 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:54:39.568800 140320453228352 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:39.568837 140320453228352 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:39.569136 140320453228352 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:54:39.569221 140320453228352 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:54:39.569917 140320453228352 open_source_utils.py:221] loaded ./results/mnist_models_seed8/: 10000 test examples
+I0614 22:54:39.574222 140320453228352 open_source_utils.py:39] Read ./results/mnist_models_seed8/eval_val.pkl
+I0614 22:54:39.574363 140320453228352 open_source_utils.py:228] loaded ./results/mnist_models_seed8/: 5000 val examples
+I0614 22:54:41.917746 140320453228352 colab_utils.py:508] Trial 0: 0.008589
+I0614 22:54:42.856217 140320453228352 colab_utils.py:508] Trial 1: 0.010010
+I0614 22:54:43.805462 140320453228352 colab_utils.py:508] Trial 2: 0.008081
+I0614 22:54:44.482628 140320453228352 colab_utils.py:508] Trial 3: 0.009182
+I0614 22:54:45.338809 140320453228352 colab_utils.py:508] Trial 4: 0.015369
+I0614 22:54:46.096643 140320453228352 colab_utils.py:508] Trial 5: 0.006708
+I0614 22:54:46.675897 140320453228352 colab_utils.py:508] Trial 6: 0.006584
+I0614 22:54:47.373013 140320453228352 colab_utils.py:508] Trial 7: 0.007081
+I0614 22:54:48.070389 140320453228352 colab_utils.py:508] Trial 8: 0.012283
+I0614 22:54:48.659641 140320453228352 colab_utils.py:508] Trial 9: 0.013029
+I0614 22:54:48.661013 140320453228352 eval.py:84] Accuracy: 0.923100
+I0614 22:54:48.661144 140320453228352 eval.py:85] Coverage: 0.990850
+I0614 22:54:48.661189 140320453228352 eval.py:86] Size: 2.221490
+I0614 22:54:48.661224 140320453228352 eval.py:89] Class size 0: 1.548875
+I0614 22:54:48.661254 140320453228352 eval.py:89] Class size 1: 1.841056
+I0614 22:54:48.661283 140320453228352 eval.py:89] Class size 2: 2.072144
+I0614 22:54:48.661311 140320453228352 eval.py:89] Class size 3: 2.281894
+I0614 22:54:48.661338 140320453228352 eval.py:89] Class size 4: 2.175767
+I0614 22:54:48.661365 140320453228352 eval.py:89] Class size 5: 2.716158
+I0614 22:54:48.661392 140320453228352 eval.py:89] Class size 6: 1.849915
+I0614 22:54:48.661419 140320453228352 eval.py:89] Class size 7: 1.962270
+I0614 22:54:48.661446 140320453228352 eval.py:89] Class size 8: 2.884912
+I0614 22:54:48.661473 140320453228352 eval.py:89] Class size 9: 2.967701
+I0614 22:54:48.661504 140320453228352 eval.py:96] Group singleton size 0: 2.238512
+I0614 22:54:48.661535 140320453228352 eval.py:96] Group singleton size 1: 2.072144
+I0614 22:54:48.661564 140320453228352 eval.py:101] Group singleton miscoverage 0: 0.157277
+I0614 22:54:48.661592 140320453228352 eval.py:104] Group singleton miscoverage 1: 0.514023
+I0614 22:54:48.661621 140320453228352 eval.py:96] Group groups size 0: 2.107585
+I0614 22:54:48.661649 140320453228352 eval.py:96] Group groups size 1: 2.331514
+I0614 22:54:48.661678 140320453228352 eval.py:101] Group groups miscoverage 0: 0.420385
+I0614 22:54:48.661706 140320453228352 eval.py:104] Group groups miscoverage 1: 0.464797
+I0614 22:54:48.661733 140320453228352 eval.py:109] Coverage confusion 4-6: 0.011420
+I0614 22:54:48.661762 140320453228352 eval.py:112] Coverage confusion 6-4: 0.012100
+      Using method: aps
+I0614 22:54:49.732525 140104331093824 open_source_utils.py:39] Read ./results/mnist_models_seed8/eval_test.pkl
+I0614 22:54:49.740353 140104331093824 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:54:49.740500 140104331093824 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:54:49.740569 140104331093824 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:49.740607 140104331093824 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:54:49.741000 140104331093824 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:54:49.741221 140104331093824 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:54:49.741706 140104331093824 open_source_utils.py:221] loaded ./results/mnist_models_seed8/: 10000 test examples
+I0614 22:54:49.745705 140104331093824 open_source_utils.py:39] Read ./results/mnist_models_seed8/eval_val.pkl
+I0614 22:54:49.745812 140104331093824 open_source_utils.py:228] loaded ./results/mnist_models_seed8/: 5000 val examples
+I0614 22:54:52.450147 140104331093824 colab_utils.py:508] Trial 0: 0.993678
+I0614 22:54:53.418750 140104331093824 colab_utils.py:508] Trial 1: 0.992667
+I0614 22:54:54.393223 140104331093824 colab_utils.py:508] Trial 2: 0.994786
+I0614 22:54:55.107480 140104331093824 colab_utils.py:508] Trial 3: 0.994333
+I0614 22:54:56.001458 140104331093824 colab_utils.py:508] Trial 4: 0.992626
+I0614 22:54:56.783808 140104331093824 colab_utils.py:508] Trial 5: 0.994790
+I0614 22:54:58.858945 140104331093824 colab_utils.py:508] Trial 6: 0.994248
+I0614 22:54:59.575174 140104331093824 colab_utils.py:508] Trial 7: 0.994920
+I0614 22:55:00.292793 140104331093824 colab_utils.py:508] Trial 8: 0.992374
+I0614 22:55:00.916697 140104331093824 colab_utils.py:508] Trial 9: 0.991109
+I0614 22:55:00.918319 140104331093824 eval.py:84] Accuracy: 0.923100
+I0614 22:55:00.918453 140104331093824 eval.py:85] Coverage: 0.990490
+I0614 22:55:00.918504 140104331093824 eval.py:86] Size: 2.492970
+I0614 22:55:00.918545 140104331093824 eval.py:89] Class size 0: 1.650243
+I0614 22:55:00.918625 140104331093824 eval.py:89] Class size 1: 2.426239
+I0614 22:55:00.918668 140104331093824 eval.py:89] Class size 2: 2.212357
+I0614 22:55:00.918705 140104331093824 eval.py:89] Class size 3: 2.472757
+I0614 22:55:00.918770 140104331093824 eval.py:89] Class size 4: 2.488983
+I0614 22:55:00.918816 140104331093824 eval.py:89] Class size 5: 3.058082
+I0614 22:55:00.918854 140104331093824 eval.py:89] Class size 6: 2.045594
+I0614 22:55:00.918889 140104331093824 eval.py:89] Class size 7: 2.041277
+I0614 22:55:00.918960 140104331093824 eval.py:89] Class size 8: 3.247253
+I0614 22:55:00.919010 140104331093824 eval.py:89] Class size 9: 3.344176
+I0614 22:55:00.919049 140104331093824 eval.py:96] Group singleton size 0: 2.524937
+I0614 22:55:00.919122 140104331093824 eval.py:96] Group singleton size 1: 2.212357
+I0614 22:55:00.919170 140104331093824 eval.py:101] Group singleton miscoverage 0: 0.206496
+I0614 22:55:00.919208 140104331093824 eval.py:104] Group singleton miscoverage 1: 0.538454
+I0614 22:55:00.919242 140104331093824 eval.py:96] Group groups size 0: 2.329855
+I0614 22:55:00.919323 140104331093824 eval.py:96] Group groups size 1: 2.650456
+I0614 22:55:00.919380 140104331093824 eval.py:101] Group groups miscoverage 0: 0.458767
+I0614 22:55:00.919456 140104331093824 eval.py:104] Group groups miscoverage 1: 0.549645
+I0614 22:55:00.919562 140104331093824 eval.py:109] Coverage confusion 4-6: 0.015840
+I0614 22:55:00.919622 140104331093824 eval.py:112] Coverage confusion 6-4: 0.014380
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:55:01.998726 140432605009728 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed8/eval_test.pkl
+I0614 22:55:02.007044 140432605009728 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:02.007196 140432605009728 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:02.007261 140432605009728 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:02.007298 140432605009728 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:02.007704 140432605009728 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:02.007900 140432605009728 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:02.008370 140432605009728 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed8/: 10000 test examples
+I0614 22:55:02.012537 140432605009728 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed8/eval_val.pkl
+I0614 22:55:02.012693 140432605009728 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed8/: 5000 val examples
+I0614 22:55:04.392120 140432605009728 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:55:05.337033 140432605009728 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:55:06.296445 140432605009728 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:55:06.970366 140432605009728 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:55:07.822543 140432605009728 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:55:08.558912 140432605009728 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:55:09.123531 140432605009728 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:55:09.797857 140432605009728 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:55:10.475351 140432605009728 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:55:11.050346 140432605009728 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:55:11.052466 140432605009728 eval.py:84] Accuracy: 0.902510
+I0614 22:55:11.052683 140432605009728 eval.py:85] Coverage: 0.990380
+I0614 22:55:11.052727 140432605009728 eval.py:86] Size: 2.159370
+I0614 22:55:11.052762 140432605009728 eval.py:89] Class size 0: 1.535235
+I0614 22:55:11.052791 140432605009728 eval.py:89] Class size 1: 1.653719
+I0614 22:55:11.052819 140432605009728 eval.py:89] Class size 2: 2.124777
+I0614 22:55:11.052846 140432605009728 eval.py:89] Class size 3: 2.251684
+I0614 22:55:11.052873 140432605009728 eval.py:89] Class size 4: 2.233130
+I0614 22:55:11.052900 140432605009728 eval.py:89] Class size 5: 2.760110
+I0614 22:55:11.052927 140432605009728 eval.py:89] Class size 6: 1.795917
+I0614 22:55:11.052953 140432605009728 eval.py:89] Class size 7: 2.056237
+I0614 22:55:11.052980 140432605009728 eval.py:89] Class size 8: 2.732844
+I0614 22:55:11.053007 140432605009728 eval.py:89] Class size 9: 2.556972
+I0614 22:55:11.053039 140432605009728 eval.py:96] Group singleton size 0: 2.163314
+I0614 22:55:11.053068 140432605009728 eval.py:96] Group singleton size 1: 2.124777
+I0614 22:55:11.053097 140432605009728 eval.py:101] Group singleton miscoverage 0: 0.136398
+I0614 22:55:11.053125 140432605009728 eval.py:104] Group singleton miscoverage 1: 0.506717
+I0614 22:55:11.053153 140432605009728 eval.py:96] Group groups size 0: 2.086486
+I0614 22:55:11.053181 140432605009728 eval.py:96] Group groups size 1: 2.229738
+I0614 22:55:11.053210 140432605009728 eval.py:101] Group groups miscoverage 0: 0.411099
+I0614 22:55:11.053237 140432605009728 eval.py:104] Group groups miscoverage 1: 0.405555
+I0614 22:55:11.053264 140432605009728 eval.py:109] Coverage confusion 4-6: 0.011980
+I0614 22:55:11.053294 140432605009728 eval.py:112] Coverage confusion 6-4: 0.014270
+      Using method: aps
+I0614 22:55:12.098911 140259051706176 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed8/eval_test.pkl
+I0614 22:55:12.106980 140259051706176 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:12.107158 140259051706176 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:12.107247 140259051706176 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:12.107297 140259051706176 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:12.107718 140259051706176 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:12.107898 140259051706176 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:12.108386 140259051706176 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed8/: 10000 test examples
+I0614 22:55:12.112355 140259051706176 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed8/eval_val.pkl
+I0614 22:55:12.112454 140259051706176 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed8/: 5000 val examples
+I0614 22:55:14.790073 140259051706176 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:55:15.757420 140259051706176 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:55:16.749752 140259051706176 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:55:17.444807 140259051706176 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:55:18.324174 140259051706176 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:55:19.106331 140259051706176 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:55:19.723280 140259051706176 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:55:20.439949 140259051706176 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:55:21.153995 140259051706176 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:55:21.772584 140259051706176 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:55:21.774053 140259051706176 eval.py:84] Accuracy: 0.902510
+I0614 22:55:21.774185 140259051706176 eval.py:85] Coverage: 0.997000
+I0614 22:55:21.774237 140259051706176 eval.py:86] Size: 8.390890
+I0614 22:55:21.774279 140259051706176 eval.py:89] Class size 0: 8.307608
+I0614 22:55:21.774310 140259051706176 eval.py:89] Class size 1: 8.265245
+I0614 22:55:21.774339 140259051706176 eval.py:89] Class size 2: 8.358091
+I0614 22:55:21.774367 140259051706176 eval.py:89] Class size 3: 8.390759
+I0614 22:55:21.774395 140259051706176 eval.py:89] Class size 4: 8.466865
+I0614 22:55:21.774427 140259051706176 eval.py:89] Class size 5: 8.494286
+I0614 22:55:21.774464 140259051706176 eval.py:89] Class size 6: 8.298544
+I0614 22:55:21.774493 140259051706176 eval.py:89] Class size 7: 8.428052
+I0614 22:55:21.774521 140259051706176 eval.py:89] Class size 8: 8.474646
+I0614 22:55:21.774548 140259051706176 eval.py:89] Class size 9: 8.441123
+I0614 22:55:21.774580 140259051706176 eval.py:96] Group singleton size 0: 8.394574
+I0614 22:55:21.774616 140259051706176 eval.py:96] Group singleton size 1: 8.358091
+I0614 22:55:21.774653 140259051706176 eval.py:101] Group singleton miscoverage 0: 0.823221
+I0614 22:55:21.774683 140259051706176 eval.py:104] Group singleton miscoverage 1: 0.888390
+I0614 22:55:21.774712 140259051706176 eval.py:96] Group groups size 0: 8.381990
+I0614 22:55:21.774742 140259051706176 eval.py:96] Group groups size 1: 8.399140
+I0614 22:55:21.774771 140259051706176 eval.py:101] Group groups miscoverage 0: 0.869426
+I0614 22:55:21.774800 140259051706176 eval.py:104] Group groups miscoverage 1: 0.867213
+I0614 22:55:21.774829 140259051706176 eval.py:109] Coverage confusion 4-6: 0.080850
+I0614 22:55:21.774865 140259051706176 eval.py:112] Coverage confusion 6-4: 0.078850
+  Completed seed 8
+  Processing seed 9...
+    Evaluating models experiment...
+      Using method: thr
+I0614 22:55:22.835688 140514250573632 open_source_utils.py:39] Read ./results/mnist_models_seed9/eval_test.pkl
+I0614 22:55:22.846578 140514250573632 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:22.846737 140514250573632 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:22.846802 140514250573632 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:22.846841 140514250573632 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:22.847192 140514250573632 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:22.847334 140514250573632 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:22.847875 140514250573632 open_source_utils.py:221] loaded ./results/mnist_models_seed9/: 10000 test examples
+I0614 22:55:22.851180 140514250573632 open_source_utils.py:39] Read ./results/mnist_models_seed9/eval_val.pkl
+I0614 22:55:22.851279 140514250573632 open_source_utils.py:228] loaded ./results/mnist_models_seed9/: 5000 val examples
+I0614 22:55:25.239441 140514250573632 colab_utils.py:508] Trial 0: 0.008295
+I0614 22:55:26.184718 140514250573632 colab_utils.py:508] Trial 1: 0.008989
+I0614 22:55:27.140553 140514250573632 colab_utils.py:508] Trial 2: 0.007847
+I0614 22:55:27.822577 140514250573632 colab_utils.py:508] Trial 3: 0.008989
+I0614 22:55:28.684746 140514250573632 colab_utils.py:508] Trial 4: 0.014423
+I0614 22:55:29.453740 140514250573632 colab_utils.py:508] Trial 5: 0.007059
+I0614 22:55:30.037568 140514250573632 colab_utils.py:508] Trial 6: 0.007321
+I0614 22:55:30.734380 140514250573632 colab_utils.py:508] Trial 7: 0.007568
+I0614 22:55:32.933684 140514250573632 colab_utils.py:508] Trial 8: 0.011645
+I0614 22:55:33.524896 140514250573632 colab_utils.py:508] Trial 9: 0.012410
+I0614 22:55:33.526393 140514250573632 eval.py:84] Accuracy: 0.924450
+I0614 22:55:33.526525 140514250573632 eval.py:85] Coverage: 0.990930
+I0614 22:55:33.526568 140514250573632 eval.py:86] Size: 2.234020
+I0614 22:55:33.526602 140514250573632 eval.py:89] Class size 0: 1.554652
+I0614 22:55:33.526633 140514250573632 eval.py:89] Class size 1: 1.877674
+I0614 22:55:33.526661 140514250573632 eval.py:89] Class size 2: 2.056212
+I0614 22:55:33.526740 140514250573632 eval.py:89] Class size 3: 2.309382
+I0614 22:55:33.526772 140514250573632 eval.py:89] Class size 4: 2.185637
+I0614 22:55:33.526801 140514250573632 eval.py:89] Class size 5: 2.720547
+I0614 22:55:33.526864 140514250573632 eval.py:89] Class size 6: 1.856363
+I0614 22:55:33.526908 140514250573632 eval.py:89] Class size 7: 2.013265
+I0614 22:55:33.526939 140514250573632 eval.py:89] Class size 8: 2.890792
+I0614 22:55:33.526968 140514250573632 eval.py:89] Class size 9: 2.956168
+I0614 22:55:33.526999 140514250573632 eval.py:96] Group singleton size 0: 2.254286
+I0614 22:55:33.527087 140514250573632 eval.py:96] Group singleton size 1: 2.056212
+I0614 22:55:33.527131 140514250573632 eval.py:101] Group singleton miscoverage 0: 0.166724
+I0614 22:55:33.527179 140514250573632 eval.py:104] Group singleton miscoverage 1: 0.504633
+I0614 22:55:33.527266 140514250573632 eval.py:96] Group groups size 0: 2.109771
+I0614 22:55:33.527302 140514250573632 eval.py:96] Group groups size 1: 2.354010
+I0614 22:55:33.527333 140514250573632 eval.py:101] Group groups miscoverage 0: 0.421566
+I0614 22:55:33.527401 140514250573632 eval.py:104] Group groups miscoverage 1: 0.475914
+I0614 22:55:33.527443 140514250573632 eval.py:109] Coverage confusion 4-6: 0.011880
+I0614 22:55:33.527476 140514250573632 eval.py:112] Coverage confusion 6-4: 0.011960
+      Using method: aps
+I0614 22:55:34.613576 140633990874944 open_source_utils.py:39] Read ./results/mnist_models_seed9/eval_test.pkl
+I0614 22:55:34.621334 140633990874944 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:34.621487 140633990874944 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:34.621554 140633990874944 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:34.621592 140633990874944 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:34.621917 140633990874944 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:34.622159 140633990874944 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:34.622645 140633990874944 open_source_utils.py:221] loaded ./results/mnist_models_seed9/: 10000 test examples
+I0614 22:55:34.626455 140633990874944 open_source_utils.py:39] Read ./results/mnist_models_seed9/eval_val.pkl
+I0614 22:55:34.626559 140633990874944 open_source_utils.py:228] loaded ./results/mnist_models_seed9/: 5000 val examples
+I0614 22:55:37.331989 140633990874944 colab_utils.py:508] Trial 0: 0.993107
+I0614 22:55:38.303769 140633990874944 colab_utils.py:508] Trial 1: 0.993339
+I0614 22:55:39.310218 140633990874944 colab_utils.py:508] Trial 2: 0.994345
+I0614 22:55:40.010262 140633990874944 colab_utils.py:508] Trial 3: 0.994807
+I0614 22:55:40.893745 140633990874944 colab_utils.py:508] Trial 4: 0.992890
+I0614 22:55:41.649811 140633990874944 colab_utils.py:508] Trial 5: 0.994885
+I0614 22:55:42.225264 140633990874944 colab_utils.py:508] Trial 6: 0.994074
+I0614 22:55:42.899845 140633990874944 colab_utils.py:508] Trial 7: 0.994895
+I0614 22:55:43.567250 140633990874944 colab_utils.py:508] Trial 8: 0.993015
+I0614 22:55:44.154819 140633990874944 colab_utils.py:508] Trial 9: 0.991470
+I0614 22:55:44.156181 140633990874944 eval.py:84] Accuracy: 0.924450
+I0614 22:55:44.156303 140633990874944 eval.py:85] Coverage: 0.990670
+I0614 22:55:44.156343 140633990874944 eval.py:86] Size: 2.513570
+I0614 22:55:44.156375 140633990874944 eval.py:89] Class size 0: 1.662308
+I0614 22:55:44.156403 140633990874944 eval.py:89] Class size 1: 2.509586
+I0614 22:55:44.156450 140633990874944 eval.py:89] Class size 2: 2.197065
+I0614 22:55:44.156483 140633990874944 eval.py:89] Class size 3: 2.504370
+I0614 22:55:44.156510 140633990874944 eval.py:89] Class size 4: 2.493302
+I0614 22:55:44.156536 140633990874944 eval.py:89] Class size 5: 3.052571
+I0614 22:55:44.156562 140633990874944 eval.py:89] Class size 6: 2.055761
+I0614 22:55:44.156587 140633990874944 eval.py:89] Class size 7: 2.100193
+I0614 22:55:44.156612 140633990874944 eval.py:89] Class size 8: 3.258251
+I0614 22:55:44.156637 140633990874944 eval.py:89] Class size 9: 3.346989
+I0614 22:55:44.156666 140633990874944 eval.py:96] Group singleton size 0: 2.549628
+I0614 22:55:44.156695 140633990874944 eval.py:96] Group singleton size 1: 2.197065
+I0614 22:55:44.156723 140633990874944 eval.py:101] Group singleton miscoverage 0: 0.218561
+I0614 22:55:44.156750 140633990874944 eval.py:104] Group singleton miscoverage 1: 0.530138
+I0614 22:55:44.156778 140633990874944 eval.py:96] Group groups size 0: 2.334062
+I0614 22:55:44.156805 140633990874944 eval.py:96] Group groups size 1: 2.686866
+I0614 22:55:44.156832 140633990874944 eval.py:101] Group groups miscoverage 0: 0.459718
+I0614 22:55:44.156858 140633990874944 eval.py:104] Group groups miscoverage 1: 0.564381
+I0614 22:55:44.156884 140633990874944 eval.py:109] Coverage confusion 4-6: 0.016260
+I0614 22:55:44.156911 140633990874944 eval.py:112] Coverage confusion 6-4: 0.014040
+    Evaluating conformal training experiment...
+      Using method: thr
+I0614 22:55:45.162044 140261214844736 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed9/eval_test.pkl
+I0614 22:55:45.168904 140261214844736 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:45.169047 140261214844736 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:45.169113 140261214844736 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:45.169149 140261214844736 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:45.169482 140261214844736 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:45.169568 140261214844736 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:45.170145 140261214844736 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed9/: 10000 test examples
+I0614 22:55:45.174034 140261214844736 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed9/eval_val.pkl
+I0614 22:55:45.174148 140261214844736 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed9/: 5000 val examples
+I0614 22:55:47.391743 140261214844736 colab_utils.py:508] Trial 0: 0.000000
+I0614 22:55:48.278274 140261214844736 colab_utils.py:508] Trial 1: 0.000000
+I0614 22:55:49.232564 140261214844736 colab_utils.py:508] Trial 2: 0.000000
+I0614 22:55:49.906806 140261214844736 colab_utils.py:508] Trial 3: 0.000000
+I0614 22:55:50.764271 140261214844736 colab_utils.py:508] Trial 4: 0.000000
+I0614 22:55:51.525785 140261214844736 colab_utils.py:508] Trial 5: 0.000000
+I0614 22:55:52.114887 140261214844736 colab_utils.py:508] Trial 6: 0.000000
+I0614 22:55:52.811797 140261214844736 colab_utils.py:508] Trial 7: 0.000000
+I0614 22:55:53.512309 140261214844736 colab_utils.py:508] Trial 8: 0.000000
+I0614 22:55:54.104965 140261214844736 colab_utils.py:508] Trial 9: 0.000000
+I0614 22:55:54.106472 140261214844736 eval.py:84] Accuracy: 0.904670
+I0614 22:55:54.106621 140261214844736 eval.py:85] Coverage: 0.990280
+I0614 22:55:54.106666 140261214844736 eval.py:86] Size: 2.158800
+I0614 22:55:54.106709 140261214844736 eval.py:89] Class size 0: 1.572348
+I0614 22:55:54.106742 140261214844736 eval.py:89] Class size 1: 1.545298
+I0614 22:55:54.106770 140261214844736 eval.py:89] Class size 2: 2.115519
+I0614 22:55:54.106799 140261214844736 eval.py:89] Class size 3: 2.172324
+I0614 22:55:54.106827 140261214844736 eval.py:89] Class size 4: 2.272903
+I0614 22:55:54.106854 140261214844736 eval.py:89] Class size 5: 2.729818
+I0614 22:55:54.106882 140261214844736 eval.py:89] Class size 6: 1.823698
+I0614 22:55:54.106909 140261214844736 eval.py:89] Class size 7: 2.027102
+I0614 22:55:54.106936 140261214844736 eval.py:89] Class size 8: 2.717525
+I0614 22:55:54.106963 140261214844736 eval.py:89] Class size 9: 2.733844
+I0614 22:55:54.106995 140261214844736 eval.py:96] Group singleton size 0: 2.163731
+I0614 22:55:54.107025 140261214844736 eval.py:96] Group singleton size 1: 2.115519
+I0614 22:55:54.107055 140261214844736 eval.py:101] Group singleton miscoverage 0: 0.140844
+I0614 22:55:54.107083 140261214844736 eval.py:104] Group singleton miscoverage 1: 0.491440
+I0614 22:55:54.107112 140261214844736 eval.py:96] Group groups size 0: 2.102235
+I0614 22:55:54.107142 140261214844736 eval.py:96] Group groups size 1: 2.213438
+I0614 22:55:54.107171 140261214844736 eval.py:101] Group groups miscoverage 0: 0.403406
+I0614 22:55:54.107200 140261214844736 eval.py:104] Group groups miscoverage 1: 0.391318
+I0614 22:55:54.107228 140261214844736 eval.py:109] Coverage confusion 4-6: 0.012600
+I0614 22:55:54.107257 140261214844736 eval.py:112] Coverage confusion 6-4: 0.013650
+      Using method: aps
+I0614 22:55:55.212378 140542019471168 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed9/eval_test.pkl
+I0614 22:55:55.220812 140542019471168 xla_bridge.py:161] Remote TPU is not linked into jax; skipping remote TPU.
+I0614 22:55:55.220973 140542019471168 xla_bridge.py:328] Unable to initialize backend 'tpu_driver': Could not initialize backend 'tpu_driver'
+I0614 22:55:55.221041 140542019471168 xla_bridge.py:328] Unable to initialize backend 'cuda': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:55.221079 140542019471168 xla_bridge.py:328] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0614 22:55:55.221384 140542019471168 xla_bridge.py:328] Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+W0614 22:55:55.221527 140542019471168 xla_bridge.py:335] No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+I0614 22:55:55.222082 140542019471168 open_source_utils.py:221] loaded ./results/mnist_conformal.training_seed9/: 10000 test examples
+I0614 22:55:55.225572 140542019471168 open_source_utils.py:39] Read ./results/mnist_conformal.training_seed9/eval_val.pkl
+I0614 22:55:55.225685 140542019471168 open_source_utils.py:228] loaded ./results/mnist_conformal.training_seed9/: 5000 val examples
+I0614 22:55:57.971430 140542019471168 colab_utils.py:508] Trial 0: 1.000000
+I0614 22:55:58.948968 140542019471168 colab_utils.py:508] Trial 1: 1.000000
+I0614 22:55:59.933644 140542019471168 colab_utils.py:508] Trial 2: 1.000000
+I0614 22:56:00.641072 140542019471168 colab_utils.py:508] Trial 3: 1.000000
+I0614 22:56:01.538294 140542019471168 colab_utils.py:508] Trial 4: 1.000000
+I0614 22:56:02.331469 140542019471168 colab_utils.py:508] Trial 5: 1.000000
+I0614 22:56:02.943677 140542019471168 colab_utils.py:508] Trial 6: 1.000000
+I0614 22:56:03.673176 140542019471168 colab_utils.py:508] Trial 7: 1.000000
+I0614 22:56:04.391281 140542019471168 colab_utils.py:508] Trial 8: 1.000000
+I0614 22:56:06.780231 140542019471168 colab_utils.py:508] Trial 9: 1.000000
+I0614 22:56:06.781641 140542019471168 eval.py:84] Accuracy: 0.904670
+I0614 22:56:06.781777 140542019471168 eval.py:85] Coverage: 0.998040
+I0614 22:56:06.781822 140542019471168 eval.py:86] Size: 9.088150
+I0614 22:56:06.781858 140542019471168 eval.py:89] Class size 0: 9.101281
+I0614 22:56:06.781888 140542019471168 eval.py:89] Class size 1: 9.103336
+I0614 22:56:06.781917 140542019471168 eval.py:89] Class size 2: 9.094884
+I0614 22:56:06.781945 140542019471168 eval.py:89] Class size 3: 9.067691
+I0614 22:56:06.781973 140542019471168 eval.py:89] Class size 4: 9.105533
+I0614 22:56:06.782001 140542019471168 eval.py:89] Class size 5: 9.069189
+I0614 22:56:06.782029 140542019471168 eval.py:89] Class size 6: 9.110772
+I0614 22:56:06.782058 140542019471168 eval.py:89] Class size 7: 9.097341
+I0614 22:56:06.782085 140542019471168 eval.py:89] Class size 8: 9.067164
+I0614 22:56:06.782113 140542019471168 eval.py:89] Class size 9: 9.061285
+I0614 22:56:06.782145 140542019471168 eval.py:96] Group singleton size 0: 9.087379
+I0614 22:56:06.782176 140542019471168 eval.py:96] Group singleton size 1: 9.094884
+I0614 22:56:06.782207 140542019471168 eval.py:101] Group singleton miscoverage 0: 0.899504
+I0614 22:56:06.782236 140542019471168 eval.py:104] Group singleton miscoverage 1: 0.942857
+I0614 22:56:06.782265 140542019471168 eval.py:96] Group groups size 0: 9.095747
+I0614 22:56:06.782295 140542019471168 eval.py:96] Group groups size 1: 9.080791
+I0614 22:56:06.782325 140542019471168 eval.py:101] Group groups miscoverage 0: 0.931937
+I0614 22:56:06.782353 140542019471168 eval.py:104] Group groups miscoverage 1: 0.925799
+I0614 22:56:06.782382 140542019471168 eval.py:109] Coverage confusion 4-6: 0.088310
+I0614 22:56:06.782412 140542019471168 eval.py:112] Coverage confusion 6-4: 0.087130
+  Completed seed 9
+MNIST evaluation completed in 00:07:34
+----------------------------------------------------------
+Completed MNIST evaluation at: Sat Jun 14 22:56:07 CEST 2025
+Duration: 00:07:34
+==========================================================
+

@@ -1,12 +1,17 @@
 #!/bin/bash
 
+
+
 ## Setup conda
 set -euo pipefail
 CONDA_BASE="${HOME}/miniconda3"
 source "${CONDA_BASE}/etc/profile.d/conda.sh"
 conda activate conformal_training
 
-printf "Running evaluation script for conformal training experiments...\n"
+echo "Running evaluation script for conformal training experiments..."
+echo "Note: output will be saved to eval_logs.txt."
+
+exec > >(tee -a eval_logs.txt) 2>&1
 
 EXPERIMENT_DIR="./results"
 # Define seed range (same as in train.sh)

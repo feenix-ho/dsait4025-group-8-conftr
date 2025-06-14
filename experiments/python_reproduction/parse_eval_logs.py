@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import re
 import os
 import sys
@@ -146,12 +148,6 @@ def parse_eval_logs(log_file):
                         **confusion_metrics,
                     }
 
-                    # Add training info based on experiment name
-                    if experiment_name == "conformal.training":
-                        entry["training_epochs"] = 4  # As per your note
-                    else:
-                        entry["training_epochs"] = 10  # Default for models/baseline
-
                     data.append(entry)
 
     return data
@@ -206,7 +202,9 @@ def main():
     parser = argparse.ArgumentParser(
         description="Parse evaluation logs and generate CSV/tabular output"
     )
-    parser.add_argument("log_file", help="Path to the log file")
+    parser.add_argument(
+        "--log_file", help="Path to the log file", default="eval_logs.txt"
+    )
     parser.add_argument(
         "--csv", help="Output CSV file path", default="eval_results.csv"
     )
