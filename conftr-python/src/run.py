@@ -32,6 +32,8 @@ from experiments.run_emnist_byclass import get_parameters as get_emnist_byclass_
 from experiments.run_fashion_mnist import get_parameters as get_fashion_mnist_parameters
 from experiments.run_mnist import get_parameters as get_mnist_parameters
 from experiments.run_wine_quality import get_parameters as get_wine_quality_parameters
+from experiments.run_german_credit import get_parameters as get_german_credit_parameters
+from experiments.run_diabetes import get_parameters as get_diabetes_parameters
 from train import train
 
 FLAGS = flags.FLAGS
@@ -160,6 +162,8 @@ def main(argv):
       'fashion_mnist',
       'cifar10',
       'cifar100',
+      'german_credit',
+      'diabetes'
   )
   if FLAGS.experiment_dataset not in supported_datasets:
     raise ValueError('Invalid dataset selected.')
