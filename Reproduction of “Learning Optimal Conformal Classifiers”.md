@@ -49,9 +49,60 @@ The Statlog German Credit Data set contains 1 000 loan applications described by
 
 The Diabetes Prediction dataset released on Kaggle aggregates 100 000 patient records with nine routinely collected attributes—age, gender, body-mass index, hypertension, heart-disease status, five-level smoking history, HbA1c %, fasting blood-glucose level—and a binary label indicating a diabetes diagnosis. Because the features mirror those used in basic clinical screening, the set offers a realistic high-stakes use-case where calibrated uncertainty is critical before deployment.
 
-## Code Analysis
+## Reproduction Methodology
 
 ### Official Python Implementation [^python]
+
+intro
+
+- google deepminds repository for _ConfTr_ is published on GitHub [here](https://github.com/google-deepmind/conformal_training/).
+- The codebase is written in Python, and has some shell scripts to run predefined tests.
+- the codebase uses conda for package management, and the environment is defined in `environment.yml`.
+- environment.yml did not work out of the box, altered slightly to get it to work
+
+installation
+
+- simple, with conda. instructions are provided in a separate `experiments/python_reproduction/README.md` file.
+- could not get GPU support to work, so used CPU only
+
+GPU issues
+
+- repo uses both Jax and TensorFlow, which are both GPU-accelerated libraries. however, could not get GPU support to work on both
+- encountered variety of isuses
+  - (all, but also) jax and tf package versions were locked on CPU versions
+  - upgrading them to equivalent GPU versions caused conflicts with other packages
+  - also,  for Jax and Jaxlib, the packages were not in the pypi registry anymore, and neither in the google archive
+  - jax and jaxlib had some package versions saved in the anaconda conda forge repository, but these were not compatible with the other packages in the environment
+  - either jax or tf could be upgraded to GPU versions, but not both at the same time. here for, there are added test scripts
+  - so, we decided to run the experiments on CPU only, which is sufficient for MNIST, but takes a while to run for the multiple seeds
+
+experiment setup
+
+- got the environment to work
+- using windows 11 pro, WSL 2 with ubuntu 24.04 LTS, conda 25.3.1
+- python unchanged, 3.9.13
+- system: ryzen 5 3600, 32GB DDR4 RAM, NVIDIA RTX 3060 12GB
+- experiment files directory: `experiments/python_reproduction/`
+- wrote a shell script to do all the training, and a shell script to run the evaluation
+- default paramters were used for MNIST, that live in the `conformal_training/experiments/run_mnist.py` file
+- Here is a concise overview of the key training hyperparameters for each MNIST experiment variant:
+
+| Variant                         | Learning Rate | Batch Size | Temperature | Size Weight | Coverage Loss  | Loss Transform | Size Transform | RNG   | Method          |
+| ------------------------------- | ------------: | ---------: | ----------: | ----------: | -------------- | -------------- | -------------- | ----- | --------------- |
+| **models**                      |          0.05 |        100 |           — |           — | —              | —              | —              | —     | —               |
+| **conformal–training**          |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
+| **conformal–group\_zero**       |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
+| **conformal–group\_one**        |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
+| **conformal–singleton\_zero**   |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
+| **conformal–singleton\_one**    |          0.01 |        100 |           1 |         0.5 | classification | log            | identity       | False | threshold\_logp |
+| **conformal–group\_size\_0**    |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
+| **conformal–group\_size\_1**    |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
+| **conformal–class\_size\_{\*}** |          0.05 |        500 |         0.5 |        0.01 | none           | log            | identity       | False | threshold\_logp |
+
+- All variants use an MLP with 0 hidden layers of 32 units, for 50 epochs.
+- "class\_size\_{\*}" denotes any `sub_experiment` matching `class_size_{0–9}` (same hyperparameters for all classes).
+
+Results (incomplete):
 
 ### Julia Implementation [^julia]
 
@@ -284,7 +335,7 @@ In the future, it would be interesting to explore the application of _ConfTr_ to
 
 ## Contributions
 
-Razo re-ran the authors' official Python code on MNIST, verified coverage and set-size metrics, and documented all hyper-parameters and random seeds to enable exact replay (reproduction criteria).
+Razo re-ran the authors' official Python code on MNIST, verified coverage and set-size metrics, and documented all hyper-parameters and random seeds to enable exact replay (reproduction criteria). Doing this, he evaluated the original codebase.
 
 Juul contributed by reproducing the German Credit results (which required partial reimplementation) and by extending the experiments to a new medical dataset (new data criteria).
 
