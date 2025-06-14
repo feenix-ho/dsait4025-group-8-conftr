@@ -203,7 +203,7 @@ In the future, it would be interesting to explore the application of _ConfTr_ to
 
 ## Contributions
 
-- _Juul_ contributed by reproducing the German Credit results (which required partial reimplementation) and by extending the experiments to a new medical dataset.
+- _Juul_ contributed by reproducing the German Credit results (which required partial reimplementation) and by extending the experiments to a new medical dataset (new data criteria).
 - _Razo_ re-ran the authors' official Python code on MNIST, verified coverage and set-size metrics, and documented all hyper-parameters and random seeds to enable exact replay (reproduction criteria). Doing this, he evaluated the original codebase.
 - _Phuong_ ported ConfTr to Julia, patched `ConformalPrediction.jl`, and ran controlled ablations across multiple base models (Linear, MLP, LeNet5) (ablation study criteria).
 
