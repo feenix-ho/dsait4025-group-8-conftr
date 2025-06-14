@@ -75,6 +75,10 @@ python3 ../../conformal_training/run.py \
 
 echo_section_end "MNIST"
 
+# only run mnist for now
+exit 1 
+
+
 # ----- Fashion‑MNIST -----
 echo_section "Fashion-MNIST"
 

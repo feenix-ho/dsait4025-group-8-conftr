@@ -198,8 +198,9 @@ def main(argv):
     for seed in range(FLAGS.experiment_seeds):
         # A sweep in one parameter is supported, e.g., the loss matrix or weights.
 
-        if os.path.exists(config.path):
-            logging.warning("Path %s already exists, skipping.", config.path)
+        output_path_will_be = config.path + "_seed%d/" % seed
+        if os.path.exists(output_path_will_be):
+            logging.warning("Path %s already exists, skipping.", output_path_will_be)
             continue
 
         if parameter_sweep is not None:
