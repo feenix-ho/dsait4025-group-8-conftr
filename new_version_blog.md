@@ -26,33 +26,32 @@ As we already mentioned in the introduction, the key idea behind *ConfTr* is to 
 The model is then updated using a loss that combines a size loss, which encourages the model to produce smaller confidence sets, and optionally a classification loss that can shape the content of the confidence sets (e.g., penalizing certain classes). The following figure from the original paper illustrates this process:
 
 <figure style="text-align: center;"> 
- <img src="https://github.com/user-attachments/assets/3b92c1d2-1406-4258-bb09-8f55ab9c3edf" alt="*ConfTr* diagram from Stutz et al. (2022)"> 
+ <img src="https://s3.hedgedoc.org/hd1-demo/uploads/165c791b-ce60-4024-9d26-dec8207b43f0.png" alt="*ConfTr* diagram from Stutz et al. (2022)"> 
  <figcaption><em>Figure from Stutz et al. (2022), illustrating the conformal training process.</em></figcaption>
 </figure> 
 
 The calibration and prediction steps are implemented in a differentiable way (using smooth approximations), so that the entire process can be optimized end-to-end with standard gradient-based methods. After training with *ConfTr*, the model can still be used with any standard CP method at test time, meaning the CP coverage guarantee is preserved.
 
-## Reproduction and Ablation: Julia implementation MNIST
+## Reproduction: Julia implementation MNIST
 
 ## Reproduction: Python implementation MNIST
 
 ## Reproduction: Python implementation German Credit
 ### Paper's Experiment on German Credit
-In the original paper, the authors evaluate *ConfTr* across several datasets, including both image and tabular data. n their experiments on the German Credit dataset, the authors compare several approaches for conformal prediction. Specifically, they evaluate:
-* A standard cross-entropy baseline (trained without any CP-related loss)
-* The method of Belotti (2021), which trains the model using ThrL
-* The *ConfTr* method, both with and without an additional *classification loss* L<sub>class
-    
-At test time, results are reported for two CP methods: Threshold CP (Thr) and Adaptive Prediction Sets (APS). During training, Bellotti uses ThrL (thresholding on raw logits), while *ConfTr* uses ThrLP (thresholding on log-probabilities). The main evaluation metrics are inefficiency (the average size of the confidence sets) and accuracy. The goal is to reduce inefficiency while maintaining the required coverage guarantee, even if accuracy may drop slightly due to the CP-related training losses.
-    
-The German Credit dataset is a binary classification task, where the model predicts whether a person has "good" or "bad" credit risk. As a result, the expected confidence sets are small (typically of size 1 or 2), and potential inefficiency reductions are more limited compared to multi-class datasets.
 
-This table shows the reported results from the original paper:
+The original paper evaluates *ConfTr* on several datasets, including the German Credit dataset. For this binary classification task (predicting "good" vs. "bad" credit risk), the authors compare:
+- A standard cross-entropy baseline
+- Bellotti (2021), trained using ThrL (thresholding on raw logits)
+- ConfTr, trained with and without an additional classification loss (L_class)
+
+At test time, two CP methods are used: threshold CP (Thr) and adaptive prediction sets (APS). While Bellotti uses ThrL, *ConfTr* uses ThrLP (thresholding on log-probabilities). The main evaluation metrics are inefficiency (average size of the confidence sets) and accuracy. Since the task is binary, expected confidence sets are small, and potential efficiency gains are limited.
+
 
 <figure style="text-align: center;">
-  <img src="https://s3.hedgedoc.org/hd1-demo/uploads/e888aa48-fcfc-4bd4-9bc6-6b5f8b2618a6.png" width="100" style="display: inline-block;">
-  <figcaption><em>Table 1: Experimental results from Stutz et al. (2022) on German Credit dataset.</em></figcaption>
+  <img src="https://s3.hedgedoc.org/hd1-demo/uploads/f67fd31d-6725-4ea6-bb79-051e1214d6e7.png" width="500" style="display: inline-block;">
+  <figcaption><em>Table 1: Experimental results from Stutz et al. (2022) on the German Credit dataset.</em></figcaption>
 </figure>
+
 
 
 
@@ -164,3 +163,6 @@ In the future, it would be interesting to explore the application of *ConfTr* to
 * Bellotti, T. (2021). Learning Probabilistic Set Predictors with Guarantees. *arXiv preprint arXiv:2103.10288.* https://arxiv.org/abs/2103.10288
 * UCI Machine Learning Repository. (1994). https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data
 * Patel, M. (n.d.). Diabetes Prediction Dataset. Kaggle. https://www.kaggle.com/datasets/marshalpatel3558/diabetes-prediction-dataset-legit-dataset
+
+
+
