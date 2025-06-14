@@ -58,7 +58,9 @@ is_regression(ŷ) = isa(ŷ, Tuple)
 
 Helper function that checks if conformal prediction `ŷ` comes from a conformal classification model.
 """
-is_classification(ŷ) = typeof(ŷ) <: Union{UnivariateFinite,Missing}
+# Code Modification
+# is_classification(ŷ) = typeof(ŷ) <: Union{UnivariateFinite,Missing}
+is_classification(ŷ) = typeof(ŷ) <: Union{UnivariateFinite,Missing,CategoricalArrays.CategoricalValue}
 
 """
     set_size(ŷ)

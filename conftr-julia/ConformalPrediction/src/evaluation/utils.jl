@@ -29,8 +29,6 @@ Helper function to check if `y` is contained in conformal region. Based on wheth
 """
 function is_covered(ŷ, y)
     is_covered = map(ŷ, y) do ŷᵢ, yᵢ
-
-        # Regression:
         if is_regression(ŷᵢ)
             _is_covered = is_covered_interval(ŷᵢ, yᵢ)
         end

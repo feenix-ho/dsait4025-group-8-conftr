@@ -3,6 +3,7 @@ using Flux
 using LinearAlgebra
 using MLJBase
 using StatsBase
+# using Statistics
 
 """
     soft_assignment(conf_model::ConformalProbabilisticSet; temp::Real=0.1)
@@ -96,7 +97,9 @@ function classification_loss(
     # Setup:
     if typeof(y) <: CategoricalArray
         L = levels(y)
-        yenc = permutedims(Flux.onehotbatch(levelcode.(y), L))
+        # Code Modification
+        # yenc = permutedims(Flux.onehotbatch(levelcode.(y), L))
+        yenc = permutedims(Flux.onehotbatch(levelcode.(y) .- 1, L))
     else
         yenc = y
     end
@@ -106,12 +109,14 @@ function classification_loss(
     end
     C = soft_assignment(conf_model, fitresult, X; temp=temp)
 
+
     # Loss:
     ℒ = map(eachrow(C), eachrow(yenc)) do c, _yenc
         y = findall(Bool.(_yenc))
         L = loss_matrix[y, :]
         A = @.((1 - c) * _yenc + c * (1 - _yenc))
-        A = @.(log(A / (1 - A)))
+        # Code Modification
+        # A = @.(log(A / (1 - A)))
         return L * A
     end
     ℒ = reduce(vcat, ℒ)

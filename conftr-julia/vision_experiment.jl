@@ -12,11 +12,13 @@ using Images
 using Flux
 using NearestNeighborModels
 using DataFrames
-
+using JLSO
 import YAML
 # import JLSO
 
 include("builder.jl")
+include("utils.jl")
+
 
 const available_datasets = Dict(
     "MNIST" => MNIST,
@@ -27,11 +29,12 @@ const available_datasets = Dict(
 const available_models = Dict(
     "cnn" => build_cnn,
     "mlp" => build_mlp,
-    "logistic" => (@load LogisticClassifier pkg = MLJLinearModels),
-    "evo_tree" => (@load EvoTreeClassifier pkg = EvoTrees),
-    "knn" => (@load KNNClassifier pkg = NearestNeighborModels),
-    "decision_tree" => (@load DecisionTreeClassifier pkg = DecisionTree),
-    "random_forest" => (@load RandomForestClassifier pkg = DecisionTree),
+    "linear" => build_mlp,
+    "logistic" => (@load LogisticClassifier pkg = MLJLinearModels verbosity=0),
+    "evo_tree" => (@load EvoTreeClassifier pkg = EvoTrees verbosity=0),
+    "knn" => (@load KNNClassifier pkg = NearestNeighborModels verbosity=0),
+    "decision_tree" => (@load DecisionTreeClassifier pkg = DecisionTree verbosity=0),
+    "random_forest" => (@load RandomForestClassifier pkg = DecisionTree verbosity=0),
 )
 
 function parse_commandline()
@@ -42,18 +45,14 @@ function parse_commandline()
             help = "Path to configuration file."
             arg_type = String
             required = true
-        # "--dataset"
-        #     help = "Dataset name."
-        #     arg_type = String
-        #     required = true
-        # "--model"
-        #     help = "Model name."
     end
 
     return parse_args(settings)
 end
 
+
 function get_dataset(dataset_name::String; convert::Bool)
+    println("Loading the dataset ...")
     @assert dataset_name in keys(available_datasets) "$(dataset_name) is not a valid dataset."
 
     X_train_raw, y_train_raw = available_datasets[dataset_name](split=:train)[:]
@@ -87,6 +86,7 @@ function convert_dict_keys(dict::Dict)
 end
 
 function build_image_classifier(config::Dict)
+    println("Building the base model ...")
     @assert :model_name in keys(config) "model_name not found."
     model_name = config[:model_name]
     @assert model_name in keys(available_models) "$(model_name) is not a valid model."
@@ -109,7 +109,7 @@ function build_image_classifier(config::Dict)
 
         builder = MLJFlux.@builder build_cnn(input_dim, conv_dims, mlp_dims)
 
-    elseif model_name == "mlp"
+    elseif model_name == "mlp" || model_name == "linear"
         @assert :input_dim in keys(config) "input_dim not found."
         input_dim = config[:input_dim]
 
@@ -125,10 +125,11 @@ function build_image_classifier(config::Dict)
         else
             clf = available_models[model_name]()
         end
+        
         return clf, false
     end
     
-    ImageClassifier = @load ImageClassifier pkg=MLJFlux
+    ImageClassifier = @load ImageClassifier pkg=MLJFlux verbosity=0
     img_clf = ImageClassifier(
         builder=builder,
         # batch_size=batch_size,
@@ -138,6 +139,97 @@ function build_image_classifier(config::Dict)
     return img_clf, true
 end
 
+function train_model(
+    base_model, X_train, y_train, save_path::String; 
+    has_cls_loss::Bool = true, is_baseline::Bool=true)
+    println("Training and evaluating the model on train split ...")
+    
+    if isfile(save_path)
+        mach = JLSO.load(save_path)[:machine]
+        restore!(mach)
+        test_model(mach, X_train, y_train; verbose=false, has_cls_loss=has_cls_loss, is_baseline=is_baseline)
+    else
+        # Create and fit the machine
+        mach = machine(base_model, X_train, y_train)
+        fit!(mach)
+        
+        # Serialize and save the machine
+        smach = serializable(mach)
+        JLSO.save(save_path, :machine => smach)
+        
+        perf = evaluate!(
+            mach,
+            resampling=Holdout(rng=123, fraction_train=0.9),
+            operation=predict,
+            measure=[emp_coverage, ssc, ineff]
+        )
+        display(perf)
+
+        ŷ = predict(mach, X_train)
+        # println(is_baseline)
+        # exit()
+        if is_baseline
+            acc = accuracy_score_baseline(ŷ, y_train)
+        else
+            acc = accuracy_score_conformal(ŷ, y_train)
+        end
+        println("Accuracy score: $(round(acc, digits=3))\n\n\n")
+
+        if has_cls_loss
+            l_class = ConformalPrediction.ConformalTraining.classification_loss(
+                mach.model, 
+                mach.fitresult, 
+                X_train, 
+                y_train
+            )
+            l_class = mean(l_class)
+            println("Classification loss: $(round(l_class, digits=3))\n\n\n")
+        end
+    end
+    return mach
+end
+
+function test_model(
+    mach, X_test, y_test; 
+    verbose::Bool=true, has_cls_loss::Bool=true, is_baseline::Bool=true)
+    if verbose
+        println("Testing the model on test split ...")
+    end
+
+    ŷ = predict(mach, X_test)
+    # ŷ  = coerce(ŷ_raw, Multiclass)
+    # evaluate!(mach, X_test, y_test)
+    
+    # println(ŷ)
+
+    e_cov = ConformalPrediction.emp_coverage(ŷ, y_test)
+    sc_cov = ConformalPrediction.size_stratified_coverage(ŷ, y_test)
+    ie = ConformalPrediction.ineff(ŷ, y_test)
+    
+    println("Empirical coverage: $(round(e_cov, digits=3))")
+    println("SSC: $(round(sc_cov, digits=3))")
+    println("Inefficiency: $(round(ie, digits=3))")
+
+
+    if is_baseline
+        acc = accuracy_score_baseline(ŷ, y_test)
+    else
+        acc = accuracy_score_conformal(ŷ, y_test)
+    end
+    println("Accuracy score: $(round(acc, digits=3))\n\n\n")
+
+    if has_cls_loss
+        l_class = ConformalPrediction.ConformalTraining.classification_loss(
+            mach.model, 
+            mach.fitresult,
+            X_test, 
+            y_test
+        )
+        l_class = mean(l_class)
+        println("Classification loss: $(round(l_class, digits=3))\n\n\n")
+    end
+end
+
 function run_baseline(config::Dict)
     printstyled("Running baseline pipeline ...\n\n"; color=:red)
     # Load dataset and build model
@@ -145,33 +237,22 @@ function run_baseline(config::Dict)
     ds_name = config[:dataset]
     @assert ds_name in keys(available_datasets) "$(ds_name) is not a valid dataset."
     
+    @assert :model_name in keys(config) "model_name not found."
+    model_name = config[:model_name]
+    @assert model_name in keys(available_models) "$(model_name) is not a valid model."
+
+    @assert :save_dir in keys(config) "save_dir not found."
+    save_dir = config[:save_dir]
+    save_path = "$(save_dir)/$(ds_name)_$(model_name)_baseline.jlso" 
+    
     img_clf, need_convert = build_image_classifier(config)
     X_train, y_train, X_test, y_test = get_dataset(ds_name; convert=need_convert)
-    
-    mach = machine(img_clf, X_train, y_train)
 
-    # Train and evaluate on train set
-    fit!(mach)
-
-    perf = evaluate!(
-        mach,
-        resampling=Holdout(rng=123, fraction_train=0.9),
-        operation=predict,
-        measure=[emp_coverage, ssc, ineff]
-    )
-    display(perf)
-
-    println("Empirical coverage: $(round(perf.measurement[1], digits=3))")
-    println("SSC: $(round(perf.measurement[2], digits=3))")
-    println("Inefficiency: $(round(perf.measurement[3], digits=3))\n\n\n")
-
-    # Predict on test set
-    ŷ = predict(mach, X_test)
-    ie = ConformalPrediction.ineff(ŷ)
-    println("Inefficiency: $(round(ie, digits=3))")
+    mach = train_model(img_clf, X_train, y_train, save_path; has_cls_loss=false, is_baseline=true)
+    test_model(mach, X_test, y_test; has_cls_loss=false, is_baseline=true)
 end
 
-function run_conformal_pipeline(config::Dict, method::Symbol)
+function run_conformal_pipeline(config::Dict, method::Symbol, save_path::String)
     # Load dataset and build ConfTr machine
     @assert :dataset in keys(config) "dataset not found."
     ds_name = config[:dataset]
@@ -182,45 +263,64 @@ function run_conformal_pipeline(config::Dict, method::Symbol)
     img_clf, need_convert = build_image_classifier(config)
     
     X_train, y_train, X_test, y_test = get_dataset(ds_name; convert=need_convert)
-    
     conf_model = conformal_model(img_clf; method=method, coverage=cov)
-    conf_mach = machine(conf_model, X_train, y_train)
-
-    # Train and evaluate on train set
-    fit!(conf_mach)
-
-    perf = evaluate!(
-        conf_mach,
-        resampling=Holdout(rng=123, fraction_train=0.9),
-        operation=predict,
-        measure=[emp_coverage, ssc, ineff]
-    )
-    display(perf)
-
-    println("Empirical coverage: $(round(perf.measurement[1], digits=3))")
-    println("SSC: $(round(perf.measurement[2], digits=3))")
-    println("Inefficiency: $(round(perf.measurement[3], digits=3))\n\n\n")
-
-    # Predict on test set
-    ŷ = predict(conf_mach, X_test)
-    ie = ConformalPrediction.ineff(ŷ)
-    println("Inefficiency: $(round(ie, digits=3))")
+    
+    conf_mach = train_model(conf_model, X_train, y_train, save_path; has_cls_loss=true, is_baseline=false)
+    test_model(conf_mach, X_test, y_test; has_cls_loss=true, is_baseline=false)
 end
 
 
 function run_simple_inductive(config::Dict)
     printstyled("Running Simple Inductive ConfTr pipeline ...\n\n"; color=:red)
-    run_conformal_pipeline(config, :simple_inductive)
+
+    @assert :dataset in keys(config) "dataset not found."
+    ds_name = config[:dataset]
+    @assert ds_name in keys(available_datasets) "$(ds_name) is not a valid dataset."
+
+    @assert :model_name in keys(config) "model_name not found."
+    model_name = config[:model_name]
+    @assert model_name in keys(available_models) "$(model_name) is not a valid model."
+
+    @assert :save_dir in keys(config) "save_dir not found."
+    save_dir = config[:save_dir]
+    save_path = "$(save_dir)/$(ds_name)_$(model_name)_simple_inductive.jlso" 
+
+    run_conformal_pipeline(config, :simple_inductive, save_path)
 end
 
 function run_adaptive_inductive(config::Dict)
     printstyled("Running Adaptive Inductive ConfTr pipeline ...\n\n"; color=:red)
-    run_conformal_pipeline(config, :adaptive_inductive)
+    
+    @assert :dataset in keys(config) "dataset not found."
+    ds_name = config[:dataset]
+    @assert ds_name in keys(available_datasets) "$(ds_name) is not a valid dataset."
+
+    @assert :model_name in keys(config) "model_name not found."
+    model_name = config[:model_name]
+    @assert model_name in keys(available_models) "$(model_name) is not a valid model."
+
+    @assert :save_dir in keys(config) "save_dir not found."
+    save_dir = config[:save_dir]
+    save_path = "$(save_dir)/$(ds_name)_$(model_name)_adaptive_inductive.jlso" 
+    run_conformal_pipeline(config, :adaptive_inductive, save_path)
 end
 
 function run_naive_transductive(config::Dict)
     printstyled("Running Naive Transductive ConfTr pipeline ...\n\n"; color=:red)
-    run_conformal_pipeline(config, :naive)
+
+    @assert :dataset in keys(config) "dataset not found."
+    ds_name = config[:dataset]
+    @assert ds_name in keys(available_datasets) "$(ds_name) is not a valid dataset."
+
+    @assert :model_name in keys(config) "model_name not found."
+    model_name = config[:model_name]
+    @assert model_name in keys(available_models) "$(model_name) is not a valid model."
+
+    @assert :save_dir in keys(config) "save_dir not found."
+    save_dir = config[:save_dir]
+    save_path = "$(save_dir)/$(ds_name)_$(model_name)_naive_transductive.jlso" 
+
+    run_conformal_pipeline(config, :naive, save_path)
 end
 
 
@@ -229,16 +329,12 @@ function main()
 
     config_path = args["config"]
     config = YAML.load_file(config_path, dicttype=Dict{Symbol,Any})
-    
-    @assert :save_dir in keys(config) "save_dir not found."
-    save_dir = config[:save_dir]
 
     run_baseline(config)
     run_simple_inductive(config)
     run_adaptive_inductive(config)
-    run_naive_transductive(config)
+    # run_naive_transductive(config)
 
-    # MLJ.save(save_dir, conf_mach)
 end
 
 main()

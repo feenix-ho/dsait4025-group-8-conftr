@@ -158,9 +158,6 @@ Score method for the [`AdaptiveInductiveClassifier`](@ref) dispatched for any `<
 function score(
     conf_model::AdaptiveInductiveClassifier, atomic::Supervised, fitresult, X, y=nothing
 )
-    # print("DEBUGGING_2")
-    # print(typeof(fitresult))
-    # exit()
     p̂ = reformat_mlj_prediction(MMI.predict(atomic, fitresult, MMI.reformat(atomic, X)...))
     L = p̂.decoder.classes
     probas = pdf(p̂, L)                                              # compute probabilities for all classes
@@ -194,6 +191,7 @@ function MMI.predict(conf_model::AdaptiveInductiveClassifier, fitresult, Xnew)
     p̂ = reformat_mlj_prediction(
         MMI.predict(conf_model.model, fitresult, MMI.reformat(conf_model.model, Xnew)...)
     )
+    # println("BEFORE, ", p̂)
     v = conf_model.scores[:calibration]
     q̂ = qplus(v, conf_model.coverage)
     p̂ = map(p̂) do pp
@@ -211,5 +209,7 @@ function MMI.predict(conf_model::AdaptiveInductiveClassifier, fitresult, Xnew)
         pp = UnivariateFinite(L[Π][1:final_idx], probas[Π][1:final_idx])
         return pp
     end
+    # print("AFTER", p̂)
+    # exit()
     return p̂
 end

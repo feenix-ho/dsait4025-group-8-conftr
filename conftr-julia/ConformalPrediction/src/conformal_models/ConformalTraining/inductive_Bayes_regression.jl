@@ -12,7 +12,6 @@ Overloads the `score` function for the `MLJFluxModel` type.
 function ConformalPrediction.score(
     conf_model::BayesRegressor, ::Type{<:MLJFluxModel}, fitresult, X, y
 )
-    print("DEBUGGING_2: ", typeof(X))
     X = matrix(X)
     fμ, fvar = fitresult[1](X)
 

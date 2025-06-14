@@ -25,14 +25,13 @@ function ConformalPrediction.score(
     X,
     y::Union{Nothing,AbstractArray}=nothing,
 )
-    # print("DEBUGGING_1")
+    # Code Modification
     # X = permutedims(matrix(X))
     # probas = permutedims(fitresult[1](X))
     p̂ = reformat_mlj_prediction(MMI.predict(atomic, fitresult, MMI.reformat(atomic, X)...))
     L = p̂.decoder.classes
     probas = pdf(p̂, L)
     scores = @.(conf_model.heuristic(y, probas))
-    # exit()
     if isnothing(y)
         return scores
     else

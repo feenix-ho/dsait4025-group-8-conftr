@@ -1,4 +1,4 @@
-model_name: "mlp"
+model_name: "linear"
 dataset: "MNIST"
 input_dim: [28, 28, 1]
 mlp_dims:

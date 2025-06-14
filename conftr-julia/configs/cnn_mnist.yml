@@ -2,10 +2,10 @@ model_name: "cnn"
 dataset: "MNIST"
 input_dim: [28, 28, 1]
 conv_dims:
-    - [32, 3, 2]
-    - [64, 3, 2]
+    - [6, 5, 2]
+    - [16, 5, 2]
 mlp_dims:
-    - 128
+    - 84
     - 10
 batch_size: 128
 epochs: 50
