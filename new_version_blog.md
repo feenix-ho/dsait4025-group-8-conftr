@@ -26,7 +26,7 @@ As we already mentioned in the introduction, the key idea behind *ConfTr* is to 
 The model is then updated using a loss that combines a size loss, which encourages the model to produce smaller confidence sets, and optionally a classification loss that can shape the content of the confidence sets (e.g., penalizing certain classes). The following figure from the original paper illustrates this process:
 
 <figure style="text-align: center;"> 
- <img src="https://s3.hedgedoc.org/hd1-demo/uploads/165c791b-ce60-4024-9d26-dec8207b43f0.png" alt="*ConfTr* diagram from Stutz et al. (2022)"> 
+ <img src="https://github.com/user-attachments/assets/3b92c1d2-1406-4258-bb09-8f55ab9c3edf" alt="*ConfTr* diagram from Stutz et al. (2022)"> 
  <figcaption><em>Figure from Stutz et al. (2022), illustrating the conformal training process.</em></figcaption>
 </figure> 
 
