@@ -34,9 +34,65 @@ The model is then updated using a loss that combines a size loss, which encourag
 
 The calibration and prediction steps are implemented in a differentiable way (using smooth approximations), so that the entire process can be optimized end-to-end with standard gradient-based methods. After training with _ConfTr_, the model can still be used with any standard CP method at test time, meaning the CP coverage guarantee is preserved.
 
+### On the Google DeepMind Implementation
+
+The official Conformal Training code is available on GitHub at [google-deepmind/conformal\_training](https://github.com/google-deepmind/conformal_training/). It’s a pure-Python codebase with auxiliary shell scripts for running experiments and tests. Package dependencies are managed via Conda, with the environment specified in `environment.yml` (minor edits were required for compatibility). The official Python implementation uses JAX for end-to-end differentiable training through conformal prediction steps, with TensorFlow handling dataset operations. The codebase follows a modular structure organized with Absl (Google's Abseil library) for command-line interfaces, logging, and application flow. Configuration management is handled through `ml_collections.ConfigDict`, with hyperparameters defined in `config.py` and experiment-specific settings in the `experiments/` directory (like `run_mnist.py`). The core conformal prediction methods are implemented in `conformal_prediction.py`, with differentiable versions in `smooth_conformal_prediction.py` that enable gradient flow. Training variants are implemented across separate modules (`train_normal.py`, `train_conformal.py`, `train_coverage.py`), with training launched through `run.py` and evaluation performed via `eval.py`. This structure enables reproducible experiments across multiple datasets and conformal prediction variants.
+
 ## Reproduction: Julia implementation MNIST
 
 ## Reproduction: Python implementation MNIST
+
+We're trying to reproduce the results as shown in Table 1 of the original paper, which includes experiments on MNIST. Please find the table and subscript from the original paper below:
+
+**Table 1:** Main Inefficiency Results, comparing (Bellotti, 2021) (Bel, trained with ThrL) and ConTr (trained with ThrLP) using THR or APS at test time (with α = 0.01). We also report improvements relative to the baseline, i.e., standard cross-entropy training, in percentage in parentheses. ConTr results in a consistent improvement of inefficiency for both THR and APS. Training with ℒ₍class₎, using ℒ = I_K, generally works slightly better. On CIFAR, the inefficiency reduction is small compared to other datasets as ConTr is trained on pre-trained ResNet features; see text. More results can be found in App. J.
+
+| Dataset  | THR Baseline | THR Bel | THR ConfTr | THR + ℒ₍class₎ | APS Baseline | APS ConfTr |  APS + ℒ₍class₎ |
+| -------- | -----------: | ------: | ---------: | -------------: | -----------: | ---------: | --------------: |
+| MNIST    |         2.23 |    2.70 |       2.18 |  2.11 (−5.4 %) |         2.50 |       2.16 |  2.14 (−14.4 %) |
+| F-MNIST  |         2.05 |    1.90 |       1.69 | 1.67 (−18.5 %) |         2.36 |       1.82 |  1.72 (−27.1 %) |
+| EMNIST   |         2.66 |    3.48 |       2.66 |  2.49 (−6.4 %) |         4.23 |       2.86 |  2.87 (−32.2 %) |
+| CIFAR10  |         2.93 |    2.93 |       2.88 |  2.84 (−3.1 %) |         3.30 |       3.05 |  2.93 (−11.2 %) |
+| CIFAR100 |        10.63 |   10.91 |      10.78 | 10.44 (−1.8 %) |        16.62 |      12.99 | 12.73 (−23.4 %) |
+
+We focus on the MNIST row, and reproduce the Baseline and the Conformal Training (ConfTr) results. We do not reproduce the Bellotti method, as it is not implemented in the codebase and out-of-scope for this reproduction.
+
+### What did we do?
+
+To reproduce the MNIST results, we first reviewed the original codebase and resolved any dependency issues to ensure it could run smoothly. We then wrote shell scripts to automate the training and evaluation process, and finally executed the official codebase on the MNIST dataset.
+
+### Experiment Setup
+
+We started by running the official codebase on the MNIST dataset, which is included in the original codebase. The MNIST dataset is a well-known benchmark for image classification tasks, consisting of 60,000 training images and 10,000 test images of handwritten digits (0-9). The original paper uses this dataset to demonstrate the effectiveness of _ConfTr_ in reducing inefficiency in conformal prediction.
+
+We reproduced the MNIST experiments on a Windows 11 Pro system with WSL 2 (Ubuntu 24.04 LTS), using Conda v25.3.1 and Python 3.9.13. The hardware consisted of an AMD Ryzen 5 3600 processor, 32 GB RAM, and an NVIDIA RTX 3060 12 GB GPU. Training and evaluation scripts are located in the `experiments/python_reproduction/` directory, with default MNIST parameters specified in `conformal_training/experiments/run_mnist.py`. Two shell scripts were created to automate training and evaluation across multiple random seeds.
+
+All models use a single-layer MLP (32 units, no hidden layers) trained for 50 epochs.
+
+#### Used Hyperparameters
+
+| Variant                  |   LR | Batch | Temp. | Size Wt | Coverage Loss  | Loss Tf. | Size Tf. | RNG   | Method          |
+| ------------------------ | ---: | ----: | ----: | ------: | -------------- | -------- | -------- | ----- | --------------- |
+| **Baseline**             | 0.05 |   100 |     – |       – | –              | –        | –        | –     | –               |
+| **Conformal Training**   | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+| **Group Zero / One**     | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
+| **Singleton Zero / One** | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
+| **Group Size 0 / 1**     | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+| **Class Size\_**\*       | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+
+`\*` denotes each class-specific experiment (`class_size_0` through `class_size_9`) which share the above Conformal Training settings.
+
+### Results MNIST Reproduction
+
+We now have these **preliminary results** from the official Python implementation. Results on MNIST (seeds 0–3, α = 0.01), from `eval_results.csv`:
+
+| Method                 | ThR Inefficiency (size) |     APS Avg. Set Size |
+| ---------------------- | ----------------------: | --------------------: |
+| **Baseline**           |            2.23 ± 0.015 |          2.50 ± 0.010 |
+| **Conformal Training** |    2.16 ± 0.021 (–3.3%) | 8.92 ± 0.90 (+257.4%) |
+
+> **Notes:** \
+> • Statistics are means ± standard deviation over four random seeds. \
+> • Inefficiency matches the original paper; APS set size appears inflated due to incomplete runs and will be verified in a full rerun.
 
 ## Reproduction: Python implementation German Credit
 
