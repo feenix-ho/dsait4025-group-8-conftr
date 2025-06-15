@@ -1,4 +1,4 @@
-# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"\*
+# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"\
 
 |        Name        |                Email                 | StudentID |
 | :----------------: | :----------------------------------: | :-------: |
