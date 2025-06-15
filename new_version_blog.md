@@ -1,10 +1,10 @@
-# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"*
+# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"\*
 
-|        Name        |               Email                | StudentID |
-| :----------------: | :--------------------------------: | :-------: |
+|        Name        |                Email                 | StudentID |
+| :----------------: | :----------------------------------: | :-------: |
 | Ho Thi Ngoc Phuong | <HoThiNgocPhuong@student.tudelft.nl> |  6172970  |
-|  Juul Schnitzler   |  <j.b.schnitzler@student.tudelft.nl>   |  5094917  |
-|  Razo van Berkel   |      <r.q.berkel@student.tudelft.nl> | 6330029 |
+|  Juul Schnitzler   | <j.b.schnitzler@student.tudelft.nl>  |  5094917  |
+|  Razo van Berkel   |   <r.q.berkel@student.tudelft.nl>    |  6330029  |
 
 The reproduction code is available on Github [here](https://github.com/feenix-ho/dsait4025-group-8-conftr).
 
@@ -36,9 +36,170 @@ The calibration and prediction steps are implemented in a differentiable way (us
 
 ### On the Google DeepMind Implementation
 
-The official Conformal Training code is available on GitHub at [google-deepmind/conformal\_training](https://github.com/google-deepmind/conformal_training/). It’s a pure-Python codebase with auxiliary shell scripts for running experiments and tests. Package dependencies are managed via Conda, with the environment specified in `environment.yml` (minor edits were required for compatibility). The official Python implementation uses JAX for end-to-end differentiable training through conformal prediction steps, with TensorFlow handling dataset operations. The codebase follows a modular structure organized with Absl (Google's Abseil library) for command-line interfaces, logging, and application flow. Configuration management is handled through `ml_collections.ConfigDict`, with hyperparameters defined in `config.py` and experiment-specific settings in the `experiments/` directory (like `run_mnist.py`). The core conformal prediction methods are implemented in `conformal_prediction.py`, with differentiable versions in `smooth_conformal_prediction.py` that enable gradient flow. Training variants are implemented across separate modules (`train_normal.py`, `train_conformal.py`, `train_coverage.py`), with training launched through `run.py` and evaluation performed via `eval.py`. This structure enables reproducible experiments across multiple datasets and conformal prediction variants.
+The official Conformal Training code is available on GitHub at [google-deepmind/conformal_training](https://github.com/google-deepmind/conformal_training/). It’s a pure-Python codebase with auxiliary shell scripts for running experiments and tests. Package dependencies are managed via Conda, with the environment specified in `environment.yml` (minor edits were required for compatibility). The official Python implementation uses JAX for end-to-end differentiable training through conformal prediction steps, with TensorFlow handling dataset operations. The codebase follows a modular structure organized with Absl (Google's Abseil library) for command-line interfaces, logging, and application flow. Configuration management is handled through `ml_collections.ConfigDict`, with hyperparameters defined in `config.py` and experiment-specific settings in the `experiments/` directory (like `run_mnist.py`). The core conformal prediction methods are implemented in `conformal_prediction.py`, with differentiable versions in `smooth_conformal_prediction.py` that enable gradient flow. Training variants are implemented across separate modules (`train_normal.py`, `train_conformal.py`, `train_coverage.py`), with training launched through `run.py` and evaluation performed via `eval.py`. This structure enables reproducible experiments across multiple datasets and conformal prediction variants.
 
 ## Reproduction: Julia implementation MNIST
+
+This part of the reproduction was carried out by Phuong Ho with Julia. All code lives in the `conftr-julia/` directory of our GitHub repository and builds on the public `ConformalPrediction.jl` package plus a few lightweight helper scripts.
+
+### Installation pain points
+
+Although `ConformalPrediction.jl` installs cleanly from the Julia registry, the first full run exposed several issues once we moved beyond toy tabular data:
+
+-   **Type and shape mismatches for images** The `:simple_inductive` mode presumes `Tables` input, so 3-D image tensors ($H\times W\times C$) fail when the code tries to coerce them to a matrix. Internally, `MLJ` cannot convert `Image` objects to `Matrix`, producing dimension and element-type errors.
+-   **Minor API drift** - A few calls broke after recent updates to `Flux` and CUDA, producing deprecation warnings or outright failures.
+
+All fixes are clearly flagged with `# Code Modification` comments in the sources.
+
+### Key files we added
+
+| File                   | Role                                                                                                                                                        |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `builder.jl`           | Assembles the base model (e.g. a small CNN for MNIST) and wraps it with the ConfTr layer.                                                                   |
+| `vision_experiment.jl` | End-to-end script that loads a vision dataset, runs conformal training, and logs metrics; swapping to another dataset (e.g. CIFAR-10) is a one-line change. |
+| `utils.jl`             | Lightweight helpers (metrics, logging, seeding).                                                                                                            |
+
+### Fix to the classification loss
+
+The official docs never show how to enable the classification-shaping loss $L_{\text{class}}$ from Stutz et al [^stutz2021learning]. Further inspection revealed a small bug that effectively disabled this term.
+
+> **Note.** We audited only the classification pipeline. Regression paths compile but remain untested and may harbour similar issues.
+
+### Model Configurations
+
+| Model                            | Architecture (input &rarr; output)                                                                                                                                                                                                 | Notes                                                                                                                                           |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Linear**                       | `Flatten` &rarr; `Dense(10)`                                                                                                                                                                                                       | A single fully-connected layer that maps the 784-dimensional pixel vector straight to the 10 logits (no hidden activations).                    |
+| **2-Layer MLP**                  | `Flatten` &rarr; `Dense(128)` &rarr; `ReLU` &rarr; `Dense(10)`                                                                                                                                                                     | Adds one hidden layer with 128 units and ReLU non-linearity, giving the model capacity to learn simple nonlinear decision boundaries.           |
+| **LeNet-5** [^lecun2002gradient] | `Conv(6×(5×5))` &rarr; _ReLU_ &rarr; `MaxPool(2×2)` &rarr; `Conv (16×(5×5), padding=2)` &rarr; _ReLU_ &rarr; `MaxPool(2×2)` &rarr; `Flatten` &rarr; `Dense(120)` &rarr; _ReLU_ &rarr; `Dense(84)` &rarr; `ReLU` &rarr; `Dense(10)` | Classic CNN for digit recognition. We keep the original kernel sizes but add padding to retain spatial dimensions after each convolution block. |
+
+All models receive $28 \times 28$ grayscale MNIST images and output a logit for each of the 10 classes.
+
+### Ablation Results
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+.tg td{background-color:#fff;border-bottom-width:1px;border-color:#ccc;border-style:solid;border-top-width:1px;
+  border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;
+  word-break:normal;}
+.tg th{background-color:#f0f0f0;border-bottom-width:1px;border-color:#ccc;border-style:solid;border-top-width:1px;
+  border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-dzk6{background-color:#f9f9f9;text-align:center;vertical-align:top}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-baqh" colspan="2" rowspan="3"></th>
+    <th class="tg-amwm" colspan="3">Baseline</th>
+    <th class="tg-amwm" colspan="6">ConfTr</th>
+  </tr>
+  <tr>
+    <th class="tg-dzk6" rowspan="2">Linear</th>
+    <th class="tg-dzk6" rowspan="2">2-layer MLP</th>
+    <th class="tg-dzk6" rowspan="2">LeNet5 </th>
+    <th class="tg-dzk6" colspan="2">Linear</th>
+    <th class="tg-dzk6" colspan="2">2-layer MLP</th>
+    <th class="tg-dzk6" colspan="2"><span style="font-style:normal">LeNet5</span></th>
+  </tr>
+  <tr>
+    <th class="tg-baqh">THR</th>
+    <th class="tg-baqh">APS</th>
+    <th class="tg-baqh">THR</th>
+    <th class="tg-baqh">APS</th>
+    <th class="tg-baqh">THR</th>
+    <th class="tg-baqh">APS</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-dzk6" rowspan="2">Inefficiency</td>
+    <td class="tg-dzk6"><span style="font-style:normal">Train</span></td>
+    <td class="tg-dzk6"><span style="font-style:normal">9.435</span></td>
+    <td class="tg-dzk6">2.016</td>
+    <td class="tg-dzk6">1.004</td>
+    <td class="tg-dzk6">2.448</td>
+    <td class="tg-dzk6">1.629</td>
+    <td class="tg-dzk6">1.306</td>
+    <td class="tg-dzk6">1.004</td>
+    <td class="tg-dzk6">1.16</td>
+    <td class="tg-dzk6">1.002</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">Test</td>
+    <td class="tg-baqh"><span style="font-style:normal">9.43</span></td>
+    <td class="tg-baqh">2.104</td>
+    <td class="tg-baqh">1.003</td>
+    <td class="tg-baqh">2.409</td>
+    <td class="tg-baqh">0.923</td>
+    <td class="tg-baqh">1.333</td>
+    <td class="tg-baqh"><span style="font-weight:400;font-style:normal">1.004</span></td>
+    <td class="tg-baqh">1.192</td>
+    <td class="tg-baqh">1.0</td>
+  </tr>
+  <tr>
+    <td class="tg-dzk6" rowspan="2">Accuracy</td>
+    <td class="tg-dzk6">Train</td>
+    <td class="tg-dzk6"><span style="font-style:normal">0.941</span></td>
+    <td class="tg-dzk6">0.992</td>
+    <td class="tg-dzk6"><span style="font-style:normal">0.978</span></td>
+    <td class="tg-dzk6">0.924</td>
+    <td class="tg-dzk6">1.605</td>
+    <td class="tg-dzk6">0.978</td>
+    <td class="tg-dzk6">0.981</td>
+    <td class="tg-dzk6">0.988</td>
+    <td class="tg-dzk6">0.985</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">Test</td>
+    <td class="tg-baqh">0.927</td>
+    <td class="tg-baqh">0.973</td>
+    <td class="tg-baqh">0.977</td>
+    <td class="tg-baqh">0.92</td>
+    <td class="tg-baqh">0.912</td>
+    <td class="tg-baqh">0.967</td>
+    <td class="tg-baqh">0.969</td>
+    <td class="tg-baqh">0.984</td>
+    <td class="tg-baqh">0.983</td>
+  </tr>
+  <tr>
+    <td class="tg-dzk6" rowspan="2">Classification loss</td>
+    <td class="tg-dzk6">Train</td>
+    <td class="tg-dzk6">-</td>
+    <td class="tg-dzk6">-</td>
+    <td class="tg-dzk6">-</td>
+    <td class="tg-dzk6">0.024</td>
+    <td class="tg-dzk6">0.459</td>
+    <td class="tg-dzk6">0.01</td>
+    <td class="tg-dzk6">0.499</td>
+    <td class="tg-dzk6">0.006</td>
+    <td class="tg-dzk6">0.5</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">Test</td>
+    <td class="tg-baqh">-</td>
+    <td class="tg-baqh">-</td>
+    <td class="tg-baqh">-</td>
+    <td class="tg-baqh">0.027</td>
+    <td class="tg-baqh">0.463</td>
+    <td class="tg-baqh">0.015</td>
+    <td class="tg-baqh">0.498</td>
+    <td class="tg-baqh">0.008</td>
+    <td class="tg-baqh">0.499</td>
+  </tr>
+</tbody></table>
+
+The above table shows the metrics we obtain with the Julia code. For completeness we also log plain accuracy and, when available, the auxiliary classification loss $L_\text{class}$
+
+1. **Inefficiecy mismatch for the linear baseline.** Our linear classifier shows a test inefficiency of 9.43, whereas Stutz et al report 2.23. After verifying that optimiser, batch size, learning-rate schedule, epochs, and α all match the paper, the most plausible culprit is preprocessing. The original code standardises each MNIST pixel to zero mean and unit variance, but our current pipeline feeds the raw 8-bit intensities (0 - 255). A linear model cannot compensate for such a scale mismatch, so its confidence sets widen dramatically.
+
+2. **ConfTr still cuts set size consistently.** Regardless of the preprocessing issue, ConfTr always improves on its own baseline. The qualitative pattern mirrors the original paper, confirming that the algorithm's relative benefit is robust.
+
+3. **Accuracy goes down - exactly as intended** For all three backbones the vanilla cross-entropy model attains the highest accuracy. The drop is expected: ConfTr trades a bit of accuracy for guaranteed coverage with smaller prediction sets. As we will see with the German Credit and Diabetes datasets, this trade-off is not dataset-specific.
+
+4. **Odd behaviour of $L_\text{class}$ in the Julia port** Even after patching `classification_loss` we still observe peculiar values-occasionally negative, and generally an order of magnitude larger than those reported by the authors. A closer look suggests the issue originates upstream in `soft_assignment`, the routine that converts smoothed logits into a differentiable confidence-set indicator.
+
+5. **Beyond the linear model, the deeper MLP and CNN behave similarly.** Both the two-layer MLP and LeNet-5 reach an inefficiency ≈ 1 after ConfTr, and their relative gains over the baseline are almost identical. This suggests that, once the backbone surpasses a certain capacity threshold, ConfTr's improvements saturate.
 
 ## Reproduction: Python implementation MNIST
 
@@ -70,14 +231,14 @@ All models use a single-layer MLP (32 units, no hidden layers) trained for 50 ep
 
 #### Used Hyperparameters
 
-| Variant                  |   LR | Batch | Temp. | Size Wt | Coverage Loss  | Loss Tf. | Size Tf. | RNG   | Method          |
-| ------------------------ | ---: | ----: | ----: | ------: | -------------- | -------- | -------- | ----- | --------------- |
-| **Baseline**             | 0.05 |   100 |     – |       – | –              | –        | –        | –     | –               |
-| **Conformal Training**   | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
-| **Group Zero / One**     | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
-| **Singleton Zero / One** | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold\_logp |
-| **Group Size 0 / 1**     | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
-| **Class Size\_**\*       | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold\_logp |
+| Variant                  |   LR | Batch | Temp. | Size Wt | Coverage Loss  | Loss Tf. | Size Tf. | RNG   | Method         |
+| ------------------------ | ---: | ----: | ----: | ------: | -------------- | -------- | -------- | ----- | -------------- |
+| **Baseline**             | 0.05 |   100 |     – |       – | –              | –        | –        | –     | –              |
+| **Conformal Training**   | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold_logp |
+| **Group Zero / One**     | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold_logp |
+| **Singleton Zero / One** | 0.01 |   100 |     1 |     0.5 | classification | log      | identity | False | threshold_logp |
+| **Group Size 0 / 1**     | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold_logp |
+| **Class Size\_**\*       | 0.05 |   500 |   0.5 |    0.01 | none           | log      | identity | False | threshold_logp |
 
 `\*` denotes each class-specific experiment (`class_size_0` through `class_size_9`) which share the above Conformal Training settings.
 
@@ -100,9 +261,9 @@ We now have these **preliminary results** from the official Python implementatio
 
 The original paper evaluates _ConfTr_ on several datasets, including the German Credit dataset. For this binary classification task (predicting "good" vs. "bad" credit risk), the authors compare:
 
-- A standard cross-entropy baseline
-- Bellotti (2021), trained using ThrL (thresholding on raw logits)
-- ConfTr, trained with and without an additional classification loss (L_class)
+-   A standard cross-entropy baseline
+-   Bellotti (2021), trained using ThrL (thresholding on raw logits)
+-   ConfTr, trained with and without an additional classification loss (L_class)
 
 At test time, two CP methods are used: threshold CP (Thr) and adaptive prediction sets (APS). While Bellotti uses ThrL, _ConfTr_ uses ThrLP (thresholding on log-probabilities). The main evaluation metrics are inefficiency (average size of the confidence sets) and accuracy. Since the task is binary, expected confidence sets are small, and potential efficiency gains are limited.
 
@@ -121,17 +282,18 @@ Why German Credit? This dataset is openly available, and the paper provides both
 
 For the reimplementation, the following steps were performed:
 
-- Manually downloading the _German Credit_ dataset from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data) (1994).
-- _Preprocessing_ the data in `preprocess_german.py`, which included one-hot encoding and scaling (whitening the features) as described in the original paper.
-- Adding a function `create_tabular_split` to `data.py` to create train/val/test splits for tabular data, using the same 70/10/20 split defined for German Credit in the original paper.
-- Adding `run_german_credit.py` to define the experimental setup for German Credit. For this, we looked at the structure of other available files (e.g., `run_mnist.py`, `run_wine_quality.py`) as well as the description in the original paper. The most important elements include the following:
-  - We used the exact same _ConfTr_ hyperparameters as defined in Table B of _Appendix F: Experimental Setup_ from the original paper, without additional tuning.
-  - We used a multilayer perceptron with 0 layers to imitate a _linear model_, as no linear architecture was available in the codebase.
-  - We derived the _loss matrix_ from the original documentation by Prof. Hofmann (UCI Machine Learning Repository, 1994).
-  - For _ConfTr_, we used ThrLP for training by setting `conformal.method = 'threshold_logp'`, which uses log-probabilities as conformity scores.
-  - For _ConfTr + L<sub>class</sub>_, we also used THR<sub>LP</sub> for training and additionally used classification loss by setting `conformal.use_class_loss = True`.
+-   Manually downloading the _German Credit_ dataset from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data) (1994).
+-   _Preprocessing_ the data in `preprocess_german.py`, which included one-hot encoding and scaling (whitening the features) as described in the original paper.
+-   Adding a function `create_tabular_split` to `data.py` to create train/val/test splits for tabular data, using the same 70/10/20 split defined for German Credit in the original paper.
+-   Adding `run_german_credit.py` to define the experimental setup for German Credit. For this, we looked at the structure of other available files (e.g., `run_mnist.py`, `run_wine_quality.py`) as well as the description in the original paper. The most important elements include the following:
 
-- Some smaller functionalities were added to make the experiment possible (e.g., defining the statistics for German Credit in `data_utils.py`), but the above sums up the most relevant contributions.
+    -   We used the exact same _ConfTr_ hyperparameters as defined in Table B of _Appendix F: Experimental Setup_ from the original paper, without additional tuning.
+    -   We used a multilayer perceptron with 0 layers to imitate a _linear model_, as no linear architecture was available in the codebase.
+    -   We derived the _loss matrix_ from the original documentation by Prof. Hofmann (UCI Machine Learning Repository, 1994).
+    -   For _ConfTr_, we used ThrLP for training by setting `conformal.method = 'threshold_logp'`, which uses log-probabilities as conformity scores.
+    -   For _ConfTr + L<sub>class</sub>_, we also used THR<sub>LP</sub> for training and additionally used classification loss by setting `conformal.use_class_loss = True`.
+
+-   Some smaller functionalities were added to make the experiment possible (e.g., defining the statistics for German Credit in `data_utils.py`), but the above sums up the most relevant contributions.
 
 #### Experimental Setup
 
@@ -166,9 +328,9 @@ The Diabetes dataset contains patient information and classifies patients into t
 
 We followed the same experimental setup as for German Credit, with the following minor adjustments:
 
-- We adjusted the number of input features to match those in the Diabetes dataset.
-- We updated the dataset statistics to reflect three classes (instead of two for German Credit).
-- Again, some other functionalities were added so the experiments could be run on an additional dataset.
+-   We adjusted the number of input features to match those in the Diabetes dataset.
+-   We updated the dataset statistics to reflect three classes (instead of two for German Credit).
+-   Again, some other functionalities were added so the experiments could be run on an additional dataset.
 
 ### Results Diabetes
 
@@ -203,13 +365,13 @@ In the future, it would be interesting to explore the application of _ConfTr_ to
 
 ## Contributions
 
-- _Juul_ contributed by reproducing the German Credit results (which required partial reimplementation) and by extending the experiments to a new medical dataset (new data criteria).
-- _Razo_ re-ran the authors' official Python code on MNIST, verified coverage and set-size metrics, and documented all hyper-parameters and random seeds to enable exact replay (reproduction criteria). Doing this, he evaluated the original codebase.
-- _Phuong_ ported ConfTr to Julia, patched `ConformalPrediction.jl`, and ran controlled ablations across multiple base models (Linear, MLP, LeNet5) (ablation study criteria).
+-   _Juul_ contributed by reproducing the German Credit results (which required partial reimplementation) and by extending the experiments to a new medical dataset (new data criteria).
+-   _Razo_ re-ran the authors' official Python code on MNIST, verified coverage and set-size metrics, and documented all hyper-parameters and random seeds to enable exact replay (reproduction criteria). Doing this, he evaluated the original codebase.
+-   _Phuong_ ported ConfTr to Julia, patched `ConformalPrediction.jl`, and ran controlled ablations across multiple base models (Linear, MLP, LeNet5) (ablation study criteria).
 
 ## References
 
-- Stutz, D., Bates, S., Rabanser, S., Hein, M., & Ermon, S. (2022). Learning Optimal Conformal Classifiers. _ICLR 2022._ <https://arxiv.org/abs/2110.09192>
-- Bellotti, T. (2021). Learning Probabilistic Set Predictors with Guarantees. _arXiv preprint arXiv:2103.10288._ <https://arxiv.org/abs/2103.10288>
-- UCI Machine Learning Repository. (1994). <https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data>
-- Patel, M. (n.d.). Diabetes Prediction Dataset. Kaggle. <https://www.kaggle.com/datasets/marshalpatel3558/diabetes-prediction-dataset-legit-dataset>
+-   Stutz, D., Bates, S., Rabanser, S., Hein, M., & Ermon, S. (2022). Learning Optimal Conformal Classifiers. _ICLR 2022._ <https://arxiv.org/abs/2110.09192>
+-   Bellotti, T. (2021). Learning Probabilistic Set Predictors with Guarantees. _arXiv preprint arXiv:2103.10288._ <https://arxiv.org/abs/2103.10288>
+-   UCI Machine Learning Repository. (1994). <https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data>
+-   Patel, M. (n.d.). Diabetes Prediction Dataset. Kaggle. <https://www.kaggle.com/datasets/marshalpatel3558/diabetes-prediction-dataset-legit-dataset>
