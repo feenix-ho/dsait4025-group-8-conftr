@@ -77,7 +77,14 @@ done
 To switch between conformal prediction methods:  
 Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)  
 Use `--experiment_method=thr` for Threshold CP (Thr)  
-Use `--experiment_method=thrl` for thresholding on raw logits (ThrL)  
+Use `--experiment_method=thrl` for thresholding on raw logits (ThrL) 
+
+To run these for the **Diabetes Prediction** dataset,  change: 
+
+```bash
+--experiment_path=~/experiments/diabetes_models_seed${seed}/ \
+--experiment_dataset=diabetes
+```
 
 
    
