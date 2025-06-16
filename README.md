@@ -35,7 +35,7 @@ python3 run.py \
   --experiment_path=~/experiments/
 ```
 
-To run these for the *Diabetes Prediction* dataset,  change the --experiment_dataset flag:
+To run these for the **Diabetes Prediction** dataset,  change the `--experiment_dataset` flag:
 
 ```bash
 --experiment_dataset=diabetes
@@ -44,7 +44,7 @@ To run these for the *Diabetes Prediction* dataset,  change the --experiment_dat
 #### Evaluation
 Use `eval.py` to evaluate trained models.
 
-**Baseline, ThrL:*
+**Baseline, ThrL:**
 ```bash
 for seed in {0..9}; do
   python eval.py \
@@ -64,7 +64,7 @@ for seed in {0..9}; do
 done
 ``` 
 
-**ConfTr + L\subclass, Thr:`**
+**ConfTr + L_class, Thr:`**
 ```
 for seed in {0..9}; do
   python eval.py \
@@ -74,10 +74,10 @@ for seed in {0..9}; do
 done
 ```
 
-To switch between conformal prediction methods:
-Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)
-Use `--experiment_method=thr` for Threshold CP (Thr)
-Use `--experiment_method=thrl` for thresholding on raw logits (ThrL)
+To switch between conformal prediction methods:  
+Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)  
+Use `--experiment_method=thr` for Threshold CP (Thr)  
+Use `--experiment_method=thrl` for thresholding on raw logits (ThrL)  
 
 
    
