@@ -49,7 +49,7 @@ To run these for the **Diabetes Prediction** dataset,  change the `--experiment_
 Use `eval.py` to evaluate trained models.
 
 **Baseline, ThrL:**
-``bash
+```bash
 for seed in {0..9}; do
   python eval.py \
     --experiment_path=~/experiments/german_credit_models_seed${seed}/ \
