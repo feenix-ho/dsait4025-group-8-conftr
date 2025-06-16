@@ -1,4 +1,4 @@
-# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"\
+# Reproducing and Extending Results from "Learning Optimal Conformal Classifiers"
 
 |        Name        |                Email                 | StudentID |
 | :----------------: | :----------------------------------: | :-------: |
@@ -16,26 +16,26 @@ CP has often been applied as a separate processing step after training, which pr
 
 In this blog post, we present a reproduction and extension of some of the results from the _Learning Optimal Conformal Classifiers_ paper. Specifically, we focus on reproducing their results for the tabular German Credit dataset. In their codebase, no implementation was provided for experiments on this dataset. Therefore, we partially reimplemented the preprocessing pipeline and experimental setup for the German Credit dataset. Reproducing results for this dataset is particularly valuable, as it allows us to assess whether the paper provides sufficient detail to reproduce its findings, since the original code for this dataset was not included.
 
-Additionally, we extend the experiments by evaluating _ConfTr_ on a new dataset: a medical tabular dataset for diabetes prediction based on patient information. While the paper highlights the relevance of CP for high-stakes AI applications such as medical diagnosis, no medical datasets were included in their experiments. We found it interesting to explore how _ConfTr_ performs in this domain.
+Additionally, we extend the experiments by evaluating _ConfTr_ on a new dataset: a medical tabular dataset for diabetes prediction based on patient information. While the paper highlights the relevance of CP for high-stakes AI applications such as medical diagnosis, no medical datasets were included in their experiments. Therefore, we want to explore how _ConfTr_ performs on medical data. 
 
 ## ConfTr: Recap of the Original Paper
-
 As we already mentioned in the introduction, the key idea behind _ConfTr_ is to bring conformal prediction (CP) into the training loop. Here, we briefly recap how this process works during training. For full details, please consult the original paper by Stutz et al. (2022).
 
-_ConfTr_ simulates CP during training on each mini-batch. Specifically, each mini-batch is split in half:
-• One half is used for the calibration step, where a threshold is computed based on the model's predicted probabilities for the calibration samples.
-• The other half is used for the prediction step, where confidence sets are constructed using the threshold obtained in the first step.
+_ConfTr_ simulates CP during training on each mini-batch. Specifically, each mini-batch is split in half:  
+• One half is used for the calibration step, where a threshold is computed based on the model's predicted probabilities for the calibration samples.  
+• The other half is used for the prediction step, where confidence sets are constructed using the threshold obtained in the first step.  
+
 The model is then updated using a loss that combines a size loss, which encourages the model to produce smaller confidence sets, and optionally a classification loss that can shape the content of the confidence sets (e.g., penalizing certain classes). The following figure from the original paper illustrates this process:
 
 <figure style="text-align: center;">
  <img src="https://s3.hedgedoc.org/hd1-demo/uploads/165c791b-ce60-4024-9d26-dec8207b43f0.png" alt="*ConfTr* diagram from Stutz et al. (2022)">
- <figcaption><em>Figure from Stutz et al. (2022), illustrating the conformal training process.</em></figcaption>
-</figure>
+ <figcaption><em>Figure1: Illustration from Stutz et al. (2022), showing the conformal training process.</em></figcaption>
+</figure>  
 
-The calibration and prediction steps are implemented in a differentiable way (using smooth approximations), so that the entire process can be optimized end-to-end with standard gradient-based methods. After training with _ConfTr_, the model can still be used with any standard CP method at test time, meaning the CP coverage guarantee is preserved.
+
+The calibration and prediction steps are implemented in a differentiable way (using smooth approximations), so that the entire process can be optimized end-to-end with standard gradient-based methods. After training with _ConfTr_, the model can still be used with any standard CP method at test time, ensuring the CP coverage guarantee.
 
 ### On the Google DeepMind Implementation
-
 The official Conformal Training code is available on GitHub at [google-deepmind/conformal_training](https://github.com/google-deepmind/conformal_training/). It’s a pure-Python codebase with auxiliary shell scripts for running experiments and tests. Package dependencies are managed via Conda, with the environment specified in `environment.yml` (minor edits were required for compatibility). The official Python implementation uses JAX for end-to-end differentiable training through conformal prediction steps, with TensorFlow handling dataset operations. The codebase follows a modular structure organized with Absl (Google's Abseil library) for command-line interfaces, logging, and application flow. Configuration management is handled through `ml_collections.ConfigDict`, with hyperparameters defined in `config.py` and experiment-specific settings in the `experiments/` directory (like `run_mnist.py`). The core conformal prediction methods are implemented in `conformal_prediction.py`, with differentiable versions in `smooth_conformal_prediction.py` that enable gradient flow. Training variants are implemented across separate modules (`train_normal.py`, `train_conformal.py`, `train_coverage.py`), with training launched through `run.py` and evaluation performed via `eval.py`. This structure enables reproducible experiments across multiple datasets and conformal prediction variants.
 
 ## Reproduction: Julia implementation MNIST
@@ -263,7 +263,7 @@ The original paper evaluates _ConfTr_ on several datasets, including the German 
 
 -   A standard cross-entropy baseline
 -   Bellotti (2021), trained using ThrL (thresholding on raw logits)
--   ConfTr, trained with and without an additional classification loss (L_class)
+-   _ConfTr_, trained with and without an additional classification loss (_L_class_)
 
 At test time, two CP methods are used: threshold CP (Thr) and adaptive prediction sets (APS). While Bellotti uses ThrL, _ConfTr_ uses ThrLP (thresholding on log-probabilities). The main evaluation metrics are inefficiency (average size of the confidence sets) and accuracy. Since the task is binary, expected confidence sets are small, and potential efficiency gains are limited.
 
@@ -307,10 +307,13 @@ Running our experiments resulted in the following table:
 
 <figure style="text-align: center;">
   <img src="https://s3.hedgedoc.org/hd1-demo/uploads/f6fadcf9-bbfb-4678-9cdc-38b998ecca94.png" width="500" style="display: inline-block;">
-  <figcaption><em>Table 2: Our experimental results on the German Credit dataset.</em></figcaption>
-</figure>
+  <figcaption><em>Table 2: Our experimental results on the German Credit dataset.  </em></figcaption>
+</figure>  
 
-We started by running the experiments for the **baseline** setup, to ensure our experimental procedure was correct. As can be seen from _Table 1_ and _Table 2_, the results for the different CP methods, in terms of both accuracy and inefficiency,are very similar. This suggests that our preprocessing and experimental setup are correct. As expected for a binary task, the resulting confidence sets remain small, and the absolute differences in inefficiency between methods are correspondingly limited.
+TO ADD: Since German Credit is a binary classification task, the confidence sets wil be maximally 2 (so either 1 or 2). Therefore, the differences between methods will be limited. Changes are high that the prediction set contains both classes since accuracy is only around 74\%. So  
+
+
+We started by running the experiments for the **baseline** setup, to ensure our experimental procedure was correct. As can be seen from _Table 1_ and _Table 2_, the results for the different CP methods, in terms of both accuracy and inefficiency,are very similar. This suggests that our preprocessing and experimental setup are correct.
 
 When applying **ConfTr**, we observe that accuracy decreases slightly for Thr (which is expected), while inefficiency increases slightly compared to the Thr baseline (+0.04). In the original paper, a similar pattern was reported: accuracy decreased, and inefficiency increased slightly (+0.02). We therefore consider our results to be roughly consistent with those reported in the paper. Looking at the APS results, we see an increase in inefficiency, confirming that THR results in (slightly) lower inefficiency, as stated in the original paper.
 
