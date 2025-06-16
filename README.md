@@ -72,7 +72,7 @@ done
 ```
 for seed in {0..9}; do
   python eval.py \
-    --experiment_path=~/experiments/german_credit_conformal.training_class_loss_seed${seed}/ \
+    --experiment_path=~/experiments/german_credit_conformal.training_Lclass_seed${seed}/ \
     --experiment_method=thr \
     --experiment_dataset=german_credit
 done
