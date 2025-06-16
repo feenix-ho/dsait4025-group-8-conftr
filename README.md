@@ -39,6 +39,7 @@ To run these for the *Diabetes Prediction* dataset,  change the --experiment_dat
 
 ```bash
 --experiment_dataset=diabetes
+```
 
 #### Evaluation
 Use `eval.py` to evaluate trained models.
@@ -51,6 +52,7 @@ for seed in {0..9}; do
     --experiment_method=thrl \
     --experiment_dataset=german_credit
 done
+``` 
 
 **ConfTr, Thr:**
 ```bash
@@ -60,8 +62,9 @@ for seed in {0..9}; do
     --experiment_method=thr \
     --experiment_dataset=german_credit
 done
+``` 
 
-**ConfTr + L\subclass, Thr:
+**ConfTr + L\subclass, Thr:`**
 ```
 for seed in {0..9}; do
   python eval.py \
@@ -69,6 +72,7 @@ for seed in {0..9}; do
     --experiment_method=thr \
     --experiment_dataset=german_credit
 done
+```
 
 To switch between conformal prediction methods:
 Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)
