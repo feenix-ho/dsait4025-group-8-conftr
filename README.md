@@ -16,7 +16,7 @@ The experiment configurations are defined in the `experiments/` directory (of `c
 
 To train **Baseline**, **ConfTr**, and **ConfTr + L_class** models for **German Credit**, run the following commands (10 seeds):
 
-```bash
+``bash
 # Baseline
 python3 run.py \
   --experiment_dataset=german_credit \
@@ -37,46 +37,46 @@ python3 run.py \
   --experiment_experiment=conformal.training_Lclass \
   --experiment_seeds=10 \
   --experiment_path=~/experiments/
-```
+``
 
 To run these for the **Diabetes Prediction** dataset,  change the `--experiment_dataset` flag:
 
-```bash
+``bash
 --experiment_dataset=diabetes
-```
+``
 
 #### Evaluation
 Use `eval.py` to evaluate trained models.
 
 **Baseline, ThrL:**
-```bash
+``bash
 for seed in {0..9}; do
   python eval.py \
     --experiment_path=~/experiments/german_credit_models_seed${seed}/ \
     --experiment_method=thrl \
     --experiment_dataset=german_credit
 done
-``` 
+`` 
 
 **ConfTr, Thr:**
-```bash
+``bash
 for seed in {0..9}; do
   python eval.py \
     --experiment_path=~/experiments/german_credit_conformal.training_seed${seed}/ \
     --experiment_method=thr \
     --experiment_dataset=german_credit
 done
-``` 
+`` 
 
-**ConfTr + L_class, Thr:`**
-```
+**ConfTr + L_class, Thr:**
+``
 for seed in {0..9}; do
   python eval.py \
     --experiment_path=~/experiments/german_credit_conformal.training_Lclass_seed${seed}/ \
     --experiment_method=thr \
     --experiment_dataset=german_credit
 done
-```
+``
 
 To switch between conformal prediction methods:  
 Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)  
@@ -85,10 +85,10 @@ Use `--experiment_method=thrl` for thresholding on raw logits (ThrL)
 
 To run these for the **Diabetes Prediction** dataset,  change: 
 
-```bash
+``bash
 --experiment_path=~/experiments/diabetes_models_seed${seed}/ \
 --experiment_dataset=diabetes
-```
+``
 
 
    
