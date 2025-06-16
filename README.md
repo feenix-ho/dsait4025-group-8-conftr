@@ -1,6 +1,10 @@
 # ConfTr Experiments - Group 8 (DSAIT 4025) 
+
+## MNIST - Julia
+
+## MNIST - Python
  
-## German Credit and Diabetes Prediction
+## German Credit and Diabetes Prediction - Python
 This repository contains code for evaluation of ConfTr on **German Credit** and **Diabetes Prediction**. 
 
 ### Installation 
