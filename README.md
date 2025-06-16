@@ -43,7 +43,7 @@ To run these for the **Diabetes Prediction** dataset,  change the `--experiment_
 
 ```bash
 --experiment_dataset=diabetes
-``
+```
 
 #### Evaluation
 Use `eval.py` to evaluate trained models.
