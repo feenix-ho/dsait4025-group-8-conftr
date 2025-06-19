@@ -1,17 +1,21 @@
-# ConfTr Experiments - Group 8 (DSAIT 4025) 
+# ConfTr Experiments - Group 8 (DSAIT 4025)
 
 ## MNIST - Julia
 
 ## MNIST - Python
- 
-## German Credit and Diabetes Prediction - Python
-This repository contains code for evaluation of ConfTr on **German Credit** and **Diabetes Prediction**. 
 
-### Installation 
+## German Credit and Diabetes Prediction - Python
+
+This repository contains code for evaluation of ConfTr on **German Credit** and **Diabetes Prediction**.
+
+### Installation
+
 To get started, please follow the installation guidelines from the [original ConfTr repository](https://github.com/google-deepmind/conformal_training).
 
 ### Reproducing Results
+
 #### Training
+
 The experiment configurations are defined in the `experiments/` directory (of `conftr-python/src`) and are executed using `run.py`.
 
 To train **Baseline**, **ConfTr**, and **ConfTr + L_class** models for **German Credit**, run the following commands (10 seeds):
@@ -46,9 +50,11 @@ To run these for the **Diabetes Prediction** dataset,  change the `--experiment_
 ```
 
 #### Evaluation
+
 Use `eval.py` to evaluate trained models.
 
 **Baseline, ThrL:**
+
 ```bash
 for seed in {0..9}; do
   python eval.py \
@@ -59,6 +65,7 @@ done
 ```
 
 **ConfTr, Thr:**
+
 ```bash
 for seed in {0..9}; do
   python eval.py \
@@ -69,6 +76,7 @@ done
 ```
 
 **ConfTr + L_class, Thr:**
+
 ```
 for seed in {0..9}; do
   python eval.py \
@@ -81,15 +89,11 @@ done
 To switch between conformal prediction methods:  
 Use `--experiment_method=aps` for Adaptive Prediction Sets (APS)  
 Use `--experiment_method=thr` for Threshold CP (Thr)  
-Use `--experiment_method=thrl` for thresholding on raw logits (ThrL) 
+Use `--experiment_method=thrl` for thresholding on raw logits (ThrL)
 
-To run these for the **Diabetes Prediction** dataset,  change: 
+To run these for the **Diabetes Prediction** dataset,  change:
 
 ```bash
 --experiment_path=~/experiments/diabetes_models_seed${seed}/ \
 --experiment_dataset=diabetes
 ```
-
-
-   
-
