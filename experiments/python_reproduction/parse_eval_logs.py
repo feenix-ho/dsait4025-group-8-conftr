@@ -93,14 +93,12 @@ def parse_eval_logs(log_file):
                     size_match = re.search(size_pattern, method_text)
                     size = float(size_match.group(1)) if size_match else None
 
-                    # Extract class sizes
                     class_sizes = {}
                     for match in re.finditer(class_size_pattern, method_text):
                         class_idx = int(match.group(1))
                         class_size = float(match.group(2))
                         class_sizes[class_idx] = class_size
 
-                    # Extract group metrics
                     group_metrics = {}
                     for match in re.finditer(group_size_pattern, method_text):
                         group_name = match.group(1)
@@ -115,12 +113,11 @@ def parse_eval_logs(log_file):
                         try:
                             miscoverage = float(match.group(3))
                         except ValueError:
-                            # Handle potential parsing issues
+                            print("Skipping miscoverage due to ValueError")
                             continue
                         group_key = f"{group_name}_miscoverage_{group_idx}"
                         group_metrics[group_key] = miscoverage
 
-                    # Extract confusion metrics
                     confusion_metrics = {}
                     for match in re.finditer(coverage_confusion_pattern, method_text):
                         a, b = int(match.group(1)), int(match.group(2))
@@ -162,7 +159,6 @@ def save_as_csv(data, output_file):
 
 def display_table(data):
     """Display data as a formatted table."""
-    # Create simplified DataFrame for display
     df = pd.DataFrame(data)
     if len(df) == 0:
         print("No data found in the log file!")
@@ -223,6 +219,19 @@ def main():
 
     save_as_csv(data, args.csv)
     display_table(data)
+
+    if args.summary:
+        df = pd.DataFrame(data)
+        print("\nSummary Statistics:")
+        print(
+            df.groupby(["dataset", "experiment", "method"]).agg(
+                {
+                    "accuracy": ["mean", "std"],
+                    "coverage": ["mean", "std"],
+                    "size": ["mean", "std"],
+                }
+            )
+        )
 
     if args.detailed:
         df = pd.DataFrame(data)
