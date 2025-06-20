@@ -18,17 +18,7 @@ In this blog post, we present a reproduction and extension of some of the result
 
 **Add motivation for reproducing MNIST \- JULIA**
 
-Lastly, we focus on reproducing their results for the tabular German Credit dataset. In their codebase, no implementation was provided for experiments on this dataset. Therefore, we partially reimplemented the preprocessing pipeline and experimental setup for the German Credit dataset. Reproducing results for this dataset is particularly valuable, as it allows us to assess whether the paper provides sufficient detail to reproduce its findings, since the original code for this dataset was not included.
-
-Additionally, we extend the experiments by evaluating ConfTr on a new dataset: a medical tabular dataset for diabetes prediction based on patient information. While the paper highlights the relevance of CP for high-stakes AI applications such as medical diagnosis, no medical datasets were included in their experiments. Therefore, we want to explore how ConfTr performs on medical data.
-
-Over the last decade, deep learning models have reached impressive levels of accuracy on a wide range of benchmarks. Yet raw accuracy is not enough for high-stakes domains, such as healthcare, autonomous driving, or credit scoring, where a single misprediction can carry severe consequences.
-
-*Conformal prediction (CP)* provides exactly such statements. It wraps any classifier in a confidence set that is guaranteed to contain the true class with a use-specified probability (e.g. 95%). Unfortunately, CP is usually bolted on after training, so the base network never learns to make those sets as small or as informative as possible.
-
-*Learning Optimal Conformal Classifiers* by Stutz et al. (2022) bridges that gap. The authors introduce *Conformal Training (ConfTr)*, a procedure that embeds CP directly inside every mini-batch. By differentiating through smoothed versions of the calibration and prediction steps, ConfTr updates the network with the future size of its confidence sets as the primary objective. Experiments show consistent drops in inefficiency—the average number of labels returned—while the CP coverage guarantee remains intact. ConfTr also lets practitioners shape the sets, for example by giving extra budget to critical classes or reducing overlap between semantically distant labels.
-
-In this blog post, we reproduce the main results on MNIST and the German Credit datasets using the authors’ official Python implementation, extend the evaluation to the Diabetes Prediction dataset, and run an ablation study with an independent Julia re-implementation.
+Additionally, we focus on reproducing their results for the tabular German Credit dataset. In their codebase, no implementation was provided for experiments on this dataset. Therefore, we partially reimplemented the preprocessing pipeline and experimental setup for the German Credit dataset. Reproducing results for this dataset is particularly valuable, as it allows us to assess whether the paper provides sufficient detail to reproduce its findings, since the original code for this dataset was not included. Besides that, we extend the experiments by evaluating ConfTr on a new dataset: a medical tabular dataset for diabetes prediction based on patient information. While the paper highlights the relevance of CP for high-stakes AI applications such as medical diagnosis, no medical datasets were included in their experiments. Therefore, we want to explore how ConfTr performs on medical data.
 
 ## ConfTr: Recap of the Original Paper
 
