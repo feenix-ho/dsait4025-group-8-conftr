@@ -5,11 +5,11 @@ DSAIT 4025 - Group 8, TU Delft, June 2025.
 
 ## Team Members
 
-| Name | Email | Student ID |
-|------|-------|------------|
-| Ho Thi Ngoc Phuong | <HoThiNgocPhuong@student.tudelft.nl> | 6172970 |
-| Juul Schnitzler | <j.b.schnitzler@student.tudelft.nl> | 5094917 |
-| Razo van Berkel | <r.q.berkel@student.tudelft.nl> | 6330029 |
+| Name               | Email                                | Student ID |
+| ------------------ | ------------------------------------ | ---------- |
+| Ho Thi Ngoc Phuong | <HoThiNgocPhuong@student.tudelft.nl> | 6172970    |
+| Juul Schnitzler    | <j.b.schnitzler@student.tudelft.nl>  | 5094917    |
+| Razo van Berkel    | <r.q.berkel@student.tudelft.nl>      | 6330029    |
 
 ## Repository Structure
 
@@ -17,11 +17,11 @@ Source for `conformal_training/`: <https://github.com/google-deepmind/conformal_
 
 ## MNIST - Julia
 
-See ![experiments/conftr-julia/README.md](experiments/conftr-julia/README.md) for details on the Julia implementation and reproduction.
+See [experiments/conftr-julia/README.md](experiments/conftr-julia/README.md) for details on the Julia implementation and reproduction.
 
 ## MNIST - Python Reproduction
 
-See ![experiments/python_reproduction/README.md](experiments/python_reproduction/README.md) for details on the scripts used to reproduce the results from the original paper using the .
+See [experiments/python_reproduction/README.md](experiments/python_reproduction/README.md) for details on the scripts used to reproduce the results from the original paper using the .
 
 ## German Credit and Diabetes Prediction - Python
 
